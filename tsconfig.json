@@ -9,7 +9,9 @@
     "declaration": false,
     "sourceMap": true,
     "jsx": "react",
-    "typeRoots": ["index.d.ts", "node_modules/@types"]
+    "typeRoots": ["index.d.ts", "node_modules/@types"],
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true
   },
   "include": ["./src/**/*.tsx", "./src/**/*.ts"],
   "exclude": ["node_modules"]
