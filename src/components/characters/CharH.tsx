@@ -1,5 +1,5 @@
 import React from "react";
-// import "../../styles/Char.css";
+import "../../styles/Char.css";
 
 const CharH = () => {
   return (
