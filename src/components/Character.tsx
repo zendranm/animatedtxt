@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import "../styles/Char.scss";
 import CharA from "./characters/CharA";
 import CharB from "./characters/CharB";
 import CharH from "./characters/CharH";
