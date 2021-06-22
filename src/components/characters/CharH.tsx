@@ -1,6 +1,11 @@
 import React from "react";
 import styled from 'styled-components'
 
+const Content = styled.svg`
+height: 100%;
+width: 100%;
+`
+
 const Svg = styled.svg`
 stroke: #000000;
 stroke-width: 36;
@@ -30,13 +35,13 @@ animation-delay: ${(props: LineProp) => props.delay}s;
 
 const CharH = () => {
   return (
-    <div>
-      <Svg viewBox="0 0 590 140">
+    <Content>
+      <Svg viewBox="0 0 140 140">
         <Line delay={0.5} x1="20" y1="0" x2="20" y2="140" />
         <Line delay={1.0} x1="90" y1="0" x2="90" y2="140" />
         <Line delay={1.5} x1="20" y1="70" x2="90" y2="70" />
       </Svg>
-    </div>
+    </Content>
   );
 };
 

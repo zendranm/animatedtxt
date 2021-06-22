@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "../styles/Char.scss";
+import styled from 'styled-components'
 import CharA from "./characters/CharA";
 import CharB from "./characters/CharB";
 import CharH from "./characters/CharH";
@@ -25,7 +25,7 @@ const Character = (props: Props) => {
     }
   }, []);
 
-  return <div>{character}</div>;
+  return <>{character}</>;
 };
 
 export default Character;
