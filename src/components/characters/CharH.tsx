@@ -1,7 +1,7 @@
 import React from "react";
 import styled from 'styled-components'
 
-type LineProp = {
+interface LineProps {
   delay: number;
 };
 
@@ -17,11 +17,11 @@ const CharH = () => {
 
 export default CharH;
 
-const Line = styled.line<LineProp>`
+const Line = styled.line<LineProps>`
 animation: dash linear;
 animation-duration: 2s; //Animation length (without delay)
 animation-fill-mode: forwards; //Animated object stays instead of disappearing
-animation-delay: ${(props: LineProp) => props.delay}s;
+animation-delay: ${(props: LineProps) => props.delay}s;
 @keyframes dash {
   from {
     stroke-dashoffset: 100%;

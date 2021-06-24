@@ -6,19 +6,25 @@ import CharH from "./characters/CharH";
 
 interface Props {
   char: typeof options[number];
+  color?: string;
+  delay?: number;
+}
+
+interface SvgProps {
+  color: string;
 }
 
 const options = ["A", "B"] as const;
 
-const Character = (props: Props) => {
+const Character = ({ char, color = "#000000", delay = 0 }: Props) => {
   const [character, setCharacter] = useState<React.ReactElement>(<div />);
 
   useEffect(() => {
-    if (props.char === "A") {
+    if (char === "A") {
       setCharacter(<CharA />);
-    } else if (props.char === "B") {
+    } else if (char === "B") {
       setCharacter(<CharB />);
-    } else if (props.char === "H") {
+    } else if (char === "H") {
       setCharacter(<CharH />);
     } else {
       setCharacter(<div>Wrong character again</div>);
@@ -27,7 +33,7 @@ const Character = (props: Props) => {
 
   return (
     <Content>
-      <Svg height="100%" width="100%" viewBox="0 0 64 64">
+      <Svg color={color} height="100%" width="100%" viewBox="0 0 64 64">
         {character}
       </Svg>
     </Content>
@@ -41,8 +47,8 @@ height: 300px;
 width: 300px;
 `
 
-const Svg = styled.svg`
-stroke: #000000;
+const Svg = styled.svg<SvgProps>`
+stroke: ${(props: SvgProps) => props.color};
 stroke-width: 16;
 stroke-dasharray: 100%;
 stroke-dashoffset: 100%;
