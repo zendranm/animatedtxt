@@ -25,7 +25,25 @@ const Character = (props: Props) => {
     }
   }, []);
 
-  return <>{character}</>;
+  return (
+    <Content>
+      <Svg height="100%" width="100%" viewBox="0 0 64 64">
+        {character}
+      </Svg>
+    </Content>
+  );
 };
 
 export default Character;
+
+const Content = styled.div`
+height: 300px;
+width: 300px;
+`
+
+const Svg = styled.svg`
+stroke: #000000;
+stroke-width: 16;
+stroke-dasharray: 100%;
+stroke-dashoffset: 100%;
+`

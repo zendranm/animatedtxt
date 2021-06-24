@@ -1,28 +1,27 @@
 import React from "react";
 import styled from 'styled-components'
 
-const Content = styled.svg`
-height: 100%;
-width: 100%;
-`
-
-const Svg = styled.svg`
-stroke: #000000;
-stroke-width: 36;
-`
-
 type LineProp = {
   delay: number;
 };
 
+const CharH = () => {
+  return (
+    <>
+      <Line delay={0.5} x1="16" y1="0" x2="16" y2="64" />
+      <Line delay={1.0} x1="48" y1="0" x2="48" y2="64" />
+      <Line delay={1.5} x1="16" y1="32" x2="48" y2="32" />
+    </>
+  );
+};
+
+export default CharH;
+
 const Line = styled.line<LineProp>`
-stroke-dasharray: 100%;
-stroke-dashoffset: 100%;
 animation: dash linear;
-animation-duration: 5s; //Animation length (without delay)
+animation-duration: 2s; //Animation length (without delay)
 animation-fill-mode: forwards; //Animated object stays instead of disappearing
 animation-delay: ${(props: LineProp) => props.delay}s;
-
 @keyframes dash {
   from {
     stroke-dashoffset: 100%;
@@ -32,17 +31,3 @@ animation-delay: ${(props: LineProp) => props.delay}s;
   }
 }
 `
-
-const CharH = () => {
-  return (
-    <Content>
-      <Svg viewBox="0 0 140 140">
-        <Line delay={0.5} x1="20" y1="0" x2="20" y2="140" />
-        <Line delay={1.0} x1="90" y1="0" x2="90" y2="140" />
-        <Line delay={1.5} x1="20" y1="70" x2="90" y2="70" />
-      </Svg>
-    </Content>
-  );
-};
-
-export default CharH;
