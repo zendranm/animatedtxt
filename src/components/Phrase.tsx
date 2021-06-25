@@ -1,15 +1,25 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from 'styled-components'
 
 interface Props {
-  children: React.ReactNode
+  children: JSX.Element[];
+  margin?: number;
 }
 
-const Phrase = (props: Props) => {
+const Phrase = ({ children, margin = 0 }: Props) => {
+  const [characters, setCharacters] = useState<JSX.Element[]>(children);
+
+  useEffect(() => {
+    const newChildren = children.map((child, index) => {
+      return React.cloneElement(child, { margin: margin, key: index })
+    })
+    setCharacters(newChildren);
+  }, []);
+
   return (
     <>
       <Content>
-        {props.children}
+        {characters}
       </Content>
     </>
   );
