@@ -8,14 +8,6 @@ interface Props {
   delay?: number;
 }
 
-interface SvgProps {
-  color: string;
-}
-
-interface LineProps {
-  delay: number;
-};
-
 const options = ["E", "H"] as const;
 
 const Character = ({ char, color = "#000000", delay = 0 }: Props) => {
@@ -35,8 +27,8 @@ const Character = ({ char, color = "#000000", delay = 0 }: Props) => {
   return (
     <Content>
       <Svg color={color} height="100%" width="100%" viewBox="0 0 64 64">
-        {character.map(({ type, delay, x1, y1, x2, y2 }: Element) => {
-          return <Line delay={delay} x1={x1} y1={y1} x2={x2} y2={y2} />
+        {character.map(({ type, elementDelay, x1, y1, x2, y2 }: Element) => {
+          return <Line delay={delay + elementDelay} x1={x1} y1={y1} x2={x2} y2={y2} />
         })}
       </Svg>
     </Content>
@@ -44,6 +36,14 @@ const Character = ({ char, color = "#000000", delay = 0 }: Props) => {
 };
 
 export default Character;
+
+interface SvgProps {
+  color: string;
+}
+
+interface LineProps {
+  delay: number;
+};
 
 const Content = styled.div`
 height: 300px;
