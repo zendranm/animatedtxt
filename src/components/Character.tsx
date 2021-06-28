@@ -4,14 +4,15 @@ import { Element, defaultCharacter, charE, charH } from './fonts/Font1'
 
 export interface CharacterProps {
   char: typeof options[number];
-  color?: string;
   delay?: number;
   margin?: number;
+  color?: string;
+  size?: number;
 }
 
 const options = ["E", "H"] as const;
 
-const Character = ({ char, color = "#000000", delay = 0, margin = 0 }: CharacterProps) => {
+const Character = ({ char, delay = 0, margin = 0, color = "#000000", size = 100 }: CharacterProps) => {
   const [character, setCharacter] = useState<Element[]>(defaultCharacter);
 
   useEffect(() => {
@@ -26,7 +27,7 @@ const Character = ({ char, color = "#000000", delay = 0, margin = 0 }: Character
   }, []);
 
   return (
-    <Content margin={margin}>
+    <Content margin={margin} size={size}>
       <Svg color={color} height="100%" width="100%" viewBox="0 0 64 64">
         {character.map(({ type, elementDelay, x1, y1, x2, y2 }: Element, index: number) => {
           return <Line delay={delay + elementDelay} x1={x1} y1={y1} x2={x2} y2={y2} key={index} />
@@ -40,6 +41,7 @@ export default Character;
 
 interface ContentProps {
   margin: number;
+  size: number;
 }
 
 interface SvgProps {
@@ -51,8 +53,8 @@ interface LineProps {
 };
 
 const Content = styled.div<ContentProps>`
-height: 300px;
-width: 300px;
+height: ${(props: ContentProps) => props.size}px;
+width: ${(props: ContentProps) => props.size}px;
 margin-left: ${(props: ContentProps) => props.margin}px;
 margin-right: ${(props: ContentProps) => props.margin}px;
 `
