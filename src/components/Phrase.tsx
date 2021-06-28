@@ -6,14 +6,15 @@ interface PhraseProps {
   margin?: number;
   color?: string;
   size?: number;
+  duration?: number;
 }
 
-const Phrase = ({ children, margin = 0, color, size = 100 }: PhraseProps) => {
+const Phrase = ({ children, margin = 0, color, size = 100, duration = 1 }: PhraseProps) => {
   const [characters, setCharacters] = useState<JSX.Element[]>(children);
 
   useEffect(() => {
     const newChildren = children.map((child, index) => {
-      const newChild = React.cloneElement(child, { color: child.props.color ?? color, size: size })
+      const newChild = React.cloneElement(child, { color: child.props.color ?? color, size: size, duration: child.props.duration ?? duration })
       return <Wrapper margin={margin} key={index}>{newChild}</Wrapper>
     })
     setCharacters(newChildren);
