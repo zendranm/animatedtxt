@@ -42,8 +42,8 @@ align-items: center;
 `
 
 const Wrapper = styled.div<WrapperProps>`
-margin-left: ${(props: WrapperProps) => props.margin}px;
-margin-right: ${(props: WrapperProps) => props.margin}px;
+margin-left: ${(props: WrapperProps) => props.margin / 2}px;
+margin-right: ${(props: WrapperProps) => props.margin / 2}px;
 &:first-child {
   margin-left: 0;
 }

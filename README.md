@@ -36,6 +36,42 @@ Grouping multiple characters into a phrase:
 </Phrase>
 ```
 
+# More features
+
+## Single character:
+
+Behavior and design of a single character (not embedded into a phrase) can be modified by passing following props:
+
+- char [string] - character to be rendered.
+- delay? [number] - number of seconds by which the start of animation will be delayed. Default value: 0.
+- duration? [number] - duration of the animation in seconds. Default value: 1.
+- color? [string] - definition of the color of the character. Should be in format accepted by CSS standards. Default value: #000000.
+- size? [number] - size of the character in "px" unit. Default value: 100.
+
+Example:
+
+```
+<Char char="A" delay={1.5} duration={0.8} color="#6600cc" size={300} />
+```
+
+## Phrase - grouped characters:
+
+Behavior and design of characters grouped in the phrase can be modified by passing following props:
+
+- margin? [number] - number of pixel "px" units between characters in a phrase. Default value: 0.
+- color? [string] - definition of the color of the characters in a phrase. Should be in format accepted by CSS standards. Default value: #000000. Value is overwritten by the color defined in the character element.
+- size? [string] - size of the characters in "px" unit. Default value: 100. Value overwrites size value of all children elements.
+- duration? [number] - duration of the animation in seconds. Default value: 1. Value is overwritten by the value defined in the character element.
+
+Example:
+
+```
+<Phrase color="#6600cc" margin={50} size={200} duration={1.1}>
+  <Char char="A" />
+  ...
+</Phrase>
+```
+
 # Local development
 
 For testing locally developed library before publishing it:
@@ -54,4 +90,4 @@ For testing locally developed library before publishing it:
 - TypeScript
 - Webpack
 - Babel
-- Sass
+- Styled Components
