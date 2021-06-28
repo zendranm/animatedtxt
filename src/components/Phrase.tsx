@@ -13,7 +13,8 @@ const Phrase = ({ children, margin = 0, color, size = 100 }: PhraseProps) => {
 
   useEffect(() => {
     const newChildren = children.map((child, index) => {
-      return React.cloneElement(child, { margin: margin, color: child.props.color ?? color, size: size, key: index })
+      const newChild = React.cloneElement(child, { color: child.props.color ?? color, size: size })
+      return <Wrapper margin={margin} key={index}>{newChild}</Wrapper>
     })
     setCharacters(newChildren);
   }, []);
@@ -27,12 +28,21 @@ const Phrase = ({ children, margin = 0, color, size = 100 }: PhraseProps) => {
   );
 };
 
+interface WrapperProps {
+  margin: number;
+}
+
 const Content = styled.div`
 display: flex;
 flex-direction: row;
 flex-wrap: nowrap;
 justify-content: flex-start;
 align-items: center;
+`
+
+const Wrapper = styled.div<WrapperProps>`
+margin-left: ${(props: WrapperProps) => props.margin}px;
+margin-right: ${(props: WrapperProps) => props.margin}px;
 `
 
 export default Phrase;
