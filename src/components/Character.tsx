@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from 'styled-components'
-import { Element, defaultCharacter, charE, charH } from './fonts/Font1'
+import { Element, defaultCharacter, charA, charE, charH, charM } from './fonts/Font1'
 
 export interface CharacterProps {
   char: typeof options[number];
@@ -10,17 +10,22 @@ export interface CharacterProps {
   size?: number;
 }
 
-const options = ["E", "H"] as const;
+const options = ["A", "E", "H", "M"] as const;
 
 const Character = ({ char, delay = 0, duration = 1, color = "#000000", size = 100 }: CharacterProps) => {
   const [character, setCharacter] = useState<Element[]>(defaultCharacter);
 
   useEffect(() => {
-    if (char === "E") {
+    if (char === "A") {
+      setCharacter(charA);
+    } else if (char === "E") {
       setCharacter(charE);
     } else if (char === "H") {
       setCharacter(charH);
-    } else {
+    } else if (char === "M") {
+      setCharacter(charM);
+    }
+    else {
       console.log("Wrong character")
       setCharacter(defaultCharacter)
     }
@@ -29,8 +34,12 @@ const Character = ({ char, delay = 0, duration = 1, color = "#000000", size = 10
   return (
     <Content size={size}>
       <Svg color={color} height="100%" width="100%" viewBox="0 0 64 64">
-        {character.map(({ type, elementDelay, x1, y1, x2, y2 }: Element, index: number) => {
-          return <Line delay={delay + elementDelay} duration={duration} x1={x1} y1={y1} x2={x2} y2={y2} key={index} />
+        {character.map(({ type, elementDelay, shape }: Element, index: number) => {
+          if (typeof shape !== "string") {
+            return <Line delay={delay + elementDelay} duration={duration} x1={shape.x1} y1={shape.y1} x2={shape.x2} y2={shape.y2} key={index} />
+          } else {
+            return <Path delay={delay + elementDelay} duration={duration} d={shape} />
+          }
         })}
       </Svg>
     </Content>
@@ -72,6 +81,22 @@ animation-delay: ${(props: LineProps) => props.delay}s;
 @keyframes dash {
   from {
     stroke-dashoffset: 100%;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+`
+const Path = styled.path<LineProps>`
+stroke: magenta;
+stroke-dasharray: 214;
+stroke-dashoffset: 0;
+animation: anim 3s linear alternate infinite;
+stroke-width: 8px;
+fill: transparent;
+@keyframes anim {
+  from {
+    stroke-dashoffset: 214;
   }
   to {
     stroke-dashoffset: 0;
