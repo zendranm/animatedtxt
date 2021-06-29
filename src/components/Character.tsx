@@ -34,7 +34,7 @@ const Character = ({ char, delay = 0, duration = 1, color = "#000000", size = 10
   return (
     <Content size={size}>
       <Svg color={color} height="100%" width="100%" viewBox="0 0 64 64">
-        {character.map(({ type, elementDelay, shape }: Element, index: number) => {
+        {character.map(({ elementDelay, shape }: Element, index: number) => {
           if (typeof shape !== "string") {
             return <Line delay={delay + elementDelay} duration={duration} x1={shape.x1} y1={shape.y1} x2={shape.x2} y2={shape.y2} key={index} />
           } else {
