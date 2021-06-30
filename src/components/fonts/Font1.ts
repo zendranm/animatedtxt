@@ -1,6 +1,9 @@
+import { type } from "os";
+
 export interface Element {
   elementDelay: number;
   shape: { x1: number; y1: number; x2: number; y2: number } | string;
+  length?: number;
 }
 
 const defaultCharacter: Element[] = [
@@ -27,7 +30,11 @@ const charH: Element[] = [
 ];
 
 const charM: Element[] = [
-  { elementDelay: 0.5, shape: "m 4 64 l 0 -64 l 28 32 l 28 -32 l 0 64" },
+  {
+    elementDelay: 0.5,
+    shape: "m 4 64 l 0 -64 l 28 32 l 28 -32 l 0 64",
+    length: 213.04116821289062,
+  },
 ];
 
 export { defaultCharacter, charA, charE, charH, charM };

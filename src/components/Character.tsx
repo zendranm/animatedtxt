@@ -34,11 +34,11 @@ const Character = ({ char, delay = 0, duration = 1, color = "#000000", size = 10
   return (
     <Content size={size}>
       <Svg color={color} height="100%" width="100%" viewBox="0 0 64 64">
-        {character.map(({ elementDelay, shape }: Element, index: number) => {
+        {character.map(({ elementDelay, shape, length }: Element, index: number) => {
           if (typeof shape !== "string") {
             return <Line delay={delay + elementDelay} duration={duration} x1={shape.x1} y1={shape.y1} x2={shape.x2} y2={shape.y2} key={index} />
           } else {
-            return <Path delay={delay + elementDelay} duration={duration} d={shape} />
+            return <Path delay={delay + elementDelay} duration={duration} d={shape} length={length} key={index} />
           }
         })}
       </Svg>
@@ -59,6 +59,7 @@ interface SvgProps {
 interface LineProps {
   delay: number;
   duration: number;
+  length?: number;
 };
 
 const Content = styled.div<ContentProps>`
@@ -68,7 +69,7 @@ width: ${(props: ContentProps) => props.size}px;
 
 const Svg = styled.svg<SvgProps>`
 stroke: ${(props: SvgProps) => props.color};
-stroke-width: 16;
+stroke-width: 8;
 stroke-dasharray: 100%;
 stroke-dashoffset: 100%;
 `
@@ -88,15 +89,17 @@ animation-delay: ${(props: LineProps) => props.delay}s;
 }
 `
 const Path = styled.path<LineProps>`
-stroke: magenta;
-stroke-dasharray: 214;
-stroke-dashoffset: 0;
-animation: anim 3s linear alternate infinite;
+animation: anim linear;
+animation-duration: ${(props: LineProps) => props.duration}s; //Animation length (without delay)
+animation-fill-mode: forwards; //Animated object stays instead of disappearing
+animation-delay: ${(props: LineProps) => props.delay}s;
+stroke-dasharray: ${(props: LineProps) => props.length};
+stroke-dashoffset: ${(props: LineProps) => props.length};
 stroke-width: 8px;
 fill: transparent;
 @keyframes anim {
   from {
-    stroke-dashoffset: 214;
+    stroke-dashoffset: ${(props: LineProps) => props.length};
   }
   to {
     stroke-dashoffset: 0;
