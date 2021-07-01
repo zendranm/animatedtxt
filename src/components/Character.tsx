@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import styled from 'styled-components'
-import { Element, defaultCharacter, charA, charE, charH, charM } from './fonts/Font1'
+import styled, { keyframes } from 'styled-components'
+import { Element, defaultCharacter, charH, charM } from './fonts/Font1'
 
 export interface CharacterProps {
   char: typeof options[number];
@@ -10,17 +10,13 @@ export interface CharacterProps {
   size?: number;
 }
 
-const options = ["A", "E", "H", "M"] as const;
+const options = ["H", "M"] as const;
 
 const Character = ({ char, delay = 0, duration = 1, color = "#000000", size = 100 }: CharacterProps) => {
   const [character, setCharacter] = useState<Element[]>(defaultCharacter);
 
   useEffect(() => {
-    if (char === "A") {
-      setCharacter(charA);
-    } else if (char === "E") {
-      setCharacter(charE);
-    } else if (char === "H") {
+    if (char === "H") {
       setCharacter(charH);
     } else if (char === "M") {
       setCharacter(charM);
@@ -35,11 +31,7 @@ const Character = ({ char, delay = 0, duration = 1, color = "#000000", size = 10
     <Content size={size}>
       <Svg color={color} height="100%" width="100%" viewBox="0 0 64 64">
         {character.map(({ elementDelay, shape, length }: Element, index: number) => {
-          if (typeof shape !== "string") {
-            return <Line delay={delay + elementDelay} duration={duration} x1={shape.x1} y1={shape.y1} x2={shape.x2} y2={shape.y2} key={index} />
-          } else {
-            return <Path delay={delay + elementDelay} duration={duration} d={shape} length={length} key={index} />
-          }
+          return <Path id={"test" + index} delay={delay + elementDelay} duration={duration} d={shape} length={length} key={index} />
         })}
       </Svg>
     </Content>
@@ -56,10 +48,11 @@ interface SvgProps {
   color: string;
 }
 
-interface LineProps {
+interface PathProps {
   delay: number;
   duration: number;
   length?: number;
+  key: number
 };
 
 const Content = styled.div<ContentProps>`
@@ -69,40 +62,25 @@ width: ${(props: ContentProps) => props.size}px;
 
 const Svg = styled.svg<SvgProps>`
 stroke: ${(props: SvgProps) => props.color};
-stroke-width: 8;
-stroke-dasharray: 100%;
-stroke-dashoffset: 100%;
+stroke-width: 16;
 `
 
-const Line = styled.line<LineProps>`
-animation: dash linear;
-animation-duration: ${(props: LineProps) => props.duration}s; //Animation length (without delay)
-animation-fill-mode: forwards; //Animated object stays instead of disappearing
-animation-delay: ${(props: LineProps) => props.delay}s;
-@keyframes dash {
-  from {
-    stroke-dashoffset: 100%;
-  }
-  to {
-    stroke-dashoffset: 0;
-  }
+const animate = (deg: any) => keyframes`
+from {
+  stroke-dashoffset: ${deg ?? "100%"};
+}
+to {
+  stroke-dashoffset: 0;
 }
 `
-const Path = styled.path<LineProps>`
-animation: anim linear;
-animation-duration: ${(props: LineProps) => props.duration}s; //Animation length (without delay)
-animation-fill-mode: forwards; //Animated object stays instead of disappearing
-animation-delay: ${(props: LineProps) => props.delay}s;
-stroke-dasharray: ${(props: LineProps) => props.length};
-stroke-dashoffset: ${(props: LineProps) => props.length};
-stroke-width: 8px;
+
+const Path = styled.path<PathProps>`
 fill: transparent;
-@keyframes anim {
-  from {
-    stroke-dashoffset: ${(props: LineProps) => props.length};
-  }
-  to {
-    stroke-dashoffset: 0;
-  }
+stroke-dasharray: ${(props: PathProps) => props.length ?? "100%"};
+stroke-dashoffset: ${(props: PathProps) => props.length ?? "100%"};
+animation: ${(props: PathProps) => animate(props.length)} 2s linear;
+animation-fill-mode: forwards; //Animated object stays instead of disappearing
+animation-duration: ${(props: PathProps) => props.duration}s; //Animation length (without delay)
+animation-delay: ${(props) => props.delay}s;
 }
 `
