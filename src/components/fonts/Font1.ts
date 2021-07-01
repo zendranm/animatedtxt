@@ -14,6 +14,18 @@ const defaultCharacter: SvgChar = {
   elements: [{ elementDelay: 0, shape: "", length: 0 }],
 };
 
+const charA: SvgChar = {
+  svgViewBox: { width: 56, height: 64 },
+  elements: [
+    {
+      elementDelay: 0.0,
+      shape: "M 7 70 L 28 0 L 49 70",
+      length: 213.04116821289062,
+    },
+    { elementDelay: 0.5, shape: "M 8 48 L 40 48", length: 32 },
+  ],
+};
+
 const charH: SvgChar = {
   svgViewBox: { width: 48, height: 64 },
   elements: [
@@ -34,4 +46,4 @@ const charM: SvgChar = {
   ],
 };
 
-export { defaultCharacter, charH, charM };
+export { defaultCharacter, charA, charH, charM };

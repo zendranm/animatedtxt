@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled, { keyframes } from 'styled-components'
-import { SvgChar, Element, defaultCharacter, charH, charM } from './fonts/Font1'
+import { SvgChar, Element, defaultCharacter, charA, charH, charM } from './fonts/Font1'
 
 export interface CharacterProps {
   char: typeof options[number];
@@ -10,13 +10,15 @@ export interface CharacterProps {
   size?: number;
 }
 
-const options = ["H", "M"] as const;
+const options = ["A", "H", "M"] as const;
 
 const Character = ({ char, delay = 0, duration = 1, color = "#000000", size = 100 }: CharacterProps) => {
   const [character, setCharacter] = useState<SvgChar>(defaultCharacter);
 
   useEffect(() => {
-    if (char === "H") {
+    if (char === "A") {
+      setCharacter(charA);
+    } else if (char === "H") {
       setCharacter(charH);
     } else if (char === "M") {
       setCharacter(charM);
