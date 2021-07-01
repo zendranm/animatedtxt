@@ -82,5 +82,4 @@ animation: ${(props: PathProps) => animate(props.length)} 2s linear;
 animation-fill-mode: forwards; //Animated object stays instead of disappearing
 animation-duration: ${(props: PathProps) => props.duration}s; //Animation length (without delay)
 animation-delay: ${(props) => props.delay}s;
-}
 `
