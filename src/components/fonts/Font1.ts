@@ -1,7 +1,7 @@
 export interface Element {
   elementDelay: number;
   shape: string;
-  length?: number;
+  length: number;
 }
 
 export interface SvgChar {
@@ -11,7 +11,7 @@ export interface SvgChar {
 
 const defaultCharacter: SvgChar = {
   svgViewBox: { width: 0, height: 0 },
-  elements: [{ elementDelay: 0, shape: "" }],
+  elements: [{ elementDelay: 0, shape: "", length: 0 }],
 };
 
 const charH: SvgChar = {

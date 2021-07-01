@@ -28,24 +28,19 @@ const Character = ({ char, delay = 0, duration = 1, color = "#000000", size = 10
   }, []);
 
   return (
-    <Content size={size}>
-      <Svg color={color} height="100%" viewBox={`0 0 ${character.svgViewBox.width} ${character.svgViewBox.height}`}>
-        {character.elements.map(({ elementDelay, shape, length }: Element, index: number) => {
-          return <Path id={"test" + index} delay={delay + elementDelay} duration={duration} d={shape} length={length} key={index} />
-        })}
-      </Svg>
-    </Content>
+    <Svg color={color} size={size} viewBox={`0 0 ${character.svgViewBox.width} ${character.svgViewBox.height}`}>
+      {character.elements.map(({ elementDelay, shape, length }: Element, index: number) => {
+        return <Path id={"test" + index} delay={delay + elementDelay} duration={duration} d={shape} length={length} key={index} />
+      })}
+    </Svg>
   );
 };
 
 export default Character;
 
-interface ContentProps {
-  size: number;
-}
-
 interface SvgProps {
   color: string;
+  size: number;
 }
 
 interface PathProps {
@@ -55,13 +50,9 @@ interface PathProps {
   key: number
 };
 
-const Content = styled.div<ContentProps>`
-height: ${(props: ContentProps) => props.size}px;
-width: fit-content;
-`
-
 const Svg = styled.svg<SvgProps>`
 stroke: ${(props: SvgProps) => props.color};
+height: ${(props: SvgProps) => props.size}px;
 stroke-width: 16;
 `
 
