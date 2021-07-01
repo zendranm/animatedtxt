@@ -15,11 +15,11 @@ const defaultCharacter: SvgChar = {
 };
 
 const charH: SvgChar = {
-  svgViewBox: { width: 64, height: 64 },
+  svgViewBox: { width: 48, height: 64 },
   elements: [
-    { elementDelay: 0.5, shape: "M 16 64 L 16 0" },
-    { elementDelay: 1.0, shape: "M 48 64 L 48 0" },
-    { elementDelay: 1.5, shape: "M 16 32 L 48 32" },
+    { elementDelay: 0.5, shape: "M 8 64 L 8 0", length: 64 },
+    { elementDelay: 1.0, shape: "M 40 64 L 40 0", length: 64 },
+    { elementDelay: 1.5, shape: "M 8 32 L 40 32", length: 32 },
   ],
 };
 

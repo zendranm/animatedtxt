@@ -57,7 +57,7 @@ interface PathProps {
 
 const Content = styled.div<ContentProps>`
 height: ${(props: ContentProps) => props.size}px;
-width: ${(props: ContentProps) => props.size}px;
+width: fit-content;
 `
 
 const Svg = styled.svg<SvgProps>`
@@ -65,9 +65,9 @@ stroke: ${(props: SvgProps) => props.color};
 stroke-width: 16;
 `
 
-const animate = (deg: any) => keyframes`
+const animate = (length: any) => keyframes`
 from {
-  stroke-dashoffset: ${deg ?? "100%"};
+  stroke-dashoffset: ${length ?? "100%"};
 }
 to {
   stroke-dashoffset: 0;
