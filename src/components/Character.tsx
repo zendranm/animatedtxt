@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled, { keyframes } from 'styled-components'
-import { Element, defaultCharacter, charH, charM } from './fonts/Font1'
+import { SvgChar, Element, defaultCharacter, charH, charM } from './fonts/Font1'
 
 export interface CharacterProps {
   char: typeof options[number];
@@ -13,7 +13,7 @@ export interface CharacterProps {
 const options = ["H", "M"] as const;
 
 const Character = ({ char, delay = 0, duration = 1, color = "#000000", size = 100 }: CharacterProps) => {
-  const [character, setCharacter] = useState<Element[]>(defaultCharacter);
+  const [character, setCharacter] = useState<SvgChar>(defaultCharacter);
 
   useEffect(() => {
     if (char === "H") {
@@ -29,8 +29,8 @@ const Character = ({ char, delay = 0, duration = 1, color = "#000000", size = 10
 
   return (
     <Content size={size}>
-      <Svg color={color} height="100%" width="100%" viewBox="0 0 64 64">
-        {character.map(({ elementDelay, shape, length }: Element, index: number) => {
+      <Svg color={color} height="100%" viewBox={`0 0 ${character.svgViewBox.width} ${character.svgViewBox.height}`}>
+        {character.elements.map(({ elementDelay, shape, length }: Element, index: number) => {
           return <Path id={"test" + index} delay={delay + elementDelay} duration={duration} d={shape} length={length} key={index} />
         })}
       </Svg>
