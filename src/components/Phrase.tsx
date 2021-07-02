@@ -29,6 +29,8 @@ const Phrase = ({ children, margin = 0, color, size = 100, duration = 1 }: Phras
   );
 };
 
+export default Phrase;
+
 interface WrapperProps {
   margin: number;
 }
@@ -51,5 +53,3 @@ margin-right: ${(props: WrapperProps) => props.margin / 2}px;
   margin-right: 0;
 }
 `
-
-export default Phrase;

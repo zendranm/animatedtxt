@@ -77,7 +77,7 @@ Example:
 For testing locally developed library before publishing it:
 
 1. Create new testing project (e.g with create-react-app)
-2. Modify the "local" script from the package.json so it's last part point to the root of application from the step #1.
+2. Modify the "local" script from the package.json so it's last part points to the root of application from the step #1.
 3. In the package.json of the application from step #1 add following script:
 
 ```
