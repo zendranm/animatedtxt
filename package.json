@@ -1,7 +1,7 @@
 {
 	"name": "animatedtxt",
 	"version": "1.0.4",
-	"description": "",
+	"description": "This npm package provides components and methods for convenient creation of animated texts and characters.",
 	"main": "./dist/index.js",
 	"types": "./dist/index.d.ts",
 	"files": [
@@ -18,8 +18,18 @@
 		"type": "git",
 		"url": "git+https://github.com/zendranm/animatedtxt.git"
 	},
-	"author": "",
+	"author": "Michał Zendran",
 	"license": "ISC",
+	"keywords": [
+		"text",
+		"letter",
+		"character",
+		"animated",
+		"animation",
+		"motion",
+		"draw",
+		"react"
+	],
 	"bugs": {
 		"url": "https://github.com/zendranm/animatedtxt/issues"
 	},

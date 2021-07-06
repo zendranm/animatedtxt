@@ -1,6 +1,6 @@
 # AnimatedTXT
 
-This npm package provides components for convenient creation of animated texts and characters.
+This npm package provides components and methods for convenient creation of animated texts and characters.
 
 ### npm package:
 
