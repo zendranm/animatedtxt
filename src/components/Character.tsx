@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled, { keyframes } from 'styled-components'
-import { SvgChar, Element, defaultCharacter, charA, charH, charM } from './fonts/Font1'
+import { SvgChar, Element, defaultCharacter, charA, charB, charH, charM } from './fonts/Font1'
 
 export interface CharacterProps {
   char: typeof options[number];
@@ -10,7 +10,7 @@ export interface CharacterProps {
   size?: number;
 }
 
-const options = ["A", "H", "M"] as const;
+const options = ["A", "B", "H", "M"] as const;
 
 const Character = ({ char, delay = 0, duration = 1, color = "#000000", size = 100 }: CharacterProps) => {
   const [character, setCharacter] = useState<SvgChar>(defaultCharacter);
@@ -18,6 +18,8 @@ const Character = ({ char, delay = 0, duration = 1, color = "#000000", size = 10
   useEffect(() => {
     if (char === "A") {
       setCharacter(charA);
+    } else if (char === "B") {
+      setCharacter(charB);
     } else if (char === "H") {
       setCharacter(charH);
     } else if (char === "M") {
@@ -32,7 +34,7 @@ const Character = ({ char, delay = 0, duration = 1, color = "#000000", size = 10
   return (
     <Svg color={color} size={size} viewBox={`0 0 ${character.svgViewBox.width} ${character.svgViewBox.height}`}>
       {character.elements.map(({ elementDelay, shape, length }: Element, index: number) => {
-        return <Path id={"test" + index} delay={delay + elementDelay} duration={duration} d={shape} length={length} key={index} />
+        return <Path delay={delay + elementDelay} duration={duration} d={shape} length={length} key={index} />
       })}
     </Svg>
   );
