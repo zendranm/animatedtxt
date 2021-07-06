@@ -1,6 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
-import { SvgChar, Element, defaultCharacter, charA, charB, charH, charM } from './fonts/Font1';
+import {
+	SvgChar,
+	Element,
+	defaultCharacter,
+	charA,
+	charB,
+	charC,
+	charH,
+	charM,
+} from './fonts/Font1';
 
 export interface CharacterProps {
 	char: typeof options[number];
@@ -10,7 +19,7 @@ export interface CharacterProps {
 	size?: number;
 }
 
-const options = ['A', 'B', 'H', 'M'] as const;
+const options = ['A', 'B', 'C', 'H', 'M'] as const;
 
 const Character = ({
 	char,
@@ -26,6 +35,8 @@ const Character = ({
 			setCharacter(charA);
 		} else if (char === 'B') {
 			setCharacter(charB);
+		} else if (char === 'C') {
+			setCharacter(charC);
 		} else if (char === 'H') {
 			setCharacter(charH);
 		} else if (char === 'M') {
