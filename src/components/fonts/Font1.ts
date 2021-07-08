@@ -40,6 +40,17 @@ export const charC: SvgChar = {
 	],
 };
 
+export const charD: SvgChar = {
+	svgViewBox: { width: 52, height: 64 },
+	elements: [
+		{
+			elementDelay: 0.0,
+			shape: 'M 8 8 L 8 56 L 26 56 C 50 56 50 8 26 8 L 0 8',
+			length: 158.94357299804688,
+		},
+	],
+};
+
 export const charH: SvgChar = {
 	svgViewBox: { width: 48, height: 64 },
 	elements: [

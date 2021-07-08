@@ -11,7 +11,7 @@ export interface CharacterProps {
 	size?: number;
 }
 
-const options = ['A', 'B', 'C', 'H', 'M'] as const;
+const options = ['A', 'B', 'C', 'D', 'H', 'M'] as const;
 
 const Character = ({
 	char,
@@ -29,6 +29,8 @@ const Character = ({
 			setCharacter(font1.charB);
 		} else if (char === 'C') {
 			setCharacter(font1.charC);
+		} else if (char === 'D') {
+			setCharacter(font1.charD);
 		} else if (char === 'H') {
 			setCharacter(font1.charH);
 		} else if (char === 'M') {
