@@ -1,20 +1,11 @@
-export interface Element {
-	elementDelay: number;
-	shape: string;
-	length: number;
-}
+import { SvgChar } from './index';
 
-export interface SvgChar {
-	svgViewBox: { width: number; height: number };
-	elements: Element[];
-}
-
-const defaultCharacter: SvgChar = {
+export const defaultCharacter: SvgChar = {
 	svgViewBox: { width: 0, height: 0 },
 	elements: [{ elementDelay: 0, shape: '', length: 0 }],
 };
 
-const charA: SvgChar = {
+export const charA: SvgChar = {
 	svgViewBox: { width: 56, height: 64 },
 	elements: [
 		{
@@ -26,7 +17,7 @@ const charA: SvgChar = {
 	],
 };
 
-const charB: SvgChar = {
+export const charB: SvgChar = {
 	svgViewBox: { width: 52, height: 64 },
 	elements: [
 		{ elementDelay: 0.0, shape: 'M 8 0 L 8 64', length: 64 },
@@ -38,7 +29,7 @@ const charB: SvgChar = {
 	],
 };
 
-const charC: SvgChar = {
+export const charC: SvgChar = {
 	svgViewBox: { width: 64, height: 64 },
 	elements: [
 		{
@@ -49,7 +40,7 @@ const charC: SvgChar = {
 	],
 };
 
-const charH: SvgChar = {
+export const charH: SvgChar = {
 	svgViewBox: { width: 48, height: 64 },
 	elements: [
 		{ elementDelay: 0.5, shape: 'M 8 64 L 8 0', length: 64 },
@@ -58,7 +49,7 @@ const charH: SvgChar = {
 	],
 };
 
-const charM: SvgChar = {
+export const charM: SvgChar = {
 	svgViewBox: { width: 64, height: 64 },
 	elements: [
 		{
@@ -68,5 +59,3 @@ const charM: SvgChar = {
 		},
 	],
 };
-
-export { defaultCharacter, charA, charB, charC, charH, charM };
