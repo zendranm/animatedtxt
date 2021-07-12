@@ -53,7 +53,7 @@ interface SvgProps {
 interface PathProps {
 	delay: number;
 	duration: number;
-	length?: number;
+	length: number;
 	key: number;
 }
 
@@ -65,7 +65,7 @@ const Svg = styled.svg<SvgProps>`
 
 const animate = (length: any) => keyframes`
 from {
-  stroke-dashoffset: ${length ?? '100%'};
+  stroke-dashoffset: ${length};
 }
 to {
   stroke-dashoffset: 0;
@@ -74,8 +74,8 @@ to {
 
 const Path = styled.path<PathProps>`
 	fill: transparent;
-	stroke-dasharray: ${(props: PathProps) => props.length ?? '100%'};
-	stroke-dashoffset: ${(props: PathProps) => props.length ?? '100%'};
+	stroke-dasharray: ${(props: PathProps) => props.length};
+	stroke-dashoffset: ${(props: PathProps) => props.length};
 	animation: ${(props: PathProps) => animate(props.length)} 2s linear;
 	animation-fill-mode: forwards; //Animated object stays instead of disappearing
 	animation-duration: ${(props: PathProps) => props.duration}s; //Animation length (without delay)
