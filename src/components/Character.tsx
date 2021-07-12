@@ -1,17 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
-import { SvgChar, Element } from './fonts/index';
-import * as font1 from './fonts/Font1';
+import { SvgChar, Element, charOptions, defaultCharacter, getCharacter } from './fonts/index';
 
 export interface CharacterProps {
-	char: typeof options[number];
+	char: charOptions;
 	delay?: number;
 	duration?: number;
 	color?: string;
 	size?: number;
 }
-
-const options = ['A', 'B', 'C', 'D', 'H', 'M'] as const;
 
 const Character = ({
 	char,
@@ -20,24 +17,11 @@ const Character = ({
 	color = '#000000',
 	size = 100,
 }: CharacterProps) => {
-	const [character, setCharacter] = useState<SvgChar>(font1.defaultCharacter);
+	const [character, setCharacter] = useState<SvgChar>(defaultCharacter);
 
 	useEffect(() => {
-		if (char === 'A') {
-			setCharacter(font1.charA);
-		} else if (char === 'B') {
-			setCharacter(font1.charB);
-		} else if (char === 'C') {
-			setCharacter(font1.charC);
-		} else if (char === 'D') {
-			setCharacter(font1.charD);
-		} else if (char === 'H') {
-			setCharacter(font1.charH);
-		} else if (char === 'M') {
-			setCharacter(font1.charM);
-		} else {
-			setCharacter(font1.defaultCharacter);
-		}
+		const newChar = getCharacter(char);
+		setCharacter(newChar);
 	}, []);
 
 	return (

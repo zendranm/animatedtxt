@@ -1,10 +1,5 @@
 import { SvgChar } from './index';
 
-export const defaultCharacter: SvgChar = {
-	svgViewBox: { width: 0, height: 0 },
-	elements: [{ elementDelay: 0, shape: '', length: 0 }],
-};
-
 export const charA: SvgChar = {
 	svgViewBox: { width: 56, height: 64 },
 	elements: [
