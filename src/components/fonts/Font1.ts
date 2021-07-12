@@ -25,7 +25,7 @@ export const charB: SvgChar = {
 };
 
 export const charC: SvgChar = {
-	svgViewBox: { width: 64, height: 64 },
+	svgViewBox: { width: 55, height: 64 },
 	elements: [
 		{
 			elementDelay: 0.0,
