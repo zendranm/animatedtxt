@@ -10,6 +10,15 @@ export interface CharacterProps {
 	size?: number;
 }
 
+export interface ExtendedElement extends Element {
+	speed: number;
+	elementDuration: number;
+}
+
+export interface ExtendedSvgChar extends SvgChar {
+	elements: ExtendedElement[];
+}
+
 const Character = ({
 	char,
 	delay = 0,
@@ -17,12 +26,65 @@ const Character = ({
 	color = '#000000',
 	size = 100,
 }: CharacterProps) => {
-	const [character, setCharacter] = useState<SvgChar>(defaultCharacter);
+	const [character, setCharacter] = useState<ExtendedSvgChar>({
+		...defaultCharacter,
+		elements: [{ elementDelay: 0, shape: '', length: 0, speed: 0, elementDuration: 0 }],
+	});
 
 	useEffect(() => {
-		const newChar = getCharacter(char);
+		const chosenChar = getCharacter(char);
+		const newChar = calculateAnimation(chosenChar, duration);
 		setCharacter(newChar);
 	}, []);
+
+	const calculateAnimation = (char: SvgChar, animationTime: number) => {
+		let longestElement: number = 0;
+		char.elements.forEach(element => {
+			if (element.length > longestElement) {
+				longestElement = element.length;
+			}
+		});
+
+		console.log('Longest element: ', longestElement);
+
+		const newElements = char.elements.map(element => ({
+			...element,
+			speed: element.length / longestElement,
+		}));
+		console.log('Elements with speed: ', newElements);
+
+		let longestAnimation = newElements[0];
+
+		newElements.forEach(element => {
+			if (
+				element.elementDelay + element.speed >
+				longestAnimation.elementDelay + longestAnimation.speed
+			) {
+				longestAnimation = element;
+			}
+		});
+
+		console.log('Longest animation: ', longestAnimation);
+
+		const LastEnd = (longestAnimation.elementDelay + longestAnimation.speed) * animationTime;
+		console.log('Last end: ', LastEnd);
+
+		let alpha = 1;
+		if (LastEnd > animationTime) {
+			alpha = 1 - longestAnimation.elementDelay;
+			console.log(alpha);
+		}
+
+		const extendedElements = newElements.map(element => ({
+			...element,
+			elementDuration: element.speed * animationTime * alpha,
+		}));
+		console.log(extendedElements);
+
+		const newChar = { ...char, elements: extendedElements };
+		console.log(newChar);
+		return newChar;
+	};
 
 	return (
 		<Svg
@@ -30,15 +92,17 @@ const Character = ({
 			size={size}
 			viewBox={`0 0 ${character.svgViewBox.width} ${character.svgViewBox.height}`}
 		>
-			{character.elements.map(({ elementDelay, shape, length }: Element, index: number) => (
-				<Path
-					delay={delay + elementDelay}
-					duration={duration}
-					d={shape}
-					length={length}
-					key={index}
-				/>
-			))}
+			{character.elements.map(
+				({ elementDelay, shape, length, elementDuration }: ExtendedElement, index: number) => (
+					<Path
+						delay={delay + elementDelay * duration}
+						duration={elementDuration}
+						d={shape}
+						length={length}
+						key={index}
+					/>
+				),
+			)}
 		</Svg>
 	);
 };

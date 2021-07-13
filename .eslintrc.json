@@ -31,7 +31,8 @@
 			}
 		],
 		"import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
-		"react/no-array-index-key": "off"
+		"react/no-array-index-key": "off",
+		"no-shadow": "off"
 	},
 	"globals": {
 		"JSX": true
