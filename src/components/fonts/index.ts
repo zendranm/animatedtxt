@@ -1,5 +1,5 @@
 import * as font1 from './Font1';
-import * as font2 from './Font2';
+// import * as font2 from './Font2';
 
 export interface Element {
 	elementDelay: number;
@@ -12,8 +12,8 @@ export interface SvgChar {
 	elements: Element[];
 }
 
-const charOptions = ['A', 'B', 'C', 'D', 'H', 'M'] as const;
-const fontOptions = ['font1', 'font2'] as const;
+const charOptions = ['A', 'B', 'C', 'D', 'E', 'H', 'M'] as const;
+const fontOptions = ['font1'] as const;
 
 export type CharOptions = typeof charOptions[number];
 export type FontOptions = typeof fontOptions[number];
@@ -29,9 +29,9 @@ export const getCharacter = (char: CharOptions, font: FontOptions) => {
 		case 'font1':
 			chosenFont = font1;
 			break;
-		case 'font2':
-			chosenFont = font2;
-			break;
+		// case 'font2':
+		// 	chosenFont = font2;
+		// 	break;
 		default:
 			chosenFont = font1;
 			break;
@@ -50,6 +50,9 @@ export const getCharacter = (char: CharOptions, font: FontOptions) => {
 			break;
 		case 'D':
 			chosenChar = chosenFont.charD;
+			break;
+		case 'E':
+			chosenChar = chosenFont.charE;
 			break;
 		case 'H':
 			chosenChar = chosenFont.charH;
