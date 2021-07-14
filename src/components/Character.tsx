@@ -39,11 +39,13 @@ const Character = ({
 		...defaultCharacter,
 		elements: [{ elementDelay: 0, shape: '', length: 0, speed: 0, elementDuration: 0 }],
 	});
+	const [fontWidth, setFontWidth] = useState<number>(1);
 
 	useEffect(() => {
-		const chosenChar = getCharacter(char, font);
+		const { chosenChar, fontWidth } = getCharacter(char, font);
 		const newChar = calculateAnimation(chosenChar, duration);
 		setCharacter(newChar);
+		setFontWidth(fontWidth);
 	}, []);
 
 	const calculateAnimation = (char: SvgChar, animationTime: number) => {
@@ -94,6 +96,7 @@ const Character = ({
 		<Svg
 			color={color}
 			size={size}
+			fontWidth={fontWidth}
 			viewBox={`0 0 ${character.svgViewBox.width} ${character.svgViewBox.height}`}
 		>
 			{character.elements.map(
@@ -116,6 +119,7 @@ export default Character;
 interface SvgProps {
 	color: string;
 	size: number;
+	fontWidth: number;
 }
 
 interface PathProps {
@@ -128,7 +132,7 @@ interface PathProps {
 const Svg = styled.svg<SvgProps>`
 	stroke: ${(props: SvgProps) => props.color};
 	height: ${(props: SvgProps) => props.size}px;
-	stroke-width: 16;
+	stroke-width: ${(props: SvgProps) => props.fontWidth};
 `;
 
 const animate = (length: any) => keyframes`

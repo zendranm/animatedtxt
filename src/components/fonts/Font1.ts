@@ -1,5 +1,7 @@
 import { SvgChar } from './index';
 
+export const fontWidth = 16;
+
 export const charA: SvgChar = {
 	svgViewBox: { width: 56, height: 64 },
 	elements: [

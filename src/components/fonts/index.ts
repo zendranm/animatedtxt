@@ -37,20 +37,32 @@ export const getCharacter = (char: CharOptions, font: FontOptions) => {
 			break;
 	}
 
+	let chosenChar;
 	switch (char) {
 		case 'A':
-			return chosenFont.charA;
+			chosenChar = chosenFont.charA;
+			break;
 		case 'B':
-			return chosenFont.charB;
+			chosenChar = chosenFont.charB;
+			break;
 		case 'C':
-			return chosenFont.charC;
+			chosenChar = chosenFont.charC;
+			break;
 		case 'D':
-			return chosenFont.charD;
+			chosenChar = chosenFont.charD;
+			break;
 		case 'H':
-			return chosenFont.charH;
+			chosenChar = chosenFont.charH;
+			break;
 		case 'M':
-			return chosenFont.charM;
+			chosenChar = chosenFont.charM;
+			break;
 		default:
-			return defaultCharacter;
+			chosenChar = defaultCharacter;
+			break;
 	}
+
+	const { fontWidth } = chosenFont;
+
+	return { chosenChar, fontWidth };
 };
