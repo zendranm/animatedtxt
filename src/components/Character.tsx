@@ -38,18 +38,21 @@ const Character = ({
 	}, []);
 
 	const calculateAnimation = (char: SvgChar, animationTime: number) => {
-		let longestElement: number = 0;
+		// Find the longest element in character
+		let longestElement = 0;
 		char.elements.forEach(element => {
 			if (element.length > longestElement) {
 				longestElement = element.length;
 			}
 		});
 
+		// Calculate ratio (speed) of each element's length to the longest element
 		const newElements = char.elements.map(element => ({
 			...element,
 			speed: element.length / longestElement,
 		}));
 
+		// Find element with animation that ends last
 		let longestAnimation = newElements[0];
 		newElements.forEach(element => {
 			if (
@@ -60,12 +63,16 @@ const Character = ({
 			}
 		});
 
+		// Calculate the time of the end of the animation that ends last
 		const LastEnd = (longestAnimation.elementDelay + longestAnimation.speed) * animationTime;
+
+		// Calculate adjustment if animation longer than animationTime
 		let alpha = 1;
 		if (LastEnd > animationTime) {
 			alpha = 1 - longestAnimation.elementDelay;
 		}
 
+		// Calculate each element's animation duration
 		const extendedElements = newElements.map(element => ({
 			...element,
 			elementDuration: element.speed * animationTime * alpha,
