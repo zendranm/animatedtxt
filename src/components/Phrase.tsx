@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { FontOptions } from './fonts/index';
 
 export interface PhraseProps {
 	children: JSX.Element[];
@@ -7,9 +8,17 @@ export interface PhraseProps {
 	color?: string;
 	size?: number;
 	duration?: number;
+	font?: FontOptions;
 }
 
-const Phrase = ({ children, margin = 0, color, size = 100, duration = 1 }: PhraseProps) => {
+const Phrase = ({
+	children,
+	margin = 0,
+	color,
+	size = 100,
+	duration = 1,
+	font = 'font1',
+}: PhraseProps) => {
 	const [characters, setCharacters] = useState<JSX.Element[]>(children);
 
 	useEffect(() => {
@@ -18,6 +27,7 @@ const Phrase = ({ children, margin = 0, color, size = 100, duration = 1 }: Phras
 				color: child.props.color ?? color,
 				size,
 				duration: child.props.duration ?? duration,
+				font,
 			});
 			return (
 				<Wrapper margin={margin} key={index}>
