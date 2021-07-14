@@ -10,7 +10,7 @@ export const charA: SvgChar = {
 			shape: 'M 7 70 L 28 0 L 49 70',
 			length: 146.16429138183594,
 		},
-		{ elementDelay: 0.5, shape: 'M 8 48 L 40 48', length: 32 },
+		{ elementDelay: 0.7, shape: 'M 8 48 L 40 48', length: 32 },
 	],
 };
 
