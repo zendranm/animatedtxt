@@ -45,16 +45,12 @@ const Character = ({
 			}
 		});
 
-		console.log('Longest element: ', longestElement);
-
 		const newElements = char.elements.map(element => ({
 			...element,
 			speed: element.length / longestElement,
 		}));
-		console.log('Elements with speed: ', newElements);
 
 		let longestAnimation = newElements[0];
-
 		newElements.forEach(element => {
 			if (
 				element.elementDelay + element.speed >
@@ -64,26 +60,18 @@ const Character = ({
 			}
 		});
 
-		console.log('Longest animation: ', longestAnimation);
-
 		const LastEnd = (longestAnimation.elementDelay + longestAnimation.speed) * animationTime;
-		console.log('Last end: ', LastEnd);
-
 		let alpha = 1;
 		if (LastEnd > animationTime) {
 			alpha = 1 - longestAnimation.elementDelay;
-			console.log(alpha);
 		}
 
 		const extendedElements = newElements.map(element => ({
 			...element,
 			elementDuration: element.speed * animationTime * alpha,
 		}));
-		console.log(extendedElements);
 
-		const newChar = { ...char, elements: extendedElements };
-		console.log(newChar);
-		return newChar;
+		return { ...char, elements: extendedElements };
 	};
 
 	return (
