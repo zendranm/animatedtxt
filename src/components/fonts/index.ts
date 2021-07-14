@@ -1,4 +1,5 @@
 import * as font1 from './Font1';
+import * as font2 from './Font2';
 
 export interface Element {
 	elementDelay: number;
@@ -11,29 +12,44 @@ export interface SvgChar {
 	elements: Element[];
 }
 
-const options = ['A', 'B', 'C', 'D', 'H', 'M'] as const;
+const charOptions = ['A', 'B', 'C', 'D', 'H', 'M'] as const;
+const fontOptions = ['font1', 'font2'] as const;
 
-export type charOptions = typeof options[number];
+export type CharOptions = typeof charOptions[number];
+export type FontOptions = typeof fontOptions[number];
 
 export const defaultCharacter: SvgChar = {
 	svgViewBox: { width: 0, height: 0 },
 	elements: [{ elementDelay: 0, shape: '', length: 0 }],
 };
 
-export const getCharacter = (char: charOptions) => {
+export const getCharacter = (char: CharOptions, font: FontOptions) => {
+	let chosenFont;
+	switch (font) {
+		case 'font1':
+			chosenFont = font1;
+			break;
+		case 'font2':
+			chosenFont = font2;
+			break;
+		default:
+			chosenFont = font1;
+			break;
+	}
+
 	switch (char) {
 		case 'A':
-			return font1.charA;
+			return chosenFont.charA;
 		case 'B':
-			return font1.charB;
+			return chosenFont.charB;
 		case 'C':
-			return font1.charC;
+			return chosenFont.charC;
 		case 'D':
-			return font1.charD;
+			return chosenFont.charD;
 		case 'H':
-			return font1.charH;
+			return chosenFont.charH;
 		case 'M':
-			return font1.charM;
+			return chosenFont.charM;
 		default:
 			return defaultCharacter;
 	}

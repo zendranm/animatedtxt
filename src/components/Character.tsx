@@ -1,13 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
-import { SvgChar, Element, charOptions, defaultCharacter, getCharacter } from './fonts/index';
+import {
+	SvgChar,
+	Element,
+	CharOptions,
+	FontOptions,
+	defaultCharacter,
+	getCharacter,
+} from './fonts/index';
 
 export interface CharacterProps {
-	char: charOptions;
+	char: CharOptions;
 	delay?: number;
 	duration?: number;
 	color?: string;
 	size?: number;
+	font?: FontOptions;
 }
 
 export interface ExtendedElement extends Element {
@@ -25,6 +33,7 @@ const Character = ({
 	duration = 1,
 	color = '#000000',
 	size = 100,
+	font = 'font1',
 }: CharacterProps) => {
 	const [character, setCharacter] = useState<ExtendedSvgChar>({
 		...defaultCharacter,
@@ -32,7 +41,7 @@ const Character = ({
 	});
 
 	useEffect(() => {
-		const chosenChar = getCharacter(char);
+		const chosenChar = getCharacter(char, font);
 		const newChar = calculateAnimation(chosenChar, duration);
 		setCharacter(newChar);
 	}, []);
