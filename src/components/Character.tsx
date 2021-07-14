@@ -80,7 +80,7 @@ const Character = ({
 		// Calculate adjustment if animation longer than animationTime
 		let alpha = 1;
 		if (LastEnd > animationTime) {
-			alpha = 1 - longestAnimation.elementDelay;
+			alpha = 1 - (longestAnimation.elementDelay + longestAnimation.speed - 1);
 		}
 
 		// Calculate each element's animation duration
