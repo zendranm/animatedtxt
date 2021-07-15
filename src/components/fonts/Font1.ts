@@ -52,9 +52,9 @@ export const charE: SvgChar = {
 	svgViewBox: { width: 48, height: 64 },
 	elements: [
 		{ elementDelay: 0.0, shape: 'M 8 0 L 8 64', length: 64 },
-		{ elementDelay: 0.2, shape: 'M 8 8 L 48 8', length: 40 },
-		{ elementDelay: 0.3, shape: 'M 8 32 L 42 32', length: 34 },
-		{ elementDelay: 0.5, shape: 'M 8 56 L 48 56', length: 40 },
+		{ elementDelay: 0.3, shape: 'M 8 8 L 48 8', length: 40 },
+		{ elementDelay: 0.5, shape: 'M 8 32 L 42 32', length: 34 },
+		{ elementDelay: 0.9, shape: 'M 8 56 L 48 56', length: 40 },
 	],
 };
 

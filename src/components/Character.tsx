@@ -75,12 +75,18 @@ const Character = ({
 		});
 
 		// Calculate the time of the end of the animation that ends last
-		const LastEnd = (longestAnimation.elementDelay + longestAnimation.speed) * animationTime;
+		const lastEnd = (longestAnimation.elementDelay + longestAnimation.speed) * animationTime;
 
 		// Calculate adjustment if animation longer than animationTime
 		let alpha = 1;
-		if (LastEnd > animationTime) {
-			alpha = 1 - (longestAnimation.elementDelay + longestAnimation.speed - 1);
+		if (lastEnd > animationTime) {
+			// Calculate time of element's animation which is too long
+			const lasts = lastEnd - longestAnimation.elementDelay * animationTime;
+
+			// Calculate allowed time that won't exceed animationTime
+			const shouldLast = animationTime - longestAnimation.elementDelay * animationTime;
+
+			alpha = shouldLast / lasts;
 		}
 
 		// Calculate each element's animation duration
