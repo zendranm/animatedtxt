@@ -92,6 +92,34 @@ export const charI: SvgChar = {
 	elements: [{ elementDelay: 0.0, shape: 'M 8 64 L 8 0', length: 64 }],
 };
 
+export const charJ: SvgChar = {
+	svgViewBox: { width: 40, height: 64 },
+	elements: [
+		{
+			elementDelay: 0.0,
+			shape: 'M 32 0 L 32 44 A 1 1 0 0 1 8 44 L 8 35',
+			length: 90.70447540283203,
+		},
+	],
+};
+
+export const charK: SvgChar = {
+	svgViewBox: { width: 54.5, height: 64 },
+	elements: [
+		{ elementDelay: 0.0, shape: 'M 8 64 L 8 0', length: 64 },
+		{ elementDelay: 0.1, shape: 'M 48 -5 L 8 44', length: 63.25345993041992 },
+		{ elementDelay: 0.6, shape: 'M 20 29 L 48 69', length: 48.82622146606445 },
+	],
+};
+
+export const charL: SvgChar = {
+	svgViewBox: { width: 40, height: 64 },
+	elements: [
+		{ elementDelay: 0.0, shape: 'M 8 0 L 8 64', length: 64 },
+		{ elementDelay: 0.68, shape: 'M 8 56 L 40 56', length: 32 },
+	],
+};
+
 export const charM: SvgChar = {
 	svgViewBox: { width: 64, height: 64 },
 	elements: [
