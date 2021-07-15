@@ -165,6 +165,22 @@ export const charP: SvgChar = {
 	],
 };
 
+export const charQ: SvgChar = {
+	svgViewBox: { width: 64, height: 64 },
+	elements: [
+		{
+			elementDelay: 0.0,
+			shape: 'M 8 32 A 24 24 0 1 0 56 32 A 24 24 0 1 0 8 32',
+			length: 150.81761169433594,
+		},
+		{
+			elementDelay: 0.5,
+			shape: 'M 40 40 L 58 58',
+			length: 25.45584487915039,
+		},
+	],
+};
+
 export const charR: SvgChar = {
 	svgViewBox: { width: 50, height: 64 },
 	elements: [

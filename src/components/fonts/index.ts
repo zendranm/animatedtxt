@@ -29,6 +29,7 @@ const charOptions = [
 	'N',
 	'O',
 	'P',
+	'Q',
 	'R',
 ] as const;
 const fontOptions = ['font1'] as const;
@@ -104,6 +105,9 @@ export const getCharacter = (char: CharOptions, font: FontOptions) => {
 			break;
 		case 'P':
 			chosenChar = chosenFont.charP;
+			break;
+		case 'Q':
+			chosenChar = chosenFont.charQ;
 			break;
 		case 'R':
 			chosenChar = chosenFont.charR;
