@@ -130,3 +130,54 @@ export const charM: SvgChar = {
 		},
 	],
 };
+
+export const charN: SvgChar = {
+	svgViewBox: { width: 56, height: 64 },
+	elements: [
+		{
+			elementDelay: 0.0,
+			shape: 'M 8 64 L 8 0 L 48 64 L 48 0',
+			length: 203.4718475341797,
+		},
+	],
+};
+
+export const charO: SvgChar = {
+	svgViewBox: { width: 64, height: 64 },
+	elements: [
+		{
+			elementDelay: 0.0,
+			shape: 'M 8 32 A 24 24 0 1 0 56 32 A 24 24 0 1 0 8 32',
+			length: 150.81761169433594,
+		},
+	],
+};
+
+export const charP: SvgChar = {
+	svgViewBox: { width: 50, height: 64 },
+	elements: [
+		{ elementDelay: 0.0, shape: 'M 8 0 L 8 64', length: 64 },
+		{
+			elementDelay: 0.2,
+			shape: 'M 8 8 L 30 8 C 46 8 46 32 30 32 L 8 32',
+			length: 82.05984497070312,
+		},
+	],
+};
+
+export const charR: SvgChar = {
+	svgViewBox: { width: 50, height: 64 },
+	elements: [
+		{ elementDelay: 0.0, shape: 'M 8 0 L 8 64', length: 64 },
+		{
+			elementDelay: 0.2,
+			shape: 'M 8 8 L 30 8 C 46 8 46 32 30 32 L 8 32',
+			length: 82.05984497070312,
+		},
+		{
+			elementDelay: 0.75,
+			shape: 'M 26 32 L 42 68',
+			length: 39.39543151855469,
+		},
+	],
+};

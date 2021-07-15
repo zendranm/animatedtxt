@@ -12,7 +12,25 @@ export interface SvgChar {
 	elements: Element[];
 }
 
-const charOptions = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M'] as const;
+const charOptions = [
+	'A',
+	'B',
+	'C',
+	'D',
+	'E',
+	'F',
+	'G',
+	'H',
+	'I',
+	'J',
+	'K',
+	'L',
+	'M',
+	'N',
+	'O',
+	'P',
+	'R',
+] as const;
 const fontOptions = ['font1'] as const;
 
 export type CharOptions = typeof charOptions[number];
@@ -77,6 +95,18 @@ export const getCharacter = (char: CharOptions, font: FontOptions) => {
 			break;
 		case 'M':
 			chosenChar = chosenFont.charM;
+			break;
+		case 'N':
+			chosenChar = chosenFont.charN;
+			break;
+		case 'O':
+			chosenChar = chosenFont.charO;
+			break;
+		case 'P':
+			chosenChar = chosenFont.charP;
+			break;
+		case 'R':
+			chosenChar = chosenFont.charR;
 			break;
 		default:
 			chosenChar = defaultCharacter;
