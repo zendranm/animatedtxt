@@ -5,6 +5,7 @@ import {
 	Element,
 	CharOptions,
 	FontOptions,
+	LinecapOptions,
 	defaultCharacter,
 	getCharacter,
 } from './fonts/index';
@@ -40,12 +41,14 @@ const Character = ({
 		elements: [{ elementDelay: 0, shape: '', length: 0, speed: 0, elementDuration: 0 }],
 	});
 	const [fontWidth, setFontWidth] = useState<number>(1);
+	const [linecap, setLinecap] = useState<LinecapOptions>('butt');
 
 	useEffect(() => {
-		const { chosenChar, fontWidth } = getCharacter(char, font);
+		const { chosenChar, fontWidth, linecap } = getCharacter(char, font);
 		const newChar = calculateAnimation(chosenChar, duration);
 		setCharacter(newChar);
 		setFontWidth(fontWidth);
+		setLinecap(linecap);
 	}, []);
 
 	const calculateAnimation = (char: SvgChar, animationTime: number) => {
@@ -103,6 +106,7 @@ const Character = ({
 			color={color}
 			size={size}
 			fontWidth={fontWidth}
+			linecap={linecap}
 			viewBox={`0 0 ${character.svgViewBox.width} ${character.svgViewBox.height}`}
 		>
 			{character.elements.map(
@@ -126,6 +130,7 @@ interface SvgProps {
 	color: string;
 	size: number;
 	fontWidth: number;
+	linecap: LinecapOptions;
 }
 
 interface PathProps {
@@ -139,6 +144,7 @@ const Svg = styled.svg<SvgProps>`
 	stroke: ${(props: SvgProps) => props.color};
 	height: ${(props: SvgProps) => props.size}px;
 	stroke-width: ${(props: SvgProps) => props.fontWidth};
+	stroke-linecap: ${(props: SvgProps) => props.linecap};
 `;
 
 const animate = (length: any) => keyframes`

@@ -33,9 +33,11 @@ const charOptions = [
 	'R',
 ] as const;
 const fontOptions = ['font1'] as const;
+const linecapOptions = ['butt', 'round', 'square'] as const;
 
 export type CharOptions = typeof charOptions[number];
 export type FontOptions = typeof fontOptions[number];
+export type LinecapOptions = typeof linecapOptions[number];
 
 export const defaultCharacter: SvgChar = {
 	svgViewBox: { width: 0, height: 0 },
@@ -117,7 +119,7 @@ export const getCharacter = (char: CharOptions, font: FontOptions) => {
 			break;
 	}
 
-	const { fontWidth } = chosenFont;
+	const { fontWidth, linecap } = chosenFont;
 
-	return { chosenChar, fontWidth };
+	return { chosenChar, fontWidth, linecap };
 };

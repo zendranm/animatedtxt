@@ -1,6 +1,7 @@
-import { SvgChar } from './index';
+import { SvgChar, LinecapOptions } from './index';
 
-export const fontWidth = 16;
+export const fontWidth: number = 16;
+export const linecap: LinecapOptions = 'butt';
 
 export const charA: SvgChar = {
 	svgViewBox: { width: 56, height: 64 },
