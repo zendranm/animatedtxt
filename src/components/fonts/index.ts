@@ -33,6 +33,12 @@ const charOptions = [
 	'R',
 	'S',
 	'T',
+	'U',
+	'V',
+	'W',
+	'X',
+	'Y',
+	'Z',
 ] as const;
 const fontOptions = ['font1'] as const;
 const linecapOptions = ['butt', 'round', 'square'] as const;
@@ -121,6 +127,24 @@ export const getCharacter = (char: CharOptions, font: FontOptions) => {
 			break;
 		case 'T':
 			chosenChar = chosenFont.charT;
+			break;
+		case 'U':
+			chosenChar = chosenFont.charU;
+			break;
+		case 'V':
+			chosenChar = chosenFont.charV;
+			break;
+		case 'W':
+			chosenChar = chosenFont.charW;
+			break;
+		case 'X':
+			chosenChar = chosenFont.charX;
+			break;
+		case 'Y':
+			chosenChar = chosenFont.charY;
+			break;
+		case 'Z':
+			chosenChar = chosenFont.charZ;
 			break;
 		default:
 			chosenChar = defaultCharacter;
