@@ -2,17 +2,21 @@
 
 This npm package provides components and methods for convenient creation of animated texts and characters.
 
+### Live demo:
+
+https://codesandbox.io/s/animatedtxt-xwj1b
+
 ### npm package:
 
 https://www.npmjs.com/package/animatedtxt
+
+# Basic usage
 
 ### Installation:
 
 ```
 npm i animatedtxt
 ```
-
-# Basic usage
 
 Importing components:
 
