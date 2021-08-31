@@ -52,7 +52,14 @@ export const defaultCharacter: SvgChar = {
 	elements: [{ elementDelay: 0, shape: '', length: 0 }],
 };
 
-export const getCharacter = (char: CharOptions, font: FontOptions) => {
+export const getCharacter = (
+	char: CharOptions,
+	font: FontOptions,
+): {
+	chosenChar: SvgChar;
+	fontWidth: number;
+	linecap: LinecapOptions;
+} => {
 	let chosenFont;
 	switch (font) {
 		case 'font1':
