@@ -28,14 +28,14 @@ export interface ExtendedSvgChar extends SvgChar {
 	elements: ExtendedElement[];
 }
 
-const Character = ({
+const Character: React.FC<CharacterProps> = ({
 	char,
 	delay = 0,
 	duration = 1,
 	color = '#000000',
 	size = 100,
 	font = 'font1',
-}: CharacterProps) => {
+}) => {
 	const [character, setCharacter] = useState<ExtendedSvgChar>({
 		...defaultCharacter,
 		elements: [{ elementDelay: 0, shape: '', length: 0, speed: 0, elementDuration: 0 }],

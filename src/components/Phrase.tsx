@@ -11,14 +11,14 @@ export interface PhraseProps {
 	font?: FontOptions;
 }
 
-const Phrase = ({
+const Phrase: React.FC<PhraseProps> = ({
 	children,
 	margin = 0,
 	color,
 	size = 100,
 	duration = 1,
 	font = 'font1',
-}: PhraseProps) => {
+}) => {
 	const [characters, setCharacters] = useState<JSX.Element[]>(children);
 
 	useEffect(() => {
