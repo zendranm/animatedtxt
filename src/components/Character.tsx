@@ -102,25 +102,41 @@ const Character: React.FC<CharacterProps> = ({
 	};
 
 	return (
-		<Svg
-			color={color}
-			size={size}
-			fontWidth={fontWidth}
-			linecap={linecap}
-			viewBox={`0 0 ${character.svgViewBox.width} ${character.svgViewBox.height}`}
-		>
-			{character.elements.map(
-				({ elementDelay, shape, length, elementDuration }: ExtendedElement, index: number) => (
-					<Path
-						delay={delay + elementDelay * duration}
-						duration={elementDuration}
-						d={shape}
-						length={length}
-						key={index}
-					/>
-				),
+		<TestParent>
+			<Svg
+				color={color}
+				size={size}
+				fontWidth={fontWidth}
+				linecap={linecap}
+				viewBox={`0 0 ${character.svgViewBox.width} ${character.svgViewBox.height}`}
+			>
+				{character.elements.map(
+					({ elementDelay, shape, length, elementDuration }: ExtendedElement, index: number) => (
+						<Path
+							delay={delay + elementDelay * duration}
+							duration={elementDuration}
+							d={shape}
+							length={length}
+							key={index}
+						/>
+					),
+				)}
+			</Svg>
+			{character?.offsets && (
+				<TestChild>
+					<Side>
+						{character.offsets.left.map(block => (
+							<Block marginLeft={block} marginRight={0} />
+						))}
+					</Side>
+					<Side>
+						{character.offsets.left.map(block => (
+							<Block marginLeft={0} marginRight={block} />
+						))}
+					</Side>
+				</TestChild>
 			)}
-		</Svg>
+		</TestParent>
 	);
 };
 
@@ -164,4 +180,40 @@ const Path = styled.path<PathProps>`
 	animation-fill-mode: forwards; //Animated object stays instead of disappearing
 	animation-duration: ${(props: PathProps) => props.duration}s; //Animation length (without delay)
 	animation-delay: ${props => props.delay}s;
+`;
+
+const TestParent = styled.div`
+	background: violet;
+	position: relative;
+`;
+
+const TestChild = styled.div`
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+`;
+
+const Side = styled.div`
+	width: 50%;
+	height: 100%;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+`;
+
+const Block = styled.div<{ marginLeft: number; marginRight: number }>`
+	width: 100%;
+	height: calc(100% / 3);
+	border-style: solid;
+	border-color: green;
+	box-sizing: border-box;
+	margin-left: ${props => props.marginLeft}px;
+	margin-right: ${props => props.marginRight}%;
 `;

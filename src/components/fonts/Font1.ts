@@ -13,6 +13,10 @@ export const charA: SvgChar = {
 		},
 		{ elementDelay: 0.7, shape: 'M 8 48 L 40 48', length: 32 },
 	],
+	offsets: {
+		left: [0.5, 0.8, 0],
+		right: [0.5, 0.8, 0],
+	},
 };
 
 export const charB: SvgChar = {

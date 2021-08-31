@@ -10,6 +10,7 @@ export interface Element {
 export interface SvgChar {
 	svgViewBox: { width: number; height: number };
 	elements: Element[];
+	offsets?: { left: [number, number, number]; right: [number, number, number] };
 }
 
 const charOptions = [
