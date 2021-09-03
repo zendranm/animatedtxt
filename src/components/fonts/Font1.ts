@@ -15,7 +15,7 @@ export const charA: SvgChar = {
 	],
 	offsets: {
 		left: [0.45, 0.23, 0],
-		right: [0.5, 0.2, 0],
+		right: [0.45, 0.23, 0],
 	},
 };
 

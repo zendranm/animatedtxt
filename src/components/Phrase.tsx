@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { FontOptions } from './fonts/index';
+import { FontOptions, getCharacter } from './fonts/index';
+import Character from './Character';
 
 export interface PhraseProps {
 	children: JSX.Element[];
@@ -21,21 +22,67 @@ const Phrase: React.FC<PhraseProps> = ({
 }) => {
 	const [characters, setCharacters] = useState<JSX.Element[]>(children);
 
-	useEffect(() => {
-		const newChildren = children.map((child, index) => {
-			const newChild = React.cloneElement(child, {
-				color: child.props.color ?? color,
-				size,
-				duration: child.props.duration ?? duration,
-				font,
-			});
+	const wrapChildren = (children: JSX.Element[]) =>
+		children.map((child, index) => {
+			const tmp = getCharacter(child.props.char, child.props.font).chosenChar.offsets;
+			const tmp2 = getCharacter(child.props.char, child.props.font).chosenChar.svgViewBox;
+			console.log(tmp);
+			const newChild = (
+				<Character
+					char={child.props.char}
+					color={child.props.color ?? color}
+					size={size}
+					duration={child.props.duration ?? duration}
+					font={font}
+				/>
+			);
 			return (
-				<Wrapper margin={margin} key={index}>
-					{newChild}
-				</Wrapper>
+				<OffsetWrapper offsets={tmp} svgViewBox={tmp2} size={size} key={index}>
+					<Wrapper margin={margin}>{newChild}</Wrapper>
+				</OffsetWrapper>
 			);
 		});
-		setCharacters(newChildren);
+
+	const addOffset = (children: JSX.Element[]) => {
+		let firstChild: JSX.Element;
+		let secondChild: JSX.Element;
+		let smallestSpace: number = 1;
+		const newChildren: JSX.Element[] = [];
+
+		for (let i = 0; i < children.length - 1; i += 1) {
+			firstChild = children[i];
+			secondChild = children[i + 1];
+
+			for (let j = 0; j < 3; j += 1) {
+				const tmp1 = firstChild.props.offsets.right[j];
+				const tmp2 = secondChild.props.offsets.left[j];
+
+				smallestSpace = tmp1 + tmp2 < smallestSpace ? tmp1 + tmp2 : smallestSpace;
+			}
+
+			console.log('Offset: ', smallestSpace);
+
+			const width =
+				(firstChild.props.svgViewBox.width / firstChild.props.svgViewBox.height) *
+				firstChild.props.size;
+
+			console.log('width: ', width);
+
+			console.log('(width / 2) * smallestSpace: ', (width / 2) * smallestSpace);
+
+			const childWithOffset = <Test offset={(width / 2) * smallestSpace}>{firstChild}</Test>;
+
+			newChildren.push(childWithOffset);
+		}
+		newChildren.push(children[children.length - 1]);
+
+		return newChildren;
+	};
+
+	useEffect(() => {
+		const newChildren = wrapChildren(children);
+		const tmp = addOffset(newChildren);
+		setCharacters(tmp);
 	}, []);
 
 	return (
@@ -68,4 +115,14 @@ const Wrapper = styled.div<WrapperProps>`
 	&:last-child {
 		margin-right: 0;
 	}
+`;
+
+const OffsetWrapper = styled.div<{
+	offsets: { left: [number, number, number]; right: [number, number, number] } | undefined;
+	svgViewBox: any;
+	size: number;
+}>``;
+
+const Test = styled.div<{ offset: number }>`
+	margin-right: -${props => props.offset}px;
 `;

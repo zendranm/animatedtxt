@@ -125,13 +125,13 @@ const Character: React.FC<CharacterProps> = ({
 			{character?.offsets && (
 				<TestChild>
 					<Side isLeftSide>
-						{character.offsets.left.map(offset => (
-							<Block offset={offset} />
+						{character.offsets.left.map((offset, index) => (
+							<Block offset={offset} key={index} />
 						))}
 					</Side>
 					<Side isLeftSide={false}>
-						{character.offsets.left.map(offset => (
-							<Block offset={offset} />
+						{character.offsets.right.map((offset, index) => (
+							<Block offset={offset} key={index} />
 						))}
 					</Side>
 				</TestChild>
@@ -183,7 +183,6 @@ const Path = styled.path<PathProps>`
 `;
 
 const TestParent = styled.div`
-	background: violet;
 	position: relative;
 `;
 
