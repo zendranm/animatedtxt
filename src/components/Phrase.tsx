@@ -24,8 +24,7 @@ const Phrase: React.FC<PhraseProps> = ({
 
 	const wrapChildren = (children: JSX.Element[]) =>
 		children.map((child, index) => {
-			const tmp = getCharacter(child.props.char, child.props.font).chosenChar.offsets;
-			const tmp2 = getCharacter(child.props.char, child.props.font).chosenChar.svgViewBox;
+			const { chosenChar } = getCharacter(child.props.char, child.props.font);
 			const newChild = (
 				<Character
 					char={child.props.char}
@@ -36,7 +35,12 @@ const Phrase: React.FC<PhraseProps> = ({
 				/>
 			);
 			return (
-				<OffsetWrapper offsets={tmp} svgViewBox={tmp2} size={size} key={index}>
+				<OffsetWrapper
+					offsets={chosenChar.offsets}
+					svgViewBox={chosenChar.svgViewBox}
+					size={size}
+					key={index}
+				>
 					<Wrapper margin={margin}>{newChild}</Wrapper>
 				</OffsetWrapper>
 			);
@@ -49,13 +53,9 @@ const Phrase: React.FC<PhraseProps> = ({
 
 		let tmp2 = 0;
 
-		for (let i = 0; i < children.length; i += 1) {
+		for (let i = 0; i < children.length - 1; i += 1) {
 			firstChild = children[i];
 			secondChild = children[i + 1];
-			if (i === children.length - 1) {
-				secondChild = firstChild;
-				secondChild.props.offsets.left = [0, 0, 0];
-			}
 			let smallestSpace: number = 1;
 
 			let tmp1 = 0;
@@ -66,11 +66,6 @@ const Phrase: React.FC<PhraseProps> = ({
 				firstChild.props.size;
 
 			for (let j = 0; j < 3; j += 1) {
-				console.log(
-					'smallestSpace check : ',
-					firstChild.props.offsets.right[j] + secondChild.props.offsets.left[j],
-				);
-
 				if (firstChild.props.offsets.right[j] + secondChild.props.offsets.left[j] < smallestSpace) {
 					tmp1 = firstChild.props.offsets.right[j];
 					tmp3 = secondChild.props.offsets.left[j];
@@ -78,14 +73,8 @@ const Phrase: React.FC<PhraseProps> = ({
 				}
 			}
 
-			console.log('smallestSpace: ', smallestSpace);
-
-			console.log('width1: ', width1);
-
-			console.log('tmp1 * (width1 / 2): ', tmp1 * (width1 / 2));
-
 			const childWithOffset = (
-				<Test offsetLeft={tmp2 * (width1 / 2)} offsetRight={tmp1 * (width1 / 2)}>
+				<Test offsetLeft={tmp2 * (width1 / 2)} offsetRight={tmp1 * (width1 / 2)} key={i}>
 					{firstChild}
 				</Test>
 			);
