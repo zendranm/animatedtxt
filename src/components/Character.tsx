@@ -124,14 +124,14 @@ const Character: React.FC<CharacterProps> = ({
 			</Svg>
 			{character?.offsets && (
 				<TestChild>
-					<Side>
-						{character.offsets.left.map(block => (
-							<Block marginLeft={block} marginRight={0} />
+					<Side isLeftSide>
+						{character.offsets.left.map(offset => (
+							<Block offset={offset} />
 						))}
 					</Side>
-					<Side>
-						{character.offsets.left.map(block => (
-							<Block marginLeft={0} marginRight={block} />
+					<Side isLeftSide={false}>
+						{character.offsets.left.map(offset => (
+							<Block offset={offset} />
 						))}
 					</Side>
 				</TestChild>
@@ -199,21 +199,19 @@ const TestChild = styled.div`
 	justify-content: center;
 `;
 
-const Side = styled.div`
+const Side = styled.div<{ isLeftSide: boolean }>`
 	width: 50%;
 	height: 100%;
 
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
+	align-items: ${props => (props.isLeftSide ? 'flex-end' : 'flex-start')};
 `;
 
-const Block = styled.div<{ marginLeft: number; marginRight: number }>`
-	width: 100%;
+const Block = styled.div<{ offset: number }>`
+	width: calc(100% * (1 - ${props => props.offset}));
 	height: calc(100% / 3);
 	border-style: solid;
 	border-color: green;
 	box-sizing: border-box;
-	margin-left: ${props => props.marginLeft}px;
-	margin-right: ${props => props.marginRight}%;
 `;

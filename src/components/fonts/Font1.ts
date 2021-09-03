@@ -14,8 +14,8 @@ export const charA: SvgChar = {
 		{ elementDelay: 0.7, shape: 'M 8 48 L 40 48', length: 32 },
 	],
 	offsets: {
-		left: [0.5, 0.8, 0],
-		right: [0.5, 0.8, 0],
+		left: [0.45, 0.23, 0],
+		right: [0.5, 0.2, 0],
 	},
 };
 
@@ -156,6 +156,10 @@ export const charO: SvgChar = {
 			length: 150.81761169433594,
 		},
 	],
+	offsets: {
+		left: [0.2, 0, 0.2],
+		right: [0.2, 0, 0.2],
+	},
 };
 
 export const charP: SvgChar = {
@@ -220,6 +224,10 @@ export const charT: SvgChar = {
 		{ elementDelay: 0.0, shape: 'M 0 8 L 48 8', length: 48 },
 		{ elementDelay: 0.35, shape: 'M 24 0 L 24 64', length: 64 },
 	],
+	offsets: {
+		left: [0, 0.65, 0.65],
+		right: [0, 0.65, 0.65],
+	},
 };
 
 export const charU: SvgChar = {
@@ -261,6 +269,10 @@ export const charX: SvgChar = {
 		{ elementDelay: 0.0, shape: 'M 6 -6 L 54 70', length: 89.8888168334961 },
 		{ elementDelay: 0.3, shape: 'M 54 -6 L 6 70', length: 89.8888168334961 },
 	],
+	offsets: {
+		left: [0, 0.45, 0],
+		right: [0, 0.45, 0],
+	},
 };
 
 export const charY: SvgChar = {
