@@ -26,7 +26,6 @@ const Phrase: React.FC<PhraseProps> = ({
 		children.map((child, index) => {
 			const tmp = getCharacter(child.props.char, child.props.font).chosenChar.offsets;
 			const tmp2 = getCharacter(child.props.char, child.props.font).chosenChar.svgViewBox;
-			console.log(tmp);
 			const newChild = (
 				<Character
 					char={child.props.char}
@@ -46,35 +45,54 @@ const Phrase: React.FC<PhraseProps> = ({
 	const addOffset = (children: JSX.Element[]) => {
 		let firstChild: JSX.Element;
 		let secondChild: JSX.Element;
-		let smallestSpace: number = 1;
 		const newChildren: JSX.Element[] = [];
 
-		for (let i = 0; i < children.length - 1; i += 1) {
+		let tmp2 = 0;
+
+		for (let i = 0; i < children.length; i += 1) {
 			firstChild = children[i];
 			secondChild = children[i + 1];
-
-			for (let j = 0; j < 3; j += 1) {
-				const tmp1 = firstChild.props.offsets.right[j];
-				const tmp2 = secondChild.props.offsets.left[j];
-
-				smallestSpace = tmp1 + tmp2 < smallestSpace ? tmp1 + tmp2 : smallestSpace;
+			if (i === children.length - 1) {
+				secondChild = firstChild;
+				secondChild.props.offsets.left = [0, 0, 0];
 			}
+			let smallestSpace: number = 1;
 
-			console.log('Offset: ', smallestSpace);
+			let tmp1 = 0;
+			let tmp3 = 0;
 
-			const width =
+			const width1 =
 				(firstChild.props.svgViewBox.width / firstChild.props.svgViewBox.height) *
 				firstChild.props.size;
 
-			console.log('width: ', width);
+			for (let j = 0; j < 3; j += 1) {
+				console.log(
+					'smallestSpace check : ',
+					firstChild.props.offsets.right[j] + secondChild.props.offsets.left[j],
+				);
 
-			console.log('(width / 2) * smallestSpace: ', (width / 2) * smallestSpace);
+				if (firstChild.props.offsets.right[j] + secondChild.props.offsets.left[j] < smallestSpace) {
+					tmp1 = firstChild.props.offsets.right[j];
+					tmp3 = secondChild.props.offsets.left[j];
+					smallestSpace = tmp1 + tmp3;
+				}
+			}
 
-			const childWithOffset = <Test offset={(width / 2) * smallestSpace}>{firstChild}</Test>;
+			console.log('smallestSpace: ', smallestSpace);
+
+			console.log('width1: ', width1);
+
+			console.log('tmp1 * (width1 / 2): ', tmp1 * (width1 / 2));
+
+			const childWithOffset = (
+				<Test offsetLeft={tmp2 * (width1 / 2)} offsetRight={tmp1 * (width1 / 2)}>
+					{firstChild}
+				</Test>
+			);
 
 			newChildren.push(childWithOffset);
+			tmp2 = tmp3;
 		}
-		newChildren.push(children[children.length - 1]);
 
 		return newChildren;
 	};
@@ -123,6 +141,7 @@ const OffsetWrapper = styled.div<{
 	size: number;
 }>``;
 
-const Test = styled.div<{ offset: number }>`
-	margin-right: -${props => props.offset}px;
+const Test = styled.div<{ offsetRight: number; offsetLeft: number }>`
+	margin-left: -${props => props.offsetLeft}px;
+	margin-right: -${props => props.offsetRight}px;
 `;

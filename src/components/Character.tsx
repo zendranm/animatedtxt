@@ -183,6 +183,7 @@ const Path = styled.path<PathProps>`
 `;
 
 const TestParent = styled.div`
+	width: fit-content;
 	position: relative;
 `;
 
