@@ -12,6 +12,10 @@ export const charA: SvgChar = {
 		},
 		{ elementDelay: 0.0, shape: 'M 8 48 L 40 48', length: 32 },
 	],
+	offsets: {
+		left: [0, 0, 0, 0, 0],
+		right: [0, 0, 0, 0, 0],
+	},
 };
 
 export const charB: SvgChar = {
@@ -24,6 +28,10 @@ export const charB: SvgChar = {
 			length: 158.12503051757812,
 		},
 	],
+	offsets: {
+		left: [0, 0, 0, 0, 0],
+		right: [0, 0, 0, 0, 0],
+	},
 };
 
 export const charC: SvgChar = {
@@ -35,6 +43,10 @@ export const charC: SvgChar = {
 			length: 113.02982330322266,
 		},
 	],
+	offsets: {
+		left: [0, 0, 0, 0, 0],
+		right: [0, 0, 0, 0, 0],
+	},
 };
 
 export const charD: SvgChar = {
@@ -46,6 +58,10 @@ export const charD: SvgChar = {
 			length: 158.94357299804688,
 		},
 	],
+	offsets: {
+		left: [0, 0, 0, 0, 0],
+		right: [0, 0, 0, 0, 0],
+	},
 };
 
 export const charH: SvgChar = {
@@ -55,6 +71,10 @@ export const charH: SvgChar = {
 		{ elementDelay: 0.3, shape: 'M 40 64 L 40 0', length: 64 },
 		{ elementDelay: 0.7, shape: 'M 8 32 L 40 32', length: 32 },
 	],
+	offsets: {
+		left: [0, 0, 0, 0, 0],
+		right: [0, 0, 0, 0, 0],
+	},
 };
 
 export const charM: SvgChar = {
@@ -66,4 +86,8 @@ export const charM: SvgChar = {
 			length: 213.04116821289062,
 		},
 	],
+	offsets: {
+		left: [0, 0, 0, 0, 0],
+		right: [0, 0, 0, 0, 0],
+	},
 };

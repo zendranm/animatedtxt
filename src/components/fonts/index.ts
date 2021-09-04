@@ -7,13 +7,13 @@ export interface Element {
 	length: number;
 }
 
-export type OffsetType = [number, number, number];
+export type OffsetType = [number, number, number, number, number];
 
 export type OffsetsType = { left: OffsetType; right: OffsetType };
 export interface SvgChar {
 	svgViewBox: { width: number; height: number };
 	elements: Element[];
-	offsets?: OffsetsType; // Remove ?
+	offsets: OffsetsType;
 }
 
 const charOptions = [
@@ -54,6 +54,10 @@ export type LinecapOptions = typeof linecapOptions[number];
 export const defaultCharacter: SvgChar = {
 	svgViewBox: { width: 0, height: 0 },
 	elements: [{ elementDelay: 0, shape: '', length: 0 }],
+	offsets: {
+		left: [0, 0, 0, 0, 0],
+		right: [0, 0, 0, 0, 0],
+	},
 };
 
 export const getCharacter = (
