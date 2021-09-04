@@ -106,7 +106,7 @@ export default Phrase;
 
 interface WrapperProps {
 	margin: number;
-	offsets: OffsetsType | undefined; // Remove undefined
+	offsets: OffsetsType;
 	svgViewBox: any;
 	size: number;
 }

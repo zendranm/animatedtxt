@@ -122,14 +122,14 @@ const Character: React.FC<CharacterProps> = ({
 					),
 				)}
 			</Svg>
-			{character?.offsets && ( // Remove ?
+			{character.offsets && (
 				<Grid>
 					<GridSide isLeftSide>
 						{character.offsets.left.map((offset, index) => (
 							<GridBlock
 								offset={offset}
 								key={index}
-								numberOfBlocks={character.offsets?.left.length ?? 1} // Remove ? and ??
+								numberOfBlocks={character.offsets.left.length}
 							/>
 						))}
 					</GridSide>
@@ -138,7 +138,7 @@ const Character: React.FC<CharacterProps> = ({
 							<GridBlock
 								offset={offset}
 								key={index}
-								numberOfBlocks={character.offsets?.right.length ?? 1} // Remove ? and ??
+								numberOfBlocks={character.offsets.right.length}
 							/>
 						))}
 					</GridSide>
