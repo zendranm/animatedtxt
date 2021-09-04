@@ -61,7 +61,7 @@ export const charD: SvgChar = {
 	],
 	offsets: {
 		left: [0, 0, 0, 0, 0],
-		right: [0.2, 0.1, 0, 0.1, 0.2],
+		right: [0.3, 0.05, 0, 0.05, 0.3],
 	},
 };
 
@@ -226,7 +226,7 @@ export const charP: SvgChar = {
 	],
 	offsets: {
 		left: [0, 0, 0, 0, 0],
-		right: [0.1, 0, 0.1, 1, 1],
+		right: [0.1, 0, 0, 1, 1],
 	},
 };
 
