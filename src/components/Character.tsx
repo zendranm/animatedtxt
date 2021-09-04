@@ -102,7 +102,7 @@ const Character: React.FC<CharacterProps> = ({
 	};
 
 	return (
-		<TestParent>
+		<CharWithGrid>
 			<Svg
 				color={color}
 				size={size}
@@ -123,28 +123,28 @@ const Character: React.FC<CharacterProps> = ({
 				)}
 			</Svg>
 			{character?.offsets && ( // Remove ?
-				<TestChild>
-					<Side isLeftSide>
+				<Grid>
+					<GridSide isLeftSide>
 						{character.offsets.left.map((offset, index) => (
-							<Block
+							<GridBlock
 								offset={offset}
 								key={index}
 								numberOfBlocks={character.offsets?.left.length ?? 1} // Remove ? and ??
 							/>
 						))}
-					</Side>
-					<Side isLeftSide={false}>
+					</GridSide>
+					<GridSide isLeftSide={false}>
 						{character.offsets.right.map((offset, index) => (
-							<Block
+							<GridBlock
 								offset={offset}
 								key={index}
 								numberOfBlocks={character.offsets?.right.length ?? 1} // Remove ? and ??
 							/>
 						))}
-					</Side>
-				</TestChild>
+					</GridSide>
+				</Grid>
 			)}
-		</TestParent>
+		</CharWithGrid>
 	);
 };
 
@@ -162,6 +162,15 @@ interface PathProps {
 	duration: number;
 	length: number;
 	key: number;
+}
+
+interface GridSideProps {
+	isLeftSide: boolean;
+}
+
+interface GridBlockProps {
+	offset: number;
+	numberOfBlocks: number;
 }
 
 const Svg = styled.svg<SvgProps>`
@@ -190,12 +199,12 @@ const Path = styled.path<PathProps>`
 	animation-delay: ${props => props.delay}s;
 `;
 
-const TestParent = styled.div`
+const CharWithGrid = styled.div`
 	width: fit-content;
 	position: relative;
 `;
 
-const TestChild = styled.div`
+const Grid = styled.div`
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -207,7 +216,7 @@ const TestChild = styled.div`
 	justify-content: center;
 `;
 
-const Side = styled.div<{ isLeftSide: boolean }>`
+const GridSide = styled.div<GridSideProps>`
 	width: 50%;
 	height: 100%;
 
@@ -216,7 +225,7 @@ const Side = styled.div<{ isLeftSide: boolean }>`
 	align-items: ${props => (props.isLeftSide ? 'flex-end' : 'flex-start')};
 `;
 
-const Block = styled.div<{ offset: number; numberOfBlocks: number }>`
+const GridBlock = styled.div<GridBlockProps>`
 	width: calc(100% * (1 - ${props => props.offset}));
 	height: calc(100% / ${props => props.numberOfBlocks});
 	border-style: solid;
