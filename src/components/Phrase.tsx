@@ -48,14 +48,18 @@ const Phrase: React.FC<PhraseProps> = ({
 
 	const addOffset = (children: JSX.Element[]) => {
 		let firstChild: JSX.Element;
-		let secondChild: JSX.Element;
+		let secondChild: any[];
 		const newChildren: JSX.Element[] = [];
 
 		let tmp2 = 0;
 
-		for (let i = 0; i < children.length - 1; i += 1) {
+		for (let i = 0; i < children.length; i += 1) {
 			firstChild = children[i];
-			secondChild = children[i + 1];
+			if (i === children.length - 1) {
+				secondChild = [0, 0, 0];
+			} else {
+				secondChild = children[i + 1].props.offsets.left;
+			}
 			let smallestSpace: number = 1;
 
 			let tmp1 = 0;
@@ -66,9 +70,9 @@ const Phrase: React.FC<PhraseProps> = ({
 				firstChild.props.size;
 
 			for (let j = 0; j < 3; j += 1) {
-				if (firstChild.props.offsets.right[j] + secondChild.props.offsets.left[j] < smallestSpace) {
+				if (firstChild.props.offsets.right[j] + secondChild[j] < smallestSpace) {
 					tmp1 = firstChild.props.offsets.right[j];
-					tmp3 = secondChild.props.offsets.left[j];
+					tmp3 = secondChild[j];
 					smallestSpace = tmp1 + tmp3;
 				}
 			}
