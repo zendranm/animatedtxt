@@ -55,6 +55,7 @@ const Phrase: React.FC<PhraseProps> = ({
 			const fcHeight = firstChild.svgViewBox.height;
 			const fcSize = firstChild.size;
 			const fcRightOffset = firstChild.offsets.right;
+			const fcMargin = firstChild.margin;
 
 			const scLeftOffset =
 				i === children.length - 1 ? [0, 0, 0] : children[i + 1].props.offsets.left;
@@ -77,6 +78,7 @@ const Phrase: React.FC<PhraseProps> = ({
 				<OffsetWrapper
 					offsetLeft={rememberedSmallestSpaceLeft * (fcActualWidth / 2)}
 					offsetRight={smallestSpaceRight * (fcActualWidth / 2)}
+					globalMargin={fcMargin}
 					key={i}
 				>
 					{children[i]}
@@ -114,6 +116,7 @@ interface WrapperProps {
 interface OffsetWrapperProps {
 	offsetRight: number;
 	offsetLeft: number;
+	globalMargin: number;
 }
 
 const Content = styled.div`
@@ -124,18 +127,15 @@ const Content = styled.div`
 	align-items: center;
 `;
 
-const Wrapper = styled.div<WrapperProps>`
-	margin-left: ${(props: WrapperProps) => props.margin / 2}px;
-	margin-right: ${(props: WrapperProps) => props.margin / 2}px;
+const Wrapper = styled.div<WrapperProps>``;
+
+const OffsetWrapper = styled.div<OffsetWrapperProps>`
+	${props => `margin-left: calc(${props.globalMargin / 2}px - ${props.offsetLeft}px);`}
+	${props => `margin-right: calc(${props.globalMargin / 2}px - ${props.offsetRight}px);`}
 	&:first-child {
 		margin-left: 0;
 	}
 	&:last-child {
 		margin-right: 0;
 	}
-`;
-
-const OffsetWrapper = styled.div<OffsetWrapperProps>`
-	margin-left: -${props => props.offsetLeft}px;
-	margin-right: -${props => props.offsetRight}px;
 `;
