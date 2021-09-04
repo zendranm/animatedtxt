@@ -7,10 +7,13 @@ export interface Element {
 	length: number;
 }
 
+export type OffsetType = [number, number, number];
+
+export type OffsetsType = { left: OffsetType; right: OffsetType };
 export interface SvgChar {
 	svgViewBox: { width: number; height: number };
 	elements: Element[];
-	offsets?: { left: [number, number, number]; right: [number, number, number] };
+	offsets?: OffsetsType; // Remove ?
 }
 
 const charOptions = [

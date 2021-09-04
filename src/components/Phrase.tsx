@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { FontOptions, getCharacter } from './fonts/index';
+import { FontOptions, getCharacter, OffsetsType } from './fonts/index';
 
 export interface PhraseProps {
 	children: JSX.Element[];
@@ -45,53 +45,54 @@ const Phrase: React.FC<PhraseProps> = ({
 		});
 
 	const addOffset = (children: JSX.Element[]) => {
-		let firstChild: JSX.Element;
-		let secondChild: any[];
 		const newChildren: JSX.Element[] = [];
 
-		let tmp2 = 0;
+		let rememberedSmallestSpaceLeft = 0;
 
 		for (let i = 0; i < children.length; i += 1) {
-			firstChild = children[i];
-			if (i === children.length - 1) {
-				secondChild = [0, 0, 0];
-			} else {
-				secondChild = children[i + 1].props.offsets.left;
-			}
-			let smallestSpace: number = 1;
+			const firstChild = children[i].props;
+			const fcWidth = firstChild.svgViewBox.width;
+			const fcHeight = firstChild.svgViewBox.height;
+			const fcSize = firstChild.size;
+			const fcRightOffset = firstChild.offsets.right;
 
-			let tmp1 = 0;
-			let tmp3 = 0;
+			const scLeftOffset =
+				i === children.length - 1 ? [0, 0, 0] : children[i + 1].props.offsets.left;
 
-			const width1 =
-				(firstChild.props.svgViewBox.width / firstChild.props.svgViewBox.height) *
-				firstChild.props.size;
+			let smallestSpaceSum: number = 1;
+			let smallestSpaceRight = 0;
+			let smallestSpaceLeft = 0;
 
-			for (let j = 0; j < firstChild.props.offsets.right.length; j += 1) {
-				if (firstChild.props.offsets.right[j] + secondChild[j] < smallestSpace) {
-					tmp1 = firstChild.props.offsets.right[j];
-					tmp3 = secondChild[j];
-					smallestSpace = tmp1 + tmp3;
+			const fcActualWidth = (fcWidth / fcHeight) * fcSize;
+
+			for (let j = 0; j < fcRightOffset.length; j += 1) {
+				if (fcRightOffset[j] + scLeftOffset[j] < smallestSpaceSum) {
+					smallestSpaceRight = fcRightOffset[j];
+					smallestSpaceLeft = scLeftOffset[j];
+					smallestSpaceSum = smallestSpaceRight + smallestSpaceLeft;
 				}
 			}
 
 			const childWithOffset = (
-				<Test offsetLeft={tmp2 * (width1 / 2)} offsetRight={tmp1 * (width1 / 2)} key={i}>
-					{firstChild}
-				</Test>
+				<OffsetWrapper
+					offsetLeft={rememberedSmallestSpaceLeft * (fcActualWidth / 2)}
+					offsetRight={smallestSpaceRight * (fcActualWidth / 2)}
+					key={i}
+				>
+					{children[i]}
+				</OffsetWrapper>
 			);
 
 			newChildren.push(childWithOffset);
-			tmp2 = tmp3;
+			rememberedSmallestSpaceLeft = smallestSpaceLeft;
 		}
-
 		return newChildren;
 	};
 
 	useEffect(() => {
-		const newChildren = wrapChildren(children);
-		const tmp = addOffset(newChildren);
-		setCharacters(tmp);
+		const wrappedChildren = wrapChildren(children);
+		const childrenWithOffset = addOffset(wrappedChildren);
+		setCharacters(childrenWithOffset);
 	}, []);
 
 	return (
@@ -105,9 +106,14 @@ export default Phrase;
 
 interface WrapperProps {
 	margin: number;
-	offsets: { left: [number, number, number]; right: [number, number, number] } | undefined;
+	offsets: OffsetsType | undefined; // Remove undefined
 	svgViewBox: any;
 	size: number;
+}
+
+interface OffsetWrapperProps {
+	offsetRight: number;
+	offsetLeft: number;
 }
 
 const Content = styled.div`
@@ -129,7 +135,7 @@ const Wrapper = styled.div<WrapperProps>`
 	}
 `;
 
-const Test = styled.div<{ offsetRight: number; offsetLeft: number }>`
+const OffsetWrapper = styled.div<OffsetWrapperProps>`
 	margin-left: -${props => props.offsetLeft}px;
 	margin-right: -${props => props.offsetRight}px;
 `;

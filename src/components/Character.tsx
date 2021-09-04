@@ -122,14 +122,14 @@ const Character: React.FC<CharacterProps> = ({
 					),
 				)}
 			</Svg>
-			{character?.offsets && (
+			{character?.offsets && ( // Remove ?
 				<TestChild>
 					<Side isLeftSide>
 						{character.offsets.left.map((offset, index) => (
 							<Block
 								offset={offset}
 								key={index}
-								numberOfBlocks={character.offsets?.left.length ?? 1}
+								numberOfBlocks={character.offsets?.left.length ?? 1} // Remove ? and ??
 							/>
 						))}
 					</Side>
@@ -138,7 +138,7 @@ const Character: React.FC<CharacterProps> = ({
 							<Block
 								offset={offset}
 								key={index}
-								numberOfBlocks={character.offsets?.right.length ?? 1}
+								numberOfBlocks={character.offsets?.right.length ?? 1} // Remove ? and ??
 							/>
 						))}
 					</Side>
