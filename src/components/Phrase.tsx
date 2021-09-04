@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { FontOptions, getCharacter } from './fonts/index';
-import Character from './Character';
 
 export interface PhraseProps {
 	children: JSX.Element[];
@@ -25,24 +24,23 @@ const Phrase: React.FC<PhraseProps> = ({
 	const wrapChildren = (children: JSX.Element[]) =>
 		children.map((child, index) => {
 			const { chosenChar } = getCharacter(child.props.char, child.props.font);
-			const newChild = (
-				<Character
-					char={child.props.char}
-					color={child.props.color ?? color}
-					size={size}
-					duration={child.props.duration ?? duration}
-					font={font}
-				/>
-			);
+			const newChild = React.cloneElement(child, {
+				color: child.props.color ?? color,
+				size,
+				duration: child.props.duration ?? duration,
+				font,
+			});
+
 			return (
-				<OffsetWrapper
+				<Wrapper
+					margin={margin}
 					offsets={chosenChar.offsets}
 					svgViewBox={chosenChar.svgViewBox}
 					size={size}
 					key={index}
 				>
-					<Wrapper margin={margin}>{newChild}</Wrapper>
-				</OffsetWrapper>
+					{newChild}
+				</Wrapper>
 			);
 		});
 
@@ -69,7 +67,7 @@ const Phrase: React.FC<PhraseProps> = ({
 				(firstChild.props.svgViewBox.width / firstChild.props.svgViewBox.height) *
 				firstChild.props.size;
 
-			for (let j = 0; j < 3; j += 1) {
+			for (let j = 0; j < firstChild.props.offsets.right.length; j += 1) {
 				if (firstChild.props.offsets.right[j] + secondChild[j] < smallestSpace) {
 					tmp1 = firstChild.props.offsets.right[j];
 					tmp3 = secondChild[j];
@@ -107,6 +105,9 @@ export default Phrase;
 
 interface WrapperProps {
 	margin: number;
+	offsets: { left: [number, number, number]; right: [number, number, number] } | undefined;
+	svgViewBox: any;
+	size: number;
 }
 
 const Content = styled.div`
@@ -127,12 +128,6 @@ const Wrapper = styled.div<WrapperProps>`
 		margin-right: 0;
 	}
 `;
-
-const OffsetWrapper = styled.div<{
-	offsets: { left: [number, number, number]; right: [number, number, number] } | undefined;
-	svgViewBox: any;
-	size: number;
-}>``;
 
 const Test = styled.div<{ offsetRight: number; offsetLeft: number }>`
 	margin-left: -${props => props.offsetLeft}px;

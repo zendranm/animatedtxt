@@ -126,12 +126,20 @@ const Character: React.FC<CharacterProps> = ({
 				<TestChild>
 					<Side isLeftSide>
 						{character.offsets.left.map((offset, index) => (
-							<Block offset={offset} key={index} />
+							<Block
+								offset={offset}
+								key={index}
+								numberOfBlocks={character.offsets?.left.length ?? 1}
+							/>
 						))}
 					</Side>
 					<Side isLeftSide={false}>
 						{character.offsets.right.map((offset, index) => (
-							<Block offset={offset} key={index} />
+							<Block
+								offset={offset}
+								key={index}
+								numberOfBlocks={character.offsets?.right.length ?? 1}
+							/>
 						))}
 					</Side>
 				</TestChild>
@@ -208,9 +216,9 @@ const Side = styled.div<{ isLeftSide: boolean }>`
 	align-items: ${props => (props.isLeftSide ? 'flex-end' : 'flex-start')};
 `;
 
-const Block = styled.div<{ offset: number }>`
+const Block = styled.div<{ offset: number; numberOfBlocks: number }>`
 	width: calc(100% * (1 - ${props => props.offset}));
-	height: calc(100% / 3);
+	height: calc(100% / ${props => props.numberOfBlocks});
 	border-style: solid;
 	border-color: green;
 	box-sizing: border-box;
