@@ -4,7 +4,7 @@ This npm package provides components and methods for convenient creation of anim
 
 ### Live demo:
 
-https://codesandbox.io/s/animatedtxt-xwj1b
+https://codesandbox.io/s/animatedtxt-st03k
 
 ### npm package:
 
