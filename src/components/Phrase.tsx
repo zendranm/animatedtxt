@@ -1,9 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, ReactElement } from 'react';
 import styled from 'styled-components';
 import { FontOptions, getCharacter, OffsetsType } from './fonts/index';
+import { CharacterProps } from './Character';
+
+type ChildType = ReactElement<CharacterProps>;
+
+type WrappedChildType = ReactElement<WrapperProps>;
+
+type OffsetWrappedChildType = ReactElement<OffsetWrapperProps>;
 
 export interface PhraseProps {
-	children: JSX.Element[];
+	children: ChildType[];
 	margin?: number;
 	color?: string;
 	size?: number;
@@ -19,12 +26,12 @@ const Phrase: React.FC<PhraseProps> = ({
 	duration = 1,
 	font = 'font1',
 }) => {
-	const [characters, setCharacters] = useState<JSX.Element[]>(children);
+	const [characters, setCharacters] = useState<ChildType[] | OffsetWrappedChildType[]>(children);
 
-	const wrapChildren = (children: JSX.Element[]) =>
+	const wrapChildren = (children: ChildType[]): WrappedChildType[] =>
 		children.map((child, index) => {
-			const { chosenChar } = getCharacter(child.props.char, child.props.font);
-			const newChild = React.cloneElement(child, {
+			const { chosenChar } = getCharacter(child.props.char, child.props.font ?? 'font1');
+			const newChild: ChildType = React.cloneElement(child, {
 				color: child.props.color ?? color,
 				size,
 				duration: child.props.duration ?? duration,
@@ -44,8 +51,8 @@ const Phrase: React.FC<PhraseProps> = ({
 			);
 		});
 
-	const addOffset = (children: JSX.Element[]) => {
-		const newChildren: JSX.Element[] = [];
+	const addOffset = (children: WrappedChildType[]): OffsetWrappedChildType[] => {
+		const newChildren: OffsetWrappedChildType[] = [];
 
 		let rememberedSmallestSpaceLeft = 0;
 
@@ -60,7 +67,7 @@ const Phrase: React.FC<PhraseProps> = ({
 			const scLeftOffset =
 				i === children.length - 1 ? [0, 0, 0] : children[i + 1].props.offsets.left;
 
-			let smallestSpaceSum: number = 1;
+			let smallestSpaceSum = 1;
 			let smallestSpaceRight = 0;
 			let smallestSpaceLeft = 0;
 
