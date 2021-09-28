@@ -5,7 +5,7 @@ import { CharacterProps } from './Character';
 
 type ChildType = ReactElement<CharacterProps>;
 
-type WrappedChildType = ReactElement<WrapperProps>;
+type WrappedChildType = ReactElement<CharacterProps & WrapperProps>;
 
 type OffsetWrappedChildType = ReactElement<OffsetWrapperProps>;
 
@@ -29,26 +29,19 @@ const Phrase: React.FC<PhraseProps> = ({
 	const [characters, setCharacters] = useState<ChildType[] | OffsetWrappedChildType[]>(children);
 
 	const wrapChildren = (children: ChildType[]): WrappedChildType[] =>
-		children.map((child, index) => {
+		children.map(child => {
 			const { chosenChar } = getCharacter(child.props.char, child.props.font ?? 'font1');
-			const newChild: ChildType = React.cloneElement(child, {
+			const newChild: WrappedChildType = React.cloneElement(child as React.ReactElement<any>, {
 				color: child.props.color ?? color,
 				size,
 				duration: child.props.duration ?? duration,
 				font,
+				margin,
+				offsets: chosenChar.offsets,
+				svgViewBox: chosenChar.svgViewBox,
 			});
 
-			return (
-				<Wrapper
-					margin={margin}
-					offsets={chosenChar.offsets}
-					svgViewBox={chosenChar.svgViewBox}
-					size={size}
-					key={index}
-				>
-					{newChild}
-				</Wrapper>
-			);
+			return newChild;
 		});
 
 	const addOffset = (children: WrappedChildType[]): OffsetWrappedChildType[] => {
@@ -104,11 +97,7 @@ const Phrase: React.FC<PhraseProps> = ({
 		setCharacters(childrenWithOffset);
 	}, []);
 
-	return (
-		<>
-			<Content>{characters}</Content>
-		</>
-	);
+	return <Content>{characters}</Content>;
 };
 
 export default Phrase;
@@ -134,9 +123,8 @@ const Content = styled.div`
 	align-items: center;
 `;
 
-const Wrapper = styled.div<WrapperProps>``;
-
 const OffsetWrapper = styled.div<OffsetWrapperProps>`
+	display: inline-flex;
 	${props => `margin-left: calc(${props.globalMargin / 2}px - ${props.offsetLeft}px);`}
 	${props => `margin-right: calc(${props.globalMargin / 2}px - ${props.offsetRight}px);`}
 	&:first-child {
