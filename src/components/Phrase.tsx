@@ -1,4 +1,4 @@
-import React, { useState, useEffect, ReactElement } from 'react';
+import React, { useState, useEffect, useCallback, ReactElement } from 'react';
 import styled from 'styled-components';
 import { FontOptions, getCharacter, OffsetsType } from './fonts/index';
 import { CharacterProps } from './Character';
@@ -28,21 +28,24 @@ const Phrase: React.FC<PhraseProps> = ({
 }) => {
 	const [characters, setCharacters] = useState<ChildType[] | OffsetWrappedChildType[]>(children);
 
-	const wrapChildren = (children: ChildType[]): WrappedChildType[] =>
-		children.map(child => {
-			const { chosenChar } = getCharacter(child.props.char, child.props.font ?? 'font1');
-			const newChild: WrappedChildType = React.cloneElement(child as React.ReactElement<any>, {
-				color: child.props.color ?? color,
-				size,
-				duration: child.props.duration ?? duration,
-				font,
-				margin,
-				offsets: chosenChar.offsets,
-				svgViewBox: chosenChar.svgViewBox,
-			});
+	const wrapChildren = useCallback(
+		(children: ChildType[]): WrappedChildType[] =>
+			children.map(child => {
+				const { chosenChar } = getCharacter(child.props.char, child.props.font ?? 'font1');
+				const newChild: WrappedChildType = React.cloneElement(child as React.ReactElement<any>, {
+					color: child.props.color ?? color,
+					size,
+					duration: child.props.duration ?? duration,
+					font,
+					margin,
+					offsets: chosenChar.offsets,
+					svgViewBox: chosenChar.svgViewBox,
+				});
 
-			return newChild;
-		});
+				return newChild;
+			}),
+		[color, duration, font, margin, size],
+	);
 
 	const addOffset = (children: WrappedChildType[]): OffsetWrappedChildType[] => {
 		const newChildren: OffsetWrappedChildType[] = [];
@@ -95,7 +98,7 @@ const Phrase: React.FC<PhraseProps> = ({
 		const wrappedChildren = wrapChildren(children);
 		const childrenWithOffset = addOffset(wrappedChildren);
 		setCharacters(childrenWithOffset);
-	}, []);
+	}, [children, wrapChildren]);
 
 	return <Content>{characters}</Content>;
 };
