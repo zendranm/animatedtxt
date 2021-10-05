@@ -1,6 +1,7 @@
-const path = require('path');
+import * as path from 'path';
+import * as webpack from 'webpack';
 
-module.exports = {
+const config: webpack.Configuration = {
 	entry: './src/index.ts',
 	output: {
 		path: path.resolve(__dirname, 'dist'),
@@ -33,3 +34,5 @@ module.exports = {
 		reactDOM: 'react-dom',
 	},
 };
+
+export default config;

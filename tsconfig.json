@@ -3,7 +3,7 @@
 		"outDir": "./dist",
 		"target": "es5",
 		"lib": ["dom", "dom.iterable", "esnext"],
-		"module": "esnext",
+		"module": "CommonJS",
 		"jsx": "react",
 		"strict": true,
 		"noImplicitAny": true,
