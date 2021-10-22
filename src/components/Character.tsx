@@ -49,7 +49,7 @@ const Character: React.FC<CharacterProps> = ({
 		setCharacter(newChar);
 		setFontWidth(fontWidth);
 		setLinecap(linecap);
-	}, []);
+	}, [char, duration, font]);
 
 	const calculateAnimation = (char: SvgChar, animationTime: number) => {
 		// Find the longest element in character

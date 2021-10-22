@@ -1,9 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, ReactElement } from 'react';
 import styled from 'styled-components';
 import { FontOptions, getCharacter, OffsetsType } from './fonts/index';
+import { CharacterProps } from './Character';
+
+type ChildType = ReactElement<CharacterProps>;
+
+type WrappedChildType = ReactElement<CharacterProps & WrapperProps>;
+
+type OffsetWrappedChildType = ReactElement<OffsetWrapperProps>;
 
 export interface PhraseProps {
-	children: JSX.Element[];
+	children: ChildType[];
 	margin?: number;
 	color?: string;
 	size?: number;
@@ -19,33 +26,29 @@ const Phrase: React.FC<PhraseProps> = ({
 	duration = 1,
 	font = 'font1',
 }) => {
-	const [characters, setCharacters] = useState<JSX.Element[]>(children);
+	const [characters, setCharacters] = useState<ChildType[] | OffsetWrappedChildType[]>(children);
 
-	const wrapChildren = (children: JSX.Element[]) =>
-		children.map((child, index) => {
-			const { chosenChar } = getCharacter(child.props.char, child.props.font);
-			const newChild = React.cloneElement(child, {
-				color: child.props.color ?? color,
-				size,
-				duration: child.props.duration ?? duration,
-				font,
-			});
+	const wrapChildren = useCallback(
+		(children: ChildType[]): WrappedChildType[] =>
+			children.map(child => {
+				const { chosenChar } = getCharacter(child.props.char, child.props.font ?? 'font1');
+				const newChild: WrappedChildType = React.cloneElement(child as React.ReactElement<any>, {
+					color: child.props.color ?? color,
+					size,
+					duration: child.props.duration ?? duration,
+					font,
+					margin,
+					offsets: chosenChar.offsets,
+					svgViewBox: chosenChar.svgViewBox,
+				});
 
-			return (
-				<Wrapper
-					margin={margin}
-					offsets={chosenChar.offsets}
-					svgViewBox={chosenChar.svgViewBox}
-					size={size}
-					key={index}
-				>
-					{newChild}
-				</Wrapper>
-			);
-		});
+				return newChild;
+			}),
+		[color, duration, font, margin, size],
+	);
 
-	const addOffset = (children: JSX.Element[]) => {
-		const newChildren: JSX.Element[] = [];
+	const addOffset = (children: WrappedChildType[]): OffsetWrappedChildType[] => {
+		const newChildren: OffsetWrappedChildType[] = [];
 
 		let rememberedSmallestSpaceLeft = 0;
 
@@ -60,7 +63,7 @@ const Phrase: React.FC<PhraseProps> = ({
 			const scLeftOffset =
 				i === children.length - 1 ? [0, 0, 0] : children[i + 1].props.offsets.left;
 
-			let smallestSpaceSum: number = 1;
+			let smallestSpaceSum = 1;
 			let smallestSpaceRight = 0;
 			let smallestSpaceLeft = 0;
 
@@ -95,13 +98,9 @@ const Phrase: React.FC<PhraseProps> = ({
 		const wrappedChildren = wrapChildren(children);
 		const childrenWithOffset = addOffset(wrappedChildren);
 		setCharacters(childrenWithOffset);
-	}, []);
+	}, [children, wrapChildren]);
 
-	return (
-		<>
-			<Content>{characters}</Content>
-		</>
-	);
+	return <Content>{characters}</Content>;
 };
 
 export default Phrase;
@@ -127,9 +126,8 @@ const Content = styled.div`
 	align-items: center;
 `;
 
-const Wrapper = styled.div<WrapperProps>``;
-
 const OffsetWrapper = styled.div<OffsetWrapperProps>`
+	display: inline-flex;
 	${props => `margin-left: calc(${props.globalMargin / 2}px - ${props.offsetLeft}px);`}
 	${props => `margin-right: calc(${props.globalMargin / 2}px - ${props.offsetRight}px);`}
 	&:first-child {
