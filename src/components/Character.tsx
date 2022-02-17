@@ -7,11 +7,14 @@ import {
 	FontOptions,
 	LinecapOptions,
 	defaultCharacter,
-	getCharacter,
+	getCharacterAndFontData,
+	getFontData,
+	CharacterAndFontData,
+	isTypeofSvgChar,
 } from './fonts/index';
 
 export interface CharacterProps {
-	char: CharOptions;
+	char: CharOptions | SvgChar;
 	delay?: number;
 	duration?: number;
 	color?: string;
@@ -44,7 +47,9 @@ const Character: React.FC<CharacterProps> = ({
 	const [linecap, setLinecap] = useState<LinecapOptions>('butt');
 
 	useEffect(() => {
-		const { chosenChar, fontWidth, linecap } = getCharacter(char, font);
+		const { chosenChar, fontWidth, linecap }: CharacterAndFontData = isTypeofSvgChar(char)
+			? { chosenChar: char, ...getFontData(font) }
+			: getCharacterAndFontData(char, font);
 		const newChar = calculateAnimation(chosenChar, duration);
 		setCharacter(newChar);
 		setFontWidth(fontWidth);

@@ -10,10 +10,15 @@ export interface Element {
 export type OffsetType = [number, number, number, number, number];
 
 export type OffsetsType = { left: OffsetType; right: OffsetType };
+
 export interface SvgChar {
 	svgViewBox: { width: number; height: number };
 	elements: Element[];
 	offsets: OffsetsType;
+}
+
+export function isTypeofSvgChar(char: unknown): char is SvgChar {
+	return (char as SvgChar).svgViewBox !== undefined;
 }
 
 const charOptions = [
@@ -60,14 +65,16 @@ export const defaultCharacter: SvgChar = {
 	},
 };
 
-export const getCharacter = (
-	char: CharOptions,
-	font: FontOptions,
-): {
+export interface CharacterAndFontData {
 	chosenChar: SvgChar;
 	fontWidth: number;
 	linecap: LinecapOptions;
-} => {
+}
+
+export const getCharacterAndFontData = (
+	char: CharOptions,
+	font: FontOptions,
+): CharacterAndFontData => {
 	let chosenFont;
 	switch (font) {
 		case 'font1':
@@ -169,4 +176,25 @@ export const getCharacter = (
 	const { fontWidth, linecap } = chosenFont;
 
 	return { chosenChar, fontWidth, linecap };
+};
+
+export const getFontData = (
+	font: FontOptions,
+): {
+	fontWidth: number;
+	linecap: LinecapOptions;
+} => {
+	let chosenFont;
+	switch (font) {
+		case 'font1':
+			chosenFont = font1;
+			break;
+		default:
+			chosenFont = font1;
+			break;
+	}
+
+	const { fontWidth, linecap } = chosenFont;
+
+	return { fontWidth, linecap };
 };

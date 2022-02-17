@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback, ReactElement } from 'react';
 import styled from 'styled-components';
-import { FontOptions, getCharacter, OffsetsType } from './fonts/index';
+import { FontOptions, getCharacterAndFontData, OffsetsType, isTypeofSvgChar } from './fonts/index';
 import { CharacterProps } from './Character';
 
 type ChildType = ReactElement<CharacterProps>;
@@ -31,7 +31,9 @@ const Phrase: React.FC<PhraseProps> = ({
 	const wrapChildren = useCallback(
 		(children: ChildType[]): WrappedChildType[] =>
 			children.map(child => {
-				const { chosenChar } = getCharacter(child.props.char, child.props.font ?? 'font1');
+				const { chosenChar } = isTypeofSvgChar(child.props.char)
+					? { chosenChar: child.props.char }
+					: getCharacterAndFontData(child.props.char, child.props.font ?? 'font1');
 				const newChild: WrappedChildType = React.cloneElement(child as React.ReactElement<any>, {
 					color: child.props.color ?? color,
 					size,
