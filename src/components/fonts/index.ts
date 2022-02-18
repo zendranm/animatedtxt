@@ -1,5 +1,4 @@
 import * as font1 from './Font1';
-// import * as font2 from './Font2';
 
 export interface Element {
 	elementDelay: number;
@@ -7,7 +6,7 @@ export interface Element {
 	length: number;
 }
 
-export type OffsetType = [number, number, number, number, number];
+type OffsetType = [number, number, number, number, number];
 
 export type OffsetsType = { left: OffsetType; right: OffsetType };
 
@@ -80,9 +79,6 @@ export const getCharacterAndFontData = (
 		case 'font1':
 			chosenFont = font1;
 			break;
-		// case 'font2':
-		// 	chosenFont = font2;
-		// 	break;
 		default:
 			chosenFont = font1;
 			break;
@@ -178,12 +174,7 @@ export const getCharacterAndFontData = (
 	return { chosenChar, fontWidth, linecap };
 };
 
-export const getFontData = (
-	font: FontOptions,
-): {
-	fontWidth: number;
-	linecap: LinecapOptions;
-} => {
+export const getFontData = (font: FontOptions): Omit<CharacterAndFontData, 'chosenChar'> => {
 	let chosenFont;
 	switch (font) {
 		case 'font1':
