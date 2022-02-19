@@ -9,7 +9,20 @@ type WrappedChildType = ReactElement<CharacterProps & WrapperProps>;
 
 type OffsetWrappedChildType = ReactElement<OffsetWrapperProps>;
 
-export interface PhraseProps {
+interface WrapperProps {
+	margin: number;
+	offsets: OffsetsType;
+	svgViewBox: any;
+	size: number;
+}
+
+interface OffsetWrapperProps {
+	offsetRight: number;
+	offsetLeft: number;
+	globalMargin: number;
+}
+
+interface PhraseProps {
 	children: ChildType[];
 	margin?: number;
 	color?: string;
@@ -106,19 +119,6 @@ const Phrase: React.FC<PhraseProps> = ({
 };
 
 export default Phrase;
-
-interface WrapperProps {
-	margin: number;
-	offsets: OffsetsType;
-	svgViewBox: any;
-	size: number;
-}
-
-interface OffsetWrapperProps {
-	offsetRight: number;
-	offsetLeft: number;
-	globalMargin: number;
-}
 
 const Content = styled.div`
 	display: flex;

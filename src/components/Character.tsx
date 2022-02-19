@@ -13,6 +13,29 @@ import {
 	isTypeofSvgChar,
 } from './fonts/index';
 
+interface SvgProps {
+	color: string;
+	size: number;
+	fontWidth: number;
+	linecap: LinecapOptions;
+}
+
+interface PathProps {
+	delay: number;
+	duration: number;
+	length: number;
+	key: number;
+}
+
+interface ExtendedElement extends Element {
+	speed: number;
+	elementDuration: number;
+}
+
+interface ExtendedSvgChar extends SvgChar {
+	elements: ExtendedElement[];
+}
+
 export interface CharacterProps {
 	char: CharOptions | SvgChar;
 	delay?: number;
@@ -20,15 +43,6 @@ export interface CharacterProps {
 	color?: string;
 	size?: number;
 	font?: FontOptions;
-}
-
-export interface ExtendedElement extends Element {
-	speed: number;
-	elementDuration: number;
-}
-
-export interface ExtendedSvgChar extends SvgChar {
-	elements: ExtendedElement[];
 }
 
 const Character: React.FC<CharacterProps> = ({
@@ -130,20 +144,6 @@ const Character: React.FC<CharacterProps> = ({
 };
 
 export default Character;
-
-interface SvgProps {
-	color: string;
-	size: number;
-	fontWidth: number;
-	linecap: LinecapOptions;
-}
-
-interface PathProps {
-	delay: number;
-	duration: number;
-	length: number;
-	key: number;
-}
 
 const Svg = styled.svg<SvgProps>`
 	stroke: ${(props: SvgProps) => props.color};
