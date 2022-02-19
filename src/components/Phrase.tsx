@@ -23,7 +23,7 @@ interface OffsetWrapperProps {
 }
 
 interface PhraseProps {
-	children: ChildType[];
+	children: ChildType | ChildType[];
 	margin?: number;
 	color?: string;
 	size?: number;
@@ -39,7 +39,7 @@ const Phrase: React.FC<PhraseProps> = ({
 	duration = 1,
 	font = 'font1',
 }) => {
-	const [characters, setCharacters] = useState<ChildType[] | OffsetWrappedChildType[]>(children);
+	const [characters, setCharacters] = useState<OffsetWrappedChildType[]>([]);
 
 	const wrapChildren = useCallback(
 		(children: ChildType[]): WrappedChildType[] =>
@@ -110,7 +110,8 @@ const Phrase: React.FC<PhraseProps> = ({
 	};
 
 	useEffect(() => {
-		const wrappedChildren = wrapChildren(children);
+		const childrenArray = (Array.isArray(children) ? children : [children]) as ChildType[];
+		const wrappedChildren = wrapChildren(childrenArray);
 		const childrenWithOffset = addOffset(wrappedChildren);
 		setCharacters(childrenWithOffset);
 	}, [children, wrapChildren]);
