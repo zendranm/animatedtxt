@@ -1,5 +1,4 @@
 import * as font1 from './Font1';
-// import * as font2 from './Font2';
 
 export interface Element {
 	elementDelay: number;
@@ -7,13 +6,18 @@ export interface Element {
 	length: number;
 }
 
-export type OffsetType = [number, number, number, number, number];
+type OffsetType = [number, number, number, number, number];
 
 export type OffsetsType = { left: OffsetType; right: OffsetType };
+
 export interface SvgChar {
 	svgViewBox: { width: number; height: number };
 	elements: Element[];
 	offsets: OffsetsType;
+}
+
+export function isTypeofSvgChar(char: unknown): char is SvgChar {
+	return (char as SvgChar).svgViewBox !== undefined;
 }
 
 const charOptions = [
@@ -60,22 +64,21 @@ export const defaultCharacter: SvgChar = {
 	},
 };
 
-export const getCharacter = (
-	char: CharOptions,
-	font: FontOptions,
-): {
+export interface CharacterAndFontData {
 	chosenChar: SvgChar;
 	fontWidth: number;
 	linecap: LinecapOptions;
-} => {
+}
+
+export const getCharacterAndFontData = (
+	char: CharOptions,
+	font: FontOptions,
+): CharacterAndFontData => {
 	let chosenFont;
 	switch (font) {
 		case 'font1':
 			chosenFont = font1;
 			break;
-		// case 'font2':
-		// 	chosenFont = font2;
-		// 	break;
 		default:
 			chosenFont = font1;
 			break;
@@ -169,4 +172,20 @@ export const getCharacter = (
 	const { fontWidth, linecap } = chosenFont;
 
 	return { chosenChar, fontWidth, linecap };
+};
+
+export const getFontData = (font: FontOptions): Omit<CharacterAndFontData, 'chosenChar'> => {
+	let chosenFont;
+	switch (font) {
+		case 'font1':
+			chosenFont = font1;
+			break;
+		default:
+			chosenFont = font1;
+			break;
+	}
+
+	const { fontWidth, linecap } = chosenFont;
+
+	return { fontWidth, linecap };
 };

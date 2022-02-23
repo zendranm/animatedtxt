@@ -61,7 +61,7 @@ Example:
 
 ## Phrase - grouped characters:
 
-At least two _**Char**_ components must be wrapped in the _**Phrase**_ component. Behavior and design of characters grouped in the phrase can be modified by passing following props:
+Behavior and design of characters grouped in the phrase can be modified by passing following props:
 
 - margin? [number] - number of pixel "px" units between characters in a phrase. Default value: 0.
 - color? [string] - definition of the color of the characters in a phrase. Should be in format accepted by CSS standards. Default value: #000000. Value is overwritten by the color defined in the character element.
@@ -78,23 +78,3 @@ Example:
   ...
 </Phrase>
 ```
-
-# Local development
-
-For testing locally developed library before publishing it:
-
-1. Create new testing project (e.g with create-react-app)
-2. Modify the "local" script from the package.json so it's last part points to the root of application from the step #1.
-3. In the package.json of the application from step #1 add following script:
-
-```
-"anim": "npm --prefix ~/path/to/root/of/animatedtxt/ run local && npm i animatedtxt-*.tgz && npm run start"
-```
-
-# Stack
-
-- React
-- TypeScript
-- Webpack
-- Babel
-- Styled Components

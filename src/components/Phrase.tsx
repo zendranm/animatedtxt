@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback, ReactElement } from 'react';
 import styled from 'styled-components';
-import { FontOptions, getCharacter, OffsetsType } from './fonts/index';
+import { FontOptions, getCharacterAndFontData, OffsetsType, isTypeofSvgChar } from './fonts/index';
 import { CharacterProps } from './Character';
 
 type ChildType = ReactElement<CharacterProps>;
@@ -9,8 +9,21 @@ type WrappedChildType = ReactElement<CharacterProps & WrapperProps>;
 
 type OffsetWrappedChildType = ReactElement<OffsetWrapperProps>;
 
-export interface PhraseProps {
-	children: ChildType[];
+interface WrapperProps {
+	margin: number;
+	offsets: OffsetsType;
+	svgViewBox: any;
+	size: number;
+}
+
+interface OffsetWrapperProps {
+	offsetRight: number;
+	offsetLeft: number;
+	globalMargin: number;
+}
+
+interface PhraseProps {
+	children: ChildType | ChildType[];
 	margin?: number;
 	color?: string;
 	size?: number;
@@ -26,12 +39,14 @@ const Phrase: React.FC<PhraseProps> = ({
 	duration = 1,
 	font = 'font1',
 }) => {
-	const [characters, setCharacters] = useState<ChildType[] | OffsetWrappedChildType[]>(children);
+	const [characters, setCharacters] = useState<OffsetWrappedChildType[]>([]);
 
 	const wrapChildren = useCallback(
 		(children: ChildType[]): WrappedChildType[] =>
 			children.map(child => {
-				const { chosenChar } = getCharacter(child.props.char, child.props.font ?? 'font1');
+				const { chosenChar } = isTypeofSvgChar(child.props.char)
+					? { chosenChar: child.props.char }
+					: getCharacterAndFontData(child.props.char, child.props.font ?? 'font1');
 				const newChild: WrappedChildType = React.cloneElement(child as React.ReactElement<any>, {
 					color: child.props.color ?? color,
 					size,
@@ -95,7 +110,8 @@ const Phrase: React.FC<PhraseProps> = ({
 	};
 
 	useEffect(() => {
-		const wrappedChildren = wrapChildren(children);
+		const childrenArray = (Array.isArray(children) ? children : [children]) as ChildType[];
+		const wrappedChildren = wrapChildren(childrenArray);
 		const childrenWithOffset = addOffset(wrappedChildren);
 		setCharacters(childrenWithOffset);
 	}, [children, wrapChildren]);
@@ -104,19 +120,6 @@ const Phrase: React.FC<PhraseProps> = ({
 };
 
 export default Phrase;
-
-interface WrapperProps {
-	margin: number;
-	offsets: OffsetsType;
-	svgViewBox: any;
-	size: number;
-}
-
-interface OffsetWrapperProps {
-	offsetRight: number;
-	offsetLeft: number;
-	globalMargin: number;
-}
 
 const Content = styled.div`
 	display: flex;

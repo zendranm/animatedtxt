@@ -35,7 +35,12 @@
 		"no-shadow": "off",
 		"@typescript-eslint/explicit-module-boundary-types": ["error"],
 		"react-hooks/rules-of-hooks": "error",
-		"react-hooks/exhaustive-deps": "warn"
+		"react-hooks/exhaustive-deps": "warn",
+		"react/require-default-props": [
+			2,
+			{ "forbidDefaultForRequired": true, "ignoreFunctionalComponents": true }
+		],
+		"react/no-unused-prop-types": [2, { "ignore": ["speed", "elementDuration"] }]
 	},
 	"globals": {
 		"JSX": true

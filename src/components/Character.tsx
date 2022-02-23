@@ -7,25 +7,42 @@ import {
 	FontOptions,
 	LinecapOptions,
 	defaultCharacter,
-	getCharacter,
+	getCharacterAndFontData,
+	getFontData,
+	CharacterAndFontData,
+	isTypeofSvgChar,
 } from './fonts/index';
 
+interface SvgProps {
+	color: string;
+	size: number;
+	fontWidth: number;
+	linecap: LinecapOptions;
+}
+
+interface PathProps {
+	delay: number;
+	duration: number;
+	length: number;
+	key: number;
+}
+
+interface ExtendedElement extends Element {
+	speed: number;
+	elementDuration: number;
+}
+
+interface ExtendedSvgChar extends SvgChar {
+	elements: ExtendedElement[];
+}
+
 export interface CharacterProps {
-	char: CharOptions;
+	char: CharOptions | SvgChar;
 	delay?: number;
 	duration?: number;
 	color?: string;
 	size?: number;
 	font?: FontOptions;
-}
-
-export interface ExtendedElement extends Element {
-	speed: number;
-	elementDuration: number;
-}
-
-export interface ExtendedSvgChar extends SvgChar {
-	elements: ExtendedElement[];
 }
 
 const Character: React.FC<CharacterProps> = ({
@@ -44,7 +61,9 @@ const Character: React.FC<CharacterProps> = ({
 	const [linecap, setLinecap] = useState<LinecapOptions>('butt');
 
 	useEffect(() => {
-		const { chosenChar, fontWidth, linecap } = getCharacter(char, font);
+		const { chosenChar, fontWidth, linecap }: CharacterAndFontData = isTypeofSvgChar(char)
+			? { chosenChar: char, ...getFontData(font) }
+			: getCharacterAndFontData(char, font);
 		const newChar = calculateAnimation(chosenChar, duration);
 		setCharacter(newChar);
 		setFontWidth(fontWidth);
@@ -149,20 +168,6 @@ const Character: React.FC<CharacterProps> = ({
 };
 
 export default Character;
-
-interface SvgProps {
-	color: string;
-	size: number;
-	fontWidth: number;
-	linecap: LinecapOptions;
-}
-
-interface PathProps {
-	delay: number;
-	duration: number;
-	length: number;
-	key: number;
-}
 
 interface GridSideProps {
 	isLeftSide: boolean;
