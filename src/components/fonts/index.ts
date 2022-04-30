@@ -1,4 +1,6 @@
-import * as font1 from './Font1';
+import * as basicThin from './basicThin';
+import * as basicMedium from './basicMedium';
+import * as basicBold from './basicBold';
 
 export interface Element {
 	elementDelay: number;
@@ -48,7 +50,7 @@ const charOptions = [
 	'Y',
 	'Z',
 ] as const;
-const fontOptions = ['font1'] as const;
+const fontOptions = ['basic-thin', 'basic-medium', 'font1'] as const;
 const linecapOptions = ['butt', 'round', 'square'] as const;
 
 export type CharOptions = typeof charOptions[number];
@@ -76,11 +78,17 @@ export const getCharacterAndFontData = (
 ): CharacterAndFontData => {
 	let chosenFont;
 	switch (font) {
+		case 'basic-thin':
+			chosenFont = basicThin;
+			break;
+		case 'basic-medium':
+			chosenFont = basicMedium;
+			break;
 		case 'font1':
-			chosenFont = font1;
+			chosenFont = basicBold;
 			break;
 		default:
-			chosenFont = font1;
+			chosenFont = basicBold;
 			break;
 	}
 
@@ -177,11 +185,17 @@ export const getCharacterAndFontData = (
 export const getFontData = (font: FontOptions): Omit<CharacterAndFontData, 'chosenChar'> => {
 	let chosenFont;
 	switch (font) {
+		case 'basic-thin':
+			chosenFont = basicThin;
+			break;
+		case 'basic-medium':
+			chosenFont = basicMedium;
+			break;
 		case 'font1':
-			chosenFont = font1;
+			chosenFont = basicBold;
 			break;
 		default:
-			chosenFont = font1;
+			chosenFont = basicBold;
 			break;
 	}
 
