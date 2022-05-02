@@ -97,8 +97,8 @@ export const charG: SvgChar = {
 	elements: [
 		{
 			elementDelay: 0.0,
-			shape: 'M 49 15 A 24 24 0 1 0 49 49 L 49 35 L 35 35',
-			length: 141.0298309326172,
+			shape: 'M 54 10 A 31 31 0 1 0 54 54 L 54 35 L 35 35',
+			length: 183.87860107421875,
 		},
 	],
 	offsets: {
@@ -108,11 +108,11 @@ export const charG: SvgChar = {
 };
 
 export const charH: SvgChar = {
-	svgViewBox: { width: 48, height: 64 },
+	svgViewBox: { width: 41, height: 64 },
 	elements: [
-		{ elementDelay: 0.0, shape: 'M 8 64 L 8 0', length: 64 },
+		{ elementDelay: 0.0, shape: 'M 1 64 L 1 0', length: 64 },
 		{ elementDelay: 0.3, shape: 'M 40 64 L 40 0', length: 64 },
-		{ elementDelay: 0.7, shape: 'M 8 32 L 40 32', length: 32 },
+		{ elementDelay: 0.7, shape: 'M 1 32 L 40 32', length: 39 },
 	],
 	offsets: {
 		left: [0, 0, 0, 0, 0],
@@ -121,8 +121,8 @@ export const charH: SvgChar = {
 };
 
 export const charI: SvgChar = {
-	svgViewBox: { width: 16, height: 64 },
-	elements: [{ elementDelay: 0.0, shape: 'M 8 64 L 8 0', length: 64 }],
+	svgViewBox: { width: 2, height: 64 },
+	elements: [{ elementDelay: 0.0, shape: 'M 1 64 L 1 0', length: 64 }],
 	offsets: {
 		left: [0, 0, 0, 0, 0],
 		right: [0, 0, 0, 0, 0],
@@ -130,12 +130,12 @@ export const charI: SvgChar = {
 };
 
 export const charJ: SvgChar = {
-	svgViewBox: { width: 40, height: 64 },
+	svgViewBox: { width: 30, height: 64 },
 	elements: [
 		{
 			elementDelay: 0.0,
-			shape: 'M 32 0 L 32 44 A 1 1 0 0 1 8 44 L 8 35',
-			length: 90.70447540283203,
+			shape: 'M 29 0 L 29 49 A 1 1 0 0 1 1 49 L 1 44',
+			length: 97.988525390625,
 		},
 	],
 	offsets: {
@@ -145,11 +145,11 @@ export const charJ: SvgChar = {
 };
 
 export const charK: SvgChar = {
-	svgViewBox: { width: 54.5, height: 64 },
+	svgViewBox: { width: 39, height: 64 },
 	elements: [
-		{ elementDelay: 0.0, shape: 'M 8 64 L 8 0', length: 64 },
-		{ elementDelay: 0.1, shape: 'M 48 -5 L 8 44', length: 63.25345993041992 },
-		{ elementDelay: 0.6, shape: 'M 20 29 L 48 69', length: 48.82622146606445 },
+		{ elementDelay: 0.0, shape: 'M 1 64 L 1 0', length: 64 },
+		{ elementDelay: 0.1, shape: 'M 41 -5 L 1 44', length: 63.25345993041992 },
+		{ elementDelay: 0.6, shape: 'M 13 29 L 41 69', length: 48.82622146606445 },
 	],
 	offsets: {
 		left: [0, 0, 0, 0, 0],
@@ -158,10 +158,10 @@ export const charK: SvgChar = {
 };
 
 export const charL: SvgChar = {
-	svgViewBox: { width: 40, height: 64 },
+	svgViewBox: { width: 37, height: 64 },
 	elements: [
-		{ elementDelay: 0.0, shape: 'M 8 0 L 8 64', length: 64 },
-		{ elementDelay: 0.68, shape: 'M 8 56 L 40 56', length: 32 },
+		{ elementDelay: 0.0, shape: 'M 1 0 L 1 64', length: 64 },
+		{ elementDelay: 0.68, shape: 'M 1 63 L 37 63', length: 36 },
 	],
 	offsets: {
 		left: [0, 0, 0, 0, 0],
@@ -170,11 +170,11 @@ export const charL: SvgChar = {
 };
 
 export const charM: SvgChar = {
-	svgViewBox: { width: 64, height: 64 },
+	svgViewBox: { width: 50, height: 64 },
 	elements: [
 		{
 			elementDelay: 0.0,
-			shape: 'M 8 64 L 8 0 L 32 32 L 56 0 L 56 64',
+			shape: 'M 1 64 L 1 0 L 25 32 L 49 0 L 49 64',
 			length: 208,
 		},
 	],
@@ -185,11 +185,11 @@ export const charM: SvgChar = {
 };
 
 export const charN: SvgChar = {
-	svgViewBox: { width: 56, height: 64 },
+	svgViewBox: { width: 42, height: 64 },
 	elements: [
 		{
 			elementDelay: 0.0,
-			shape: 'M 8 64 L 8 0 L 48 64 L 48 0',
+			shape: 'M 1 64 L 1 0 L 41 64 L 41 0',
 			length: 203.4718475341797,
 		},
 	],
@@ -204,8 +204,8 @@ export const charO: SvgChar = {
 	elements: [
 		{
 			elementDelay: 0.0,
-			shape: 'M 8 32 A 24 24 0 1 0 56 32 A 24 24 0 1 0 8 32',
-			length: 150.81761169433594,
+			shape: 'M 1 32 A 24 24 0 1 0 63 32 A 24 24 0 1 0 1 32',
+			length: 194.80616760253906,
 		},
 	],
 	offsets: {
