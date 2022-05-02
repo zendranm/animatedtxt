@@ -334,7 +334,7 @@ export const charW: SvgChar = {
 		{
 			elementDelay: 0.0,
 			shape: 'M 8 -1 L 14 64 L 32 32 L 50 64 L 56 -1',
-			length: 208,
+			length: 203.98291015625,
 		},
 	],
 	offsets: {
