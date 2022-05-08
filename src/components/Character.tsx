@@ -146,6 +146,7 @@ const Character: React.FC<CharacterProps> = ({
 					<GridSide isLeftSide>
 						{character.offsets.left.map((offset, index) => (
 							<GridBlock
+								isLeftSide
 								offset={offset}
 								key={index}
 								numberOfBlocks={character.offsets.left.length}
@@ -155,6 +156,7 @@ const Character: React.FC<CharacterProps> = ({
 					<GridSide isLeftSide={false}>
 						{character.offsets.right.map((offset, index) => (
 							<GridBlock
+								isLeftSide={false}
 								offset={offset}
 								key={index}
 								numberOfBlocks={character.offsets.right.length}
@@ -173,7 +175,7 @@ interface GridSideProps {
 	isLeftSide: boolean;
 }
 
-interface GridBlockProps {
+interface GridBlockProps extends GridSideProps {
 	offset: number;
 	numberOfBlocks: number;
 }
@@ -234,6 +236,6 @@ const GridBlock = styled.div<GridBlockProps>`
 	width: calc(100% * (1 - ${props => props.offset}));
 	height: calc(100% / ${props => props.numberOfBlocks});
 	border-style: solid;
-	border-color: green;
+	border-color: ${props => (props.isLeftSide ? 'green' : 'red')};
 	box-sizing: border-box;
 `;
