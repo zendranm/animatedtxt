@@ -121,29 +121,62 @@ const Character: React.FC<CharacterProps> = ({
 	};
 
 	return (
-		<Svg
-			color={color}
-			size={size}
-			fontWidth={fontWidth}
-			linecap={linecap}
-			viewBox={`0 0 ${character.svgViewBox.width} ${character.svgViewBox.height}`}
-		>
-			{character.elements.map(
-				({ elementDelay, shape, length, elementDuration }: ExtendedElement, index: number) => (
-					<Path
-						delay={delay + elementDelay * duration}
-						duration={elementDuration}
-						d={shape}
-						length={length}
-						key={index}
-					/>
-				),
+		<CharWithGrid>
+			<Svg
+				color={color}
+				size={size}
+				fontWidth={fontWidth}
+				linecap={linecap}
+				viewBox={`0 0 ${character.svgViewBox.width} ${character.svgViewBox.height}`}
+			>
+				{character.elements.map(
+					({ elementDelay, shape, length, elementDuration }: ExtendedElement, index: number) => (
+						<Path
+							delay={delay + elementDelay * duration}
+							duration={elementDuration}
+							d={shape}
+							length={length}
+							key={index}
+						/>
+					),
+				)}
+			</Svg>
+			{character.offsets && (
+				<Grid>
+					<GridSide isLeftSide>
+						{character.offsets.left.map((offset, index) => (
+							<GridBlock
+								offset={offset}
+								key={index}
+								numberOfBlocks={character.offsets.left.length}
+							/>
+						))}
+					</GridSide>
+					<GridSide isLeftSide={false}>
+						{character.offsets.right.map((offset, index) => (
+							<GridBlock
+								offset={offset}
+								key={index}
+								numberOfBlocks={character.offsets.right.length}
+							/>
+						))}
+					</GridSide>
+				</Grid>
 			)}
-		</Svg>
+		</CharWithGrid>
 	);
 };
 
 export default Character;
+
+interface GridSideProps {
+	isLeftSide: boolean;
+}
+
+interface GridBlockProps {
+	offset: number;
+	numberOfBlocks: number;
+}
 
 const Svg = styled.svg<SvgProps>`
 	stroke: ${(props: SvgProps) => props.color};
@@ -169,4 +202,38 @@ const Path = styled.path<PathProps>`
 	animation-fill-mode: forwards; //Animated object stays instead of disappearing
 	animation-duration: ${(props: PathProps) => props.duration}s; //Animation length (without delay)
 	animation-delay: ${props => props.delay}s;
+`;
+
+const CharWithGrid = styled.div`
+	width: fit-content;
+	position: relative;
+`;
+
+const Grid = styled.div`
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+`;
+
+const GridSide = styled.div<GridSideProps>`
+	width: 50%;
+	height: 100%;
+
+	display: flex;
+	flex-direction: column;
+	align-items: ${props => (props.isLeftSide ? 'flex-end' : 'flex-start')};
+`;
+
+const GridBlock = styled.div<GridBlockProps>`
+	width: calc(100% * (1 - ${props => props.offset}));
+	height: calc(100% / ${props => props.numberOfBlocks});
+	border-style: solid;
+	border-color: green;
+	box-sizing: border-box;
 `;
