@@ -46,7 +46,7 @@ const Phrase: React.FC<PhraseProps> = ({
 			children.map(child => {
 				const { chosenChar } = isTypeofSvgChar(child.props.char)
 					? { chosenChar: child.props.char }
-					: getCharacterAndFontData(child.props.char, child.props.font ?? 'font1');
+					: getCharacterAndFontData(child.props.char, child.props.font ?? font);
 				const newChild: WrappedChildType = React.cloneElement(child as React.ReactElement<any>, {
 					color: child.props.color ?? color,
 					size,
@@ -78,7 +78,7 @@ const Phrase: React.FC<PhraseProps> = ({
 			const scLeftOffset =
 				i === children.length - 1 ? [0, 0, 0] : children[i + 1].props.offsets.left;
 
-			let smallestSpaceSum = 1;
+			let smallestSpaceSum = 2;
 			let smallestSpaceRight = 0;
 			let smallestSpaceLeft = 0;
 
