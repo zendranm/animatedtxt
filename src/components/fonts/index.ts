@@ -50,7 +50,7 @@ const charOptions = [
 	'Y',
 	'Z',
 ] as const;
-const fontOptions = ['basic-thin', 'basic-medium', 'font1'] as const;
+const fontOptions = ['basic-thin', 'basic-medium', 'basic-bold', 'font1'] as const;
 const linecapOptions = ['butt', 'round', 'square'] as const;
 
 export type CharOptions = typeof charOptions[number];
@@ -84,6 +84,7 @@ export const getCharacterAndFontData = (
 		case 'basic-medium':
 			chosenFont = basicMedium;
 			break;
+		case 'basic-bold':
 		case 'font1':
 			chosenFont = basicBold;
 			break;
@@ -191,6 +192,7 @@ export const getFontData = (font: FontOptions): Omit<CharacterAndFontData, 'chos
 		case 'basic-medium':
 			chosenFont = basicMedium;
 			break;
+		case 'basic-bold':
 		case 'font1':
 			chosenFont = basicBold;
 			break;
