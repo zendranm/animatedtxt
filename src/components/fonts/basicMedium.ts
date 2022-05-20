@@ -314,11 +314,11 @@ export const charU: SvgChar = {
 };
 
 export const charV: SvgChar = {
-	svgViewBox: { width: 56, height: 64 },
+	svgViewBox: { width: 48, height: 64 },
 	elements: [
 		{
 			elementDelay: 0.0,
-			shape: 'M 7 -6 L 28 64 L 49 -6',
+			shape: 'M 3 -6 L 24 64 L 45 -6',
 			length: 146.16429138183594,
 		},
 	],
@@ -329,12 +329,12 @@ export const charV: SvgChar = {
 };
 
 export const charW: SvgChar = {
-	svgViewBox: { width: 64, height: 64 },
+	svgViewBox: { width: 56, height: 64 },
 	elements: [
 		{
 			elementDelay: 0.0,
-			shape: 'M 8 -1 L 14 64 L 32 32 L 50 64 L 56 -1',
-			length: 208,
+			shape: 'M 4 -1 L 10 64 L 28 32 L 46 64 L 52 -1',
+			length: 203.98291015625,
 		},
 	],
 	offsets: {
@@ -344,10 +344,10 @@ export const charW: SvgChar = {
 };
 
 export const charX: SvgChar = {
-	svgViewBox: { width: 60, height: 64 },
+	svgViewBox: { width: 50, height: 64 },
 	elements: [
-		{ elementDelay: 0.0, shape: 'M 6 -6 L 54 70', length: 89.8888168334961 },
-		{ elementDelay: 0.3, shape: 'M 54 -6 L 6 70', length: 89.8888168334961 },
+		{ elementDelay: 0.0, shape: 'M 1 -6 L 49 70', length: 89.8888168334961 },
+		{ elementDelay: 0.3, shape: 'M 49 -6 L 1 70', length: 89.8888168334961 },
 	],
 	offsets: {
 		left: [0, 0.3, 0.5, 0.3, 0],
@@ -356,10 +356,10 @@ export const charX: SvgChar = {
 };
 
 export const charY: SvgChar = {
-	svgViewBox: { width: 60, height: 64 },
+	svgViewBox: { width: 50, height: 64 },
 	elements: [
-		{ elementDelay: 0.0, shape: 'M 6 -6 L 30 32 L 30 64', length: 76.94441223144531 },
-		{ elementDelay: 0.55, shape: 'M 30 32 L 54 -6', length: 44.94440841674805 },
+		{ elementDelay: 0.0, shape: 'M 1 -6 L 25 32 L 25 64', length: 76.94441223144531 },
+		{ elementDelay: 0.55, shape: 'M 25 32 L 49 -6', length: 44.94440841674805 },
 	],
 	offsets: {
 		left: [0, 0.25, 0.55, 0.7, 0.7],
@@ -368,11 +368,11 @@ export const charY: SvgChar = {
 };
 
 export const charZ: SvgChar = {
-	svgViewBox: { width: 52, height: 64 },
+	svgViewBox: { width: 48, height: 64 },
 	elements: [
-		{ elementDelay: 0.0, shape: 'M 0 8 L 52 8', length: 52 },
-		{ elementDelay: 0.35, shape: 'M 49 8 L 3 56', length: 66.48307800292969 },
-		{ elementDelay: 0.7, shape: 'M 0 56 L 52 56', length: 52 },
+		{ elementDelay: 0.0, shape: 'M 0 4 L 48 4', length: 52 },
+		{ elementDelay: 0.35, shape: 'M 47 4 L 1 60', length: 72.4706802368164 },
+		{ elementDelay: 0.7, shape: 'M 0 60 L 48 60', length: 52 },
 	],
 	offsets: {
 		left: [0, 0, 0.3, 0, 0],
