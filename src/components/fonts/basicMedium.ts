@@ -130,12 +130,12 @@ export const charI: SvgChar = {
 };
 
 export const charJ: SvgChar = {
-	svgViewBox: { width: 40, height: 64 },
+	svgViewBox: { width: 34, height: 64 },
 	elements: [
 		{
 			elementDelay: 0.0,
-			shape: 'M 32 0 L 32 44 A 1 1 0 0 1 8 44 L 8 35',
-			length: 90.70447540283203,
+			shape: 'M 30 0 L 30 47 A 1 1 0 0 1 4 47 L 4 40',
+			length: 94.84649658203125,
 		},
 	],
 	offsets: {
@@ -145,11 +145,11 @@ export const charJ: SvgChar = {
 };
 
 export const charK: SvgChar = {
-	svgViewBox: { width: 54.5, height: 64 },
+	svgViewBox: { width: 45.5, height: 64 },
 	elements: [
-		{ elementDelay: 0.0, shape: 'M 8 64 L 8 0', length: 64 },
-		{ elementDelay: 0.1, shape: 'M 48 -5 L 8 44', length: 63.25345993041992 },
-		{ elementDelay: 0.6, shape: 'M 20 29 L 48 69', length: 48.82622146606445 },
+		{ elementDelay: 0.0, shape: 'M 4 64 L 4 0', length: 64 },
+		{ elementDelay: 0.1, shape: 'M 44 -5 L 4 44', length: 63.25345993041992 },
+		{ elementDelay: 0.6, shape: 'M 16 29 L 44 69', length: 48.82622146606445 },
 	],
 	offsets: {
 		left: [0, 0, 0, 0, 0],
@@ -158,10 +158,10 @@ export const charK: SvgChar = {
 };
 
 export const charL: SvgChar = {
-	svgViewBox: { width: 40, height: 64 },
+	svgViewBox: { width: 38, height: 64 },
 	elements: [
-		{ elementDelay: 0.0, shape: 'M 8 0 L 8 64', length: 64 },
-		{ elementDelay: 0.68, shape: 'M 8 56 L 40 56', length: 32 },
+		{ elementDelay: 0.0, shape: 'M 4 0 L 4 64', length: 64 },
+		{ elementDelay: 0.68, shape: 'M 4 60 L 38 60', length: 34 },
 	],
 	offsets: {
 		left: [0, 0, 0, 0, 0],
@@ -170,11 +170,11 @@ export const charL: SvgChar = {
 };
 
 export const charM: SvgChar = {
-	svgViewBox: { width: 64, height: 64 },
+	svgViewBox: { width: 56, height: 64 },
 	elements: [
 		{
 			elementDelay: 0.0,
-			shape: 'M 8 64 L 8 0 L 32 32 L 56 0 L 56 64',
+			shape: 'M 4 64 L 4 0 L 28 32 L 52 0 L 52 64',
 			length: 208,
 		},
 	],
@@ -185,11 +185,11 @@ export const charM: SvgChar = {
 };
 
 export const charN: SvgChar = {
-	svgViewBox: { width: 56, height: 64 },
+	svgViewBox: { width: 48, height: 64 },
 	elements: [
 		{
 			elementDelay: 0.0,
-			shape: 'M 8 64 L 8 0 L 48 64 L 48 0',
+			shape: 'M 4 64 L 4 0 L 44 64 L 44 0',
 			length: 203.4718475341797,
 		},
 	],
