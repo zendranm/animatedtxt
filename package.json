@@ -34,9 +34,6 @@
 		"url": "https://github.com/zendranm/animatedtxt/issues"
 	},
 	"homepage": "https://github.com/zendranm/animatedtxt#readme",
-	"peerDependencies": {
-		"react": "^17.0.2"
-	},
 	"devDependencies": {
 		"@babel/core": "^7.15.0",
 		"@babel/preset-env": "^7.15.0",
