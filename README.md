@@ -4,7 +4,7 @@ This [npm package](https://www.npmjs.com/package/animatedtxt) provides component
 
 ### Live demo:
 
-https://codesandbox.io/s/animatedtxt-st03k
+https://codesandbox.io/s/animatedtxt-0s5259
 
 # Installation
 
