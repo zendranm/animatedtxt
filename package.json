@@ -12,7 +12,7 @@
 		"start": "webpack --watch --mode=development",
 		"build": "webpack --mode=development",
 		"prepare": "npm run build",
-		"local": "npm run build && npm pack && mv animatedtxt-*.tgz ~/Desktop/test-app-ts/"
+		"local": "npm run build && npm pack && mv animatedtxt-*.tgz ~/Desktop/test-anim-18/"
 	},
 	"repository": {
 		"type": "git",
@@ -34,9 +34,6 @@
 		"url": "https://github.com/zendranm/animatedtxt/issues"
 	},
 	"homepage": "https://github.com/zendranm/animatedtxt#readme",
-	"peerDependencies": {
-		"react": "^17.0.2"
-	},
 	"devDependencies": {
 		"@babel/core": "^7.15.0",
 		"@babel/preset-env": "^7.15.0",
@@ -68,7 +65,7 @@
 		"webpack-cli": "^4.8.0"
 	},
 	"dependencies": {
-		"react": "^17.0.2",
-		"react-dom": "^17.0.2"
+		"react": ">=16.0.0",
+		"react-dom": ">=16.0.0"
 	}
 }
