@@ -19,7 +19,7 @@
 		"url": "git+https://github.com/zendranm/animatedtxt.git"
 	},
 	"author": "Michał Zendran",
-	"license": "ISC",
+	"license": "MIT",
 	"keywords": [
 		"text",
 		"letter",
