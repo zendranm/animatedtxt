@@ -25,6 +25,7 @@ interface PathProps {
 	duration: number;
 	length: number;
 	key: number;
+	cubicBezier?: [number, number, number, number];
 }
 
 interface ExtendedElement extends Element {
@@ -43,6 +44,7 @@ export interface CharacterProps {
 	color?: string;
 	size?: number;
 	font?: FontOptions;
+	cubicBezier?: [number, number, number, number];
 }
 
 const Character: React.FC<CharacterProps> = ({
@@ -52,6 +54,7 @@ const Character: React.FC<CharacterProps> = ({
 	color = '#000000',
 	size = 100,
 	font = 'font1',
+	cubicBezier,
 }) => {
 	const [character, setCharacter] = useState<ExtendedSvgChar>({
 		...defaultCharacter,
@@ -136,6 +139,7 @@ const Character: React.FC<CharacterProps> = ({
 						d={shape}
 						length={length}
 						key={index}
+						cubicBezier={cubicBezier}
 					/>
 				),
 			)}
@@ -169,5 +173,6 @@ const Path = styled.path<PathProps>`
 	animation-fill-mode: forwards; //Animated object stays instead of disappearing
 	animation-duration: ${(props: PathProps) => props.duration}s; //Animation length (without delay)
 	animation-delay: ${props => props.delay}s;
-	animation-timing-function: cubic-bezier(1, 0.04, 0.02, 1);
+	animation-timing-function: ${(props: PathProps) =>
+		props.cubicBezier ? `cubic-bezier(${props.cubicBezier})` : 'linear'};
 `;
