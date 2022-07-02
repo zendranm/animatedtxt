@@ -169,4 +169,5 @@ const Path = styled.path<PathProps>`
 	animation-fill-mode: forwards; //Animated object stays instead of disappearing
 	animation-duration: ${(props: PathProps) => props.duration}s; //Animation length (without delay)
 	animation-delay: ${props => props.delay}s;
+	animation-timing-function: cubic-bezier(1, 0.04, 0.02, 1);
 `;
