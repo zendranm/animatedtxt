@@ -44,7 +44,7 @@ export interface CharacterProps {
 	color?: string;
 	size?: number;
 	font?: FontOptions;
-	cubicBezier?: [number, number, number, number];
+	cubicBezier?: PathProps['cubicBezier'];
 }
 
 const Character: React.FC<CharacterProps> = ({
