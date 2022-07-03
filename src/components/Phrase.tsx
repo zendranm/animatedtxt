@@ -25,6 +25,7 @@ interface OffsetWrapperProps {
 interface PhraseProps {
 	children: ChildType | ChildType[];
 	margin?: number;
+	delay?: number;
 	duration?: number;
 	color?: string;
 	size?: number;
@@ -35,6 +36,7 @@ interface PhraseProps {
 const Phrase: React.FC<PhraseProps> = ({
 	children,
 	margin = 0,
+	delay = 0,
 	duration = 1,
 	color,
 	size = 100,
@@ -50,6 +52,7 @@ const Phrase: React.FC<PhraseProps> = ({
 					? { chosenChar: child.props.char }
 					: getCharacterAndFontData(child.props.char, child.props.font ?? font);
 				const newChild: WrappedChildType = React.cloneElement(child as React.ReactElement<any>, {
+					delay: (child.props.delay ?? 0) + delay,
 					duration: child.props.duration ?? duration,
 					color: child.props.color ?? color,
 					size,
@@ -62,7 +65,7 @@ const Phrase: React.FC<PhraseProps> = ({
 
 				return newChild;
 			}),
-		[color, cubicBezier, duration, font, margin, size],
+		[color, cubicBezier, delay, duration, font, margin, size],
 	);
 
 	const addOffset = (children: WrappedChildType[]): OffsetWrappedChildType[] => {
