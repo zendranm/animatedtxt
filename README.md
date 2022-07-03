@@ -98,6 +98,7 @@ Behavior and design of characters grouped in the phrase can be modified by passi
 - color? `<string>` - definition of the color of the characters in a phrase. Should be in format accepted by CSS standards. Default value: #000000. Value is overwritten by the color defined in the character element.
 - size? `<string>` - size of the characters in "px" unit. Default value: 100. Value overwrites size value of all children elements.
 - duration? `<number>` - duration of the animation in seconds. Default value: 1. Value is overwritten by the value defined in the character element.
+- delay? `<number>` - number of seconds by which the start of the phrase animation will be delayed. When specified, this value is added to the delay of each `Char` component within the `Phrase`. Default value: 0.
 - font? `<string>` - name of the font. Each font has different design of characters and may have different characters available. Default value: "basic-bold". Value overwrites size value of all children elements.
 - cubicBezier? `<[number, number, number, number]>` - definition of a Cubic Bezier curve used for `animation-timing-function` property. If not provided then `linear` function is used. Value is overwritten by the value defined in the character element.
 
