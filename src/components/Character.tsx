@@ -26,6 +26,7 @@ interface PathProps {
 	length: number;
 	key: number;
 	cubicBezier?: [number, number, number, number];
+	isReversed: boolean;
 }
 
 interface ExtendedElement extends Element {
@@ -45,6 +46,7 @@ export interface CharacterProps {
 	size?: number;
 	font?: FontOptions;
 	cubicBezier?: PathProps['cubicBezier'];
+	isReversed?: boolean;
 }
 
 const Character: React.FC<CharacterProps> = ({
@@ -55,6 +57,7 @@ const Character: React.FC<CharacterProps> = ({
 	size = 100,
 	font = 'font1',
 	cubicBezier,
+	isReversed = false,
 }) => {
 	const [character, setCharacter] = useState<ExtendedSvgChar>({
 		...defaultCharacter,
@@ -140,6 +143,7 @@ const Character: React.FC<CharacterProps> = ({
 						length={length}
 						key={index}
 						cubicBezier={cubicBezier}
+						isReversed={isReversed}
 					/>
 				),
 			)}
@@ -156,20 +160,20 @@ const Svg = styled.svg<SvgProps>`
 	stroke-linecap: ${(props: SvgProps) => props.linecap};
 `;
 
-const animate = (length: any) => keyframes`
+const animate = (length: any, isReversed: boolean) => keyframes`
 from {
-  stroke-dashoffset: ${length};
+	stroke-dashoffset: ${isReversed ? 0 : length};
 }
 to {
-  stroke-dashoffset: 0;
+	stroke-dashoffset: ${isReversed ? length : 0};
 }
 `;
 
 const Path = styled.path<PathProps>`
 	fill: transparent;
 	stroke-dasharray: ${(props: PathProps) => props.length};
-	stroke-dashoffset: ${(props: PathProps) => props.length};
-	animation: ${(props: PathProps) => animate(props.length)} 2s linear;
+	stroke-dashoffset: ${(props: PathProps) => (props.isReversed ? 0 : props.length)};
+	animation: ${(props: PathProps) => animate(props.length, props.isReversed)} 2s linear;
 	animation-fill-mode: forwards; //Animated object stays instead of disappearing
 	animation-duration: ${(props: PathProps) => props.duration}s; //Animation length (without delay)
 	animation-delay: ${props => props.delay}s;
