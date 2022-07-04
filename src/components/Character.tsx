@@ -38,6 +38,20 @@ interface ExtendedSvgChar extends SvgChar {
 	elements: ExtendedElement[];
 }
 
+const reverseElements = (char: ExtendedSvgChar) => {
+	const sortedElements = char.elements.sort(
+		(current, next) => current.elementDelay - next.elementDelay,
+	);
+
+	let rememberedValue;
+	for (let i = 0; i < Math.floor(sortedElements.length / 2); i += 1) {
+		rememberedValue = sortedElements[i].elementDelay;
+		sortedElements[i].elementDelay = sortedElements[sortedElements.length - 1 - i].elementDelay;
+		sortedElements[sortedElements.length - 1 - i].elementDelay = rememberedValue;
+	}
+	return char;
+};
+
 export interface CharacterProps {
 	char: CharOptions | SvgChar;
 	delay?: number;
@@ -71,12 +85,12 @@ const Character: React.FC<CharacterProps> = ({
 			? { chosenChar: char, ...getFontData(font) }
 			: getCharacterAndFontData(char, font);
 		const newChar = calculateAnimation(chosenChar, duration);
-		setCharacter(newChar);
+		setCharacter(isReversed ? reverseElements(newChar) : newChar);
 		setFontWidth(fontWidth);
 		setLinecap(linecap);
-	}, [char, duration, font]);
+	}, [char, duration, font, isReversed]);
 
-	const calculateAnimation = (char: SvgChar, animationTime: number) => {
+	const calculateAnimation = (char: SvgChar, animationTime: number): ExtendedSvgChar => {
 		// Find the longest element in character
 		let longestElement = 0;
 		char.elements.forEach(element => {
