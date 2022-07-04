@@ -31,6 +31,7 @@ interface PhraseProps {
 	size?: number;
 	font?: FontOptions;
 	cubicBezier?: CharacterProps['cubicBezier'];
+	isReversed?: boolean;
 }
 
 const Phrase: React.FC<PhraseProps> = ({
@@ -42,6 +43,7 @@ const Phrase: React.FC<PhraseProps> = ({
 	size = 100,
 	font = 'font1',
 	cubicBezier,
+	isReversed = false,
 }) => {
 	const [characters, setCharacters] = useState<OffsetWrappedChildType[]>([]);
 
@@ -58,6 +60,7 @@ const Phrase: React.FC<PhraseProps> = ({
 					size,
 					font,
 					cubicBezier: child.props.cubicBezier ?? cubicBezier,
+					isReversed,
 					margin,
 					offsets: chosenChar.offsets,
 					svgViewBox: chosenChar.svgViewBox,
@@ -65,7 +68,7 @@ const Phrase: React.FC<PhraseProps> = ({
 
 				return newChild;
 			}),
-		[color, cubicBezier, delay, duration, font, margin, size],
+		[color, cubicBezier, delay, duration, font, isReversed, margin, size],
 	);
 
 	const addOffset = (children: WrappedChildType[]): OffsetWrappedChildType[] => {
