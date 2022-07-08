@@ -25,6 +25,8 @@ interface PathProps {
 	duration: number;
 	length: number;
 	key: number;
+	cubicBezier?: [number, number, number, number];
+	isReversed: boolean;
 }
 
 interface ExtendedElement extends Element {
@@ -36,6 +38,20 @@ interface ExtendedSvgChar extends SvgChar {
 	elements: ExtendedElement[];
 }
 
+const reverseElements = (char: ExtendedSvgChar) => {
+	const sortedElements = char.elements.sort(
+		(current, next) => current.elementDelay - next.elementDelay,
+	);
+
+	let rememberedValue;
+	for (let i = 0; i < Math.floor(sortedElements.length / 2); i += 1) {
+		rememberedValue = sortedElements[i].elementDelay;
+		sortedElements[i].elementDelay = sortedElements[sortedElements.length - 1 - i].elementDelay;
+		sortedElements[sortedElements.length - 1 - i].elementDelay = rememberedValue;
+	}
+	return char;
+};
+
 export interface CharacterProps {
 	char: CharOptions | SvgChar;
 	delay?: number;
@@ -43,6 +59,8 @@ export interface CharacterProps {
 	color?: string;
 	size?: number;
 	font?: FontOptions;
+	cubicBezier?: PathProps['cubicBezier'];
+	isReversed?: boolean;
 }
 
 const Character: React.FC<CharacterProps> = ({
@@ -52,6 +70,8 @@ const Character: React.FC<CharacterProps> = ({
 	color = '#000000',
 	size = 100,
 	font = 'font1',
+	cubicBezier,
+	isReversed = false,
 }) => {
 	const [character, setCharacter] = useState<ExtendedSvgChar>({
 		...defaultCharacter,
@@ -65,12 +85,12 @@ const Character: React.FC<CharacterProps> = ({
 			? { chosenChar: char, ...getFontData(font) }
 			: getCharacterAndFontData(char, font);
 		const newChar = calculateAnimation(chosenChar, duration);
-		setCharacter(newChar);
+		setCharacter(isReversed ? reverseElements(newChar) : newChar);
 		setFontWidth(fontWidth);
 		setLinecap(linecap);
-	}, [char, duration, font]);
+	}, [char, duration, font, isReversed]);
 
-	const calculateAnimation = (char: SvgChar, animationTime: number) => {
+	const calculateAnimation = (char: SvgChar, animationTime: number): ExtendedSvgChar => {
 		// Find the longest element in character
 		let longestElement = 0;
 		char.elements.forEach(element => {
@@ -136,6 +156,8 @@ const Character: React.FC<CharacterProps> = ({
 						d={shape}
 						length={length}
 						key={index}
+						cubicBezier={cubicBezier}
+						isReversed={isReversed}
 					/>
 				),
 			)}
@@ -152,21 +174,23 @@ const Svg = styled.svg<SvgProps>`
 	stroke-linecap: ${(props: SvgProps) => props.linecap};
 `;
 
-const animate = (length: any) => keyframes`
+const animate = (length: any, isReversed: boolean) => keyframes`
 from {
-  stroke-dashoffset: ${length};
+	stroke-dashoffset: ${isReversed ? 0 : length};
 }
 to {
-  stroke-dashoffset: 0;
+	stroke-dashoffset: ${isReversed ? length : 0};
 }
 `;
 
 const Path = styled.path<PathProps>`
 	fill: transparent;
 	stroke-dasharray: ${(props: PathProps) => props.length};
-	stroke-dashoffset: ${(props: PathProps) => props.length};
-	animation: ${(props: PathProps) => animate(props.length)} 2s linear;
+	stroke-dashoffset: ${(props: PathProps) => (props.isReversed ? 0 : props.length)};
+	animation: ${(props: PathProps) => animate(props.length, props.isReversed)} 2s linear;
 	animation-fill-mode: forwards; //Animated object stays instead of disappearing
 	animation-duration: ${(props: PathProps) => props.duration}s; //Animation length (without delay)
 	animation-delay: ${props => props.delay}s;
+	animation-timing-function: ${(props: PathProps) =>
+		props.cubicBezier ? `cubic-bezier(${props.cubicBezier})` : 'linear'};
 `;

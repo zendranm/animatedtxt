@@ -25,19 +25,25 @@ interface OffsetWrapperProps {
 interface PhraseProps {
 	children: ChildType | ChildType[];
 	margin?: number;
+	delay?: number;
+	duration?: number;
 	color?: string;
 	size?: number;
-	duration?: number;
 	font?: FontOptions;
+	cubicBezier?: CharacterProps['cubicBezier'];
+	isReversed?: boolean;
 }
 
 const Phrase: React.FC<PhraseProps> = ({
 	children,
 	margin = 0,
+	delay = 0,
+	duration = 1,
 	color,
 	size = 100,
-	duration = 1,
 	font = 'font1',
+	cubicBezier,
+	isReversed = false,
 }) => {
 	const [characters, setCharacters] = useState<OffsetWrappedChildType[]>([]);
 
@@ -48,10 +54,13 @@ const Phrase: React.FC<PhraseProps> = ({
 					? { chosenChar: child.props.char }
 					: getCharacterAndFontData(child.props.char, child.props.font ?? font);
 				const newChild: WrappedChildType = React.cloneElement(child as React.ReactElement<any>, {
+					delay: (child.props.delay ?? 0) + delay,
+					duration: child.props.duration ?? duration,
 					color: child.props.color ?? color,
 					size,
-					duration: child.props.duration ?? duration,
 					font,
+					cubicBezier: child.props.cubicBezier ?? cubicBezier,
+					isReversed,
 					margin,
 					offsets: chosenChar.offsets,
 					svgViewBox: chosenChar.svgViewBox,
@@ -59,7 +68,7 @@ const Phrase: React.FC<PhraseProps> = ({
 
 				return newChild;
 			}),
-		[color, duration, font, margin, size],
+		[color, cubicBezier, delay, duration, font, isReversed, margin, size],
 	);
 
 	const addOffset = (children: WrappedChildType[]): OffsetWrappedChildType[] => {
