@@ -1,4 +1,4 @@
-<!--- Remeber to add a meaningful title -->
+<!--- Remember to add a meaningful title -->
 
 ## Description
 <!--- Describe your changes in detail -->
