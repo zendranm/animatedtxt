@@ -3,7 +3,7 @@
 		"browser": true,
 		"es2021": true
 	},
-	"extends": ["plugin:react/recommended", "airbnb", "prettier"],
+	"extends": "vazco/typescript",
 	"parser": "@typescript-eslint/parser",
 	"parserOptions": {
 		"ecmaFeatures": {
@@ -11,36 +11,6 @@
 		},
 		"ecmaVersion": 12,
 		"sourceType": "module"
-	},
-	"settings": {
-		"import/resolver": {
-			"typescript": {}
-		}
-	},
-	"plugins": ["react", "@typescript-eslint", "react-hooks"],
-	"rules": {
-		"no-use-before-define": "off",
-		"@typescript-eslint/no-use-before-define": "off",
-		"react/jsx-filename-extension": ["warn", { "extensions": [".tsx"] }],
-		"import/extensions": [
-			"error",
-			"ignorePackages",
-			{
-				"ts": "never",
-				"tsx": "never"
-			}
-		],
-		"import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
-		"react/no-array-index-key": "off",
-		"no-shadow": "off",
-		"@typescript-eslint/explicit-module-boundary-types": ["error"],
-		"react-hooks/rules-of-hooks": "error",
-		"react-hooks/exhaustive-deps": "warn",
-		"react/require-default-props": [
-			2,
-			{ "forbidDefaultForRequired": true, "ignoreFunctionalComponents": true }
-		],
-		"react/no-unused-prop-types": [2, { "ignore": ["speed", "elementDuration"] }]
 	},
 	"globals": {
 		"JSX": true
