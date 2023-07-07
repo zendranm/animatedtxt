@@ -1,6 +1,6 @@
 import { SvgChar, LinecapOptions } from './index';
 
-export const fontWidth: number = 2;
+export const fontWidth = 2;
 export const linecap: LinecapOptions = 'butt';
 
 export const charA: SvgChar = {
@@ -25,7 +25,8 @@ export const charB: SvgChar = {
 		{ elementDelay: 0.0, shape: 'M 1 0 L 1 64', length: 64 },
 		{
 			elementDelay: 0.1,
-			shape: 'M 1 1 L 26 1 C 45 1 45 30 26 30 L 1 30 L 26 30 C 48 30 48 63 26 63 L 1 63',
+			shape:
+				'M 1 1 L 26 1 C 45 1 45 30 26 30 L 1 30 L 26 30 C 48 30 48 63 26 63 L 1 63',
 			length: 197.9264678955078,
 		},
 	],
@@ -276,7 +277,8 @@ export const charS: SvgChar = {
 	elements: [
 		{
 			elementDelay: 0.0,
-			shape: 'M 40 16 C 40 -4 1 -4 1 16 C 1 33 16 32 20 32 C 24 32 40 31 40 48 C 40 68 1 68 1 48',
+			shape:
+				'M 40 16 C 40 -4 1 -4 1 16 C 1 33 16 32 20 32 C 24 32 40 31 40 48 C 40 68 1 68 1 48',
 			length: 168.1623992919922,
 		},
 	],
