@@ -7,6 +7,7 @@ import {
 	getCharacterAndFontData,
 	OffsetsType,
 	isTypeofSvgChar,
+	SvgChar,
 } from './fonts/index';
 
 type ChildType = ReactElement<CharacterProps>;
@@ -18,7 +19,7 @@ type OffsetWrappedChildType = ReactElement<OffsetWrapperProps>;
 interface WrapperProps {
 	margin: number;
 	offsets: OffsetsType;
-	svgViewBox: any;
+	svgViewBox: SvgChar['svgViewBox'];
 	size: number;
 }
 
@@ -60,7 +61,7 @@ const Phrase: React.FC<PhraseProps> = ({
 					? { chosenChar: child.props.char }
 					: getCharacterAndFontData(child.props.char, child.props.font ?? font);
 				const newChild: WrappedChildType = React.cloneElement(
-					child as React.ReactElement<any>,
+					child as WrappedChildType,
 					{
 						delay: (child.props.delay ?? 0) + delay,
 						duration: child.props.duration ?? duration,
