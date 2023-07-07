@@ -1,6 +1,6 @@
-import * as basicThin from './basicThin';
-import * as basicMedium from './basicMedium';
 import * as basicBold from './basicBold';
+import * as basicMedium from './basicMedium';
+import * as basicThin from './basicThin';
 
 export interface Element {
 	elementDelay: number;
@@ -50,12 +50,17 @@ const charOptions = [
 	'Y',
 	'Z',
 ] as const;
-const fontOptions = ['basic-thin', 'basic-medium', 'basic-bold', 'font1'] as const;
+const fontOptions = [
+	'basic-thin',
+	'basic-medium',
+	'basic-bold',
+	'font1',
+] as const;
 const linecapOptions = ['butt', 'round', 'square'] as const;
 
-export type CharOptions = typeof charOptions[number];
-export type FontOptions = typeof fontOptions[number];
-export type LinecapOptions = typeof linecapOptions[number];
+export type CharOptions = (typeof charOptions)[number];
+export type FontOptions = (typeof fontOptions)[number];
+export type LinecapOptions = (typeof linecapOptions)[number];
 
 export const defaultCharacter: SvgChar = {
 	svgViewBox: { width: 0, height: 0 },
@@ -183,7 +188,9 @@ export const getCharacterAndFontData = (
 	return { chosenChar, fontWidth, linecap };
 };
 
-export const getFontData = (font: FontOptions): Omit<CharacterAndFontData, 'chosenChar'> => {
+export const getFontData = (
+	font: FontOptions,
+): Omit<CharacterAndFontData, 'chosenChar'> => {
 	let chosenFont;
 	switch (font) {
 		case 'basic-thin':
