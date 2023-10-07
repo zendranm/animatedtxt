@@ -133,9 +133,7 @@ const Phrase: React.FC<PhraseProps> = ({
 	};
 
 	useEffect(() => {
-		const childrenArray = (
-			Array.isArray(children) ? children : [children]
-		) as ChildType[];
+		const childrenArray = Array.isArray(children) ? children : [children];
 		const wrappedChildren = wrapChildren(childrenArray);
 		const childrenWithOffset = addOffset(wrappedChildren);
 		setCharacters(childrenWithOffset);

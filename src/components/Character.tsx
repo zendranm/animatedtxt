@@ -188,7 +188,7 @@ const Svg = styled.svg<SvgProps>`
 	stroke-linecap: ${(props: SvgProps) => props.linecap};
 `;
 
-const animate = (length: any, isReversed: boolean) => keyframes`
+const animate = (length: number, isReversed: boolean) => keyframes`
 from {
 	stroke-dashoffset: ${isReversed ? 0 : length};
 }

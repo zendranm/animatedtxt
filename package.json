@@ -13,7 +13,8 @@
 		"start": "webpack --watch --mode=development",
 		"build": "webpack --mode=development",
 		"prepare": "npm run build",
-		"local": "npm run build && npm pack && mv animatedtxt-*.tgz ~/Desktop/test-anim-18/"
+		"local": "npm run build && npm pack && mv animatedtxt-*.tgz ~/Desktop/test-anim-18/",
+		"lint": "npx eslint src/*"
 	},
 	"repository": {
 		"type": "git",

@@ -77,6 +77,7 @@ export interface CharacterAndFontData {
 	linecap: LinecapOptions;
 }
 
+// eslint-disable-next-line complexity -- TODO: instead of importing many objects and using switch to find correct char use dictionary like map
 export const getCharacterAndFontData = (
 	char: CharOptions,
 	font: FontOptions,
