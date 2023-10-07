@@ -14,13 +14,9 @@ import {
 	PathProps,
 	ExtendedElement,
 	SvgProps,
+	CharacterProps,
 } from '@/types/character';
-import {
-	SvgChar,
-	CharOptions,
-	FontOptions,
-	LinecapOptions,
-} from '@/types/font';
+import { SvgChar, LinecapOptions } from '@/types/font';
 
 const reverseElements = (char: ExtendedSvgChar) => {
 	const sortedElements = char.elements.sort(
@@ -37,17 +33,6 @@ const reverseElements = (char: ExtendedSvgChar) => {
 	}
 	return char;
 };
-
-export interface CharacterProps {
-	char: CharOptions | SvgChar;
-	delay?: number;
-	duration?: number;
-	color?: string;
-	size?: number;
-	font?: FontOptions;
-	cubicBezier?: PathProps['cubicBezier'];
-	isReversed?: boolean;
-}
 
 const Character: React.FC<CharacterProps> = ({
 	char,

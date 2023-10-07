@@ -1,4 +1,10 @@
-import { LinecapOptions, SvgChar, Element } from './font';
+import {
+	LinecapOptions,
+	CharOptions,
+	FontOptions,
+	SvgChar,
+	Element,
+} from './font';
 
 export interface SvgProps {
 	color: string;
@@ -23,4 +29,15 @@ export interface ExtendedElement extends Element {
 
 export interface ExtendedSvgChar extends SvgChar {
 	elements: ExtendedElement[];
+}
+
+export interface CharacterProps {
+	char: CharOptions | SvgChar;
+	delay?: number;
+	duration?: number;
+	color?: string;
+	size?: number;
+	font?: FontOptions;
+	cubicBezier?: PathProps['cubicBezier'];
+	isReversed?: boolean;
 }

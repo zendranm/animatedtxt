@@ -1,29 +1,16 @@
-import React, { useState, useEffect, useCallback, ReactElement } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 
-import { CharacterProps } from './Character';
 import { getCharacterAndFontData, isTypeofSvgChar } from './fonts/index';
 
-import { FontOptions, OffsetsType, SvgChar } from '@/types/font';
-
-type ChildType = ReactElement<CharacterProps>;
-
-type WrappedChildType = ReactElement<CharacterProps & WrapperProps>;
-
-type OffsetWrappedChildType = ReactElement<OffsetWrapperProps>;
-
-interface WrapperProps {
-	margin: number;
-	offsets: OffsetsType;
-	svgViewBox: SvgChar['svgViewBox'];
-	size: number;
-}
-
-interface OffsetWrapperProps {
-	offsetRight: number;
-	offsetLeft: number;
-	globalMargin: number;
-}
+import { CharacterProps } from '@/types/character';
+import { FontOptions } from '@/types/font';
+import {
+	ChildType,
+	OffsetWrappedChildType,
+	OffsetWrapperProps,
+	WrappedChildType,
+} from '@/types/phrase';
 
 interface PhraseProps {
 	children: ChildType | ChildType[];
