@@ -15,7 +15,11 @@
 		"noFallthroughCasesInSwitch": true,
 		"isolatedModules": true,
 		"noEmit": false,
-		"declaration": true
+		"declaration": true,
+		"baseUrl": ".",
+    	"paths": {
+      		"@/*": ["./src/*"]
+    	},
 	},
 	"include": ["src"],
 	"exclude": ["node_modules"]

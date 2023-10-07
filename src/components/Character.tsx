@@ -2,17 +2,20 @@ import React, { useState, useEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
 
 import {
-	SvgChar,
-	Element,
-	CharOptions,
-	FontOptions,
-	LinecapOptions,
 	defaultCharacter,
 	getCharacterAndFontData,
 	getFontData,
 	CharacterAndFontData,
 	isTypeofSvgChar,
 } from './fonts/index';
+
+import {
+	SvgChar,
+	Element,
+	CharOptions,
+	FontOptions,
+	LinecapOptions,
+} from '@/types/font';
 
 interface SvgProps {
 	color: string;

@@ -1,6 +1,6 @@
 // eslint-disable-next-line eslint-comments/disable-enable-pair -- comment is provided below
 /* eslint-disable @typescript-eslint/no-loss-of-precision -- those lengths of svg elements match the actual svg elements */
-import { SvgChar, LinecapOptions } from './index';
+import { SvgChar, LinecapOptions } from '@/types/font';
 
 export const fontWidth = 8;
 export const linecap: LinecapOptions = 'butt';

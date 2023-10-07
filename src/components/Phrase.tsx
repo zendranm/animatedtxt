@@ -2,13 +2,9 @@ import React, { useState, useEffect, useCallback, ReactElement } from 'react';
 import styled from 'styled-components';
 
 import { CharacterProps } from './Character';
-import {
-	FontOptions,
-	getCharacterAndFontData,
-	OffsetsType,
-	isTypeofSvgChar,
-	SvgChar,
-} from './fonts/index';
+import { getCharacterAndFontData, isTypeofSvgChar } from './fonts/index';
+
+import { FontOptions, OffsetsType, SvgChar } from '@/types/font';
 
 type ChildType = ReactElement<CharacterProps>;
 
