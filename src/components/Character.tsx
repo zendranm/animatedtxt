@@ -10,37 +10,17 @@ import {
 } from './fonts/index';
 
 import {
+	ExtendedSvgChar,
+	PathProps,
+	ExtendedElement,
+	SvgProps,
+} from '@/types/character';
+import {
 	SvgChar,
-	Element,
 	CharOptions,
 	FontOptions,
 	LinecapOptions,
 } from '@/types/font';
-
-interface SvgProps {
-	color: string;
-	size: number;
-	fontWidth: number;
-	linecap: LinecapOptions;
-}
-
-interface PathProps {
-	delay: number;
-	duration: number;
-	length: number;
-	key: number;
-	cubicBezier?: [number, number, number, number];
-	isReversed: boolean;
-}
-
-interface ExtendedElement extends Element {
-	speed: number;
-	elementDuration: number;
-}
-
-interface ExtendedSvgChar extends SvgChar {
-	elements: ExtendedElement[];
-}
 
 const reverseElements = (char: ExtendedSvgChar) => {
 	const sortedElements = char.elements.sort(
