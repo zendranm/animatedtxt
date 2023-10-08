@@ -13,7 +13,8 @@
 		"start": "webpack --watch --mode=development",
 		"build": "webpack --mode=development",
 		"prepare": "npm run build",
-		"local": "npm run build && npm pack && mv animatedtxt-*.tgz ~/Desktop/test-anim-18/"
+		"local": "npm run build && npm pack && mv animatedtxt-*.tgz ~/Desktop/test-anim-18/",
+		"lint": "npx eslint src/*"
 	},
 	"repository": {
 		"type": "git",
@@ -61,6 +62,7 @@
 		"styled-components": "6.0.8",
 		"ts-loader": "9.5.0",
 		"ts-node": "10.9.1",
+		"tsconfig-paths-webpack-plugin": "4.1.0",
 		"typescript": "5.2.2",
 		"webpack": "5.88.2",
 		"webpack-cli": "5.1.4"

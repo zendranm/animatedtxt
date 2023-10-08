@@ -1,33 +1,64 @@
-import React, { useState, useEffect, useCallback, ReactElement } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 
-import { CharacterProps } from './Character';
+import { CharacterProps } from '@/types/character';
+import { FontOptions } from '@/types/font';
 import {
-	FontOptions,
-	getCharacterAndFontData,
-	OffsetsType,
-	isTypeofSvgChar,
-	SvgChar,
-} from './fonts/index';
+	ChildType,
+	OffsetWrappedChildType,
+	OffsetWrapperProps,
+	WrappedChildType,
+} from '@/types/phrase';
+import { getCharacterAndFontData, isTypeofSvgChar } from '@/utils/common';
 
-type ChildType = ReactElement<CharacterProps>;
+const addOffset = (children: WrappedChildType[]): OffsetWrappedChildType[] => {
+	const newChildren: OffsetWrappedChildType[] = [];
 
-type WrappedChildType = ReactElement<CharacterProps & WrapperProps>;
+	let rememberedSmallestSpaceLeft = 0;
 
-type OffsetWrappedChildType = ReactElement<OffsetWrapperProps>;
+	for (let i = 0; i < children.length; i += 1) {
+		const firstChild = children[i].props;
+		const fcWidth = firstChild.svgViewBox.width;
+		const fcHeight = firstChild.svgViewBox.height;
+		const fcSize = firstChild.size;
+		const fcRightOffset = firstChild.offsets.right;
+		const fcMargin = firstChild.margin;
 
-interface WrapperProps {
-	margin: number;
-	offsets: OffsetsType;
-	svgViewBox: SvgChar['svgViewBox'];
-	size: number;
-}
+		const scLeftOffset =
+			i === children.length - 1
+				? [0, 0, 0]
+				: children[i + 1].props.offsets.left;
 
-interface OffsetWrapperProps {
-	offsetRight: number;
-	offsetLeft: number;
-	globalMargin: number;
-}
+		let smallestSpaceSum = 2;
+		let smallestSpaceRight = 0;
+		let smallestSpaceLeft = 0;
+
+		const fcActualWidth = (fcWidth / fcHeight) * fcSize;
+
+		for (let j = 0; j < fcRightOffset.length; j += 1) {
+			if (fcRightOffset[j] + scLeftOffset[j] < smallestSpaceSum) {
+				smallestSpaceRight = fcRightOffset[j];
+				smallestSpaceLeft = scLeftOffset[j];
+				smallestSpaceSum = smallestSpaceRight + smallestSpaceLeft;
+			}
+		}
+
+		const childWithOffset = (
+			<OffsetWrapper
+				offsetLeft={rememberedSmallestSpaceLeft * (fcActualWidth / 2)}
+				offsetRight={smallestSpaceRight * (fcActualWidth / 2)}
+				globalMargin={fcMargin}
+				key={i}
+			>
+				{children[i]}
+			</OffsetWrapper>
+		);
+
+		newChildren.push(childWithOffset);
+		rememberedSmallestSpaceLeft = smallestSpaceLeft;
+	}
+	return newChildren;
+};
 
 interface PhraseProps {
 	children: ChildType | ChildType[];
@@ -81,61 +112,8 @@ const Phrase: React.FC<PhraseProps> = ({
 		[color, cubicBezier, delay, duration, font, isReversed, margin, size],
 	);
 
-	const addOffset = (
-		children: WrappedChildType[],
-	): OffsetWrappedChildType[] => {
-		const newChildren: OffsetWrappedChildType[] = [];
-
-		let rememberedSmallestSpaceLeft = 0;
-
-		for (let i = 0; i < children.length; i += 1) {
-			const firstChild = children[i].props;
-			const fcWidth = firstChild.svgViewBox.width;
-			const fcHeight = firstChild.svgViewBox.height;
-			const fcSize = firstChild.size;
-			const fcRightOffset = firstChild.offsets.right;
-			const fcMargin = firstChild.margin;
-
-			const scLeftOffset =
-				i === children.length - 1
-					? [0, 0, 0]
-					: children[i + 1].props.offsets.left;
-
-			let smallestSpaceSum = 2;
-			let smallestSpaceRight = 0;
-			let smallestSpaceLeft = 0;
-
-			const fcActualWidth = (fcWidth / fcHeight) * fcSize;
-
-			for (let j = 0; j < fcRightOffset.length; j += 1) {
-				if (fcRightOffset[j] + scLeftOffset[j] < smallestSpaceSum) {
-					smallestSpaceRight = fcRightOffset[j];
-					smallestSpaceLeft = scLeftOffset[j];
-					smallestSpaceSum = smallestSpaceRight + smallestSpaceLeft;
-				}
-			}
-
-			const childWithOffset = (
-				<OffsetWrapper
-					offsetLeft={rememberedSmallestSpaceLeft * (fcActualWidth / 2)}
-					offsetRight={smallestSpaceRight * (fcActualWidth / 2)}
-					globalMargin={fcMargin}
-					key={i}
-				>
-					{children[i]}
-				</OffsetWrapper>
-			);
-
-			newChildren.push(childWithOffset);
-			rememberedSmallestSpaceLeft = smallestSpaceLeft;
-		}
-		return newChildren;
-	};
-
 	useEffect(() => {
-		const childrenArray = (
-			Array.isArray(children) ? children : [children]
-		) as ChildType[];
+		const childrenArray = Array.isArray(children) ? children : [children];
 		const wrappedChildren = wrapChildren(childrenArray);
 		const childrenWithOffset = addOffset(wrappedChildren);
 		setCharacters(childrenWithOffset);
