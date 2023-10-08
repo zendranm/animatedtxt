@@ -1,7 +1,6 @@
-import * as basicBold from './basicBold';
-import * as basicMedium from './basicMedium';
-import * as basicThin from './basicThin';
-
+import * as basicBold from '@/fonts/basicBold';
+import * as basicMedium from '@/fonts/basicMedium';
+import * as basicThin from '@/fonts/basicThin';
 import {
 	SvgChar,
 	LinecapOptions,
