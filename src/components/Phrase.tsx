@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 
-import { getCharacterAndFontData, isTypeofSvgChar } from './fonts/index';
-
 import { CharacterProps } from '@/types/character';
 import { FontOptions } from '@/types/font';
 import {
@@ -11,6 +9,7 @@ import {
 	OffsetWrapperProps,
 	WrappedChildType,
 } from '@/types/phrase';
+import { getCharacterAndFontData, isTypeofSvgChar } from '@/utils/common';
 
 const addOffset = (children: WrappedChildType[]): OffsetWrappedChildType[] => {
 	const newChildren: OffsetWrappedChildType[] = [];
