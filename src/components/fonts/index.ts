@@ -3,7 +3,7 @@ import * as basicMedium from '@/fonts/basicMedium';
 import * as basicThin from '@/fonts/basicThin';
 import {
 	SvgChar,
-	LinecapOptions,
+	CharacterAndFontData,
 	CharOptions,
 	FontOptions,
 } from '@/types/font';
@@ -20,12 +20,6 @@ export const defaultCharacter: SvgChar = {
 		right: [0, 0, 0, 0, 0],
 	},
 };
-
-export interface CharacterAndFontData {
-	chosenChar: SvgChar;
-	fontWidth: number;
-	linecap: LinecapOptions;
-}
 
 // eslint-disable-next-line complexity -- TODO: instead of importing many objects and using switch to find correct char use dictionary like map
 export const getCharacterAndFontData = (

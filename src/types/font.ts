@@ -56,3 +56,9 @@ const fontOptions = [
 export type CharOptions = (typeof charOptions)[number];
 export type FontOptions = (typeof fontOptions)[number];
 export type LinecapOptions = (typeof linecapOptions)[number];
+
+export interface CharacterAndFontData {
+	chosenChar: SvgChar;
+	fontWidth: number;
+	linecap: LinecapOptions;
+}
