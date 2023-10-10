@@ -10,8 +10,7 @@
 		"dist"
 	],
 	"scripts": {
-		"start": "webpack --watch --mode=development",
-		"build": "webpack --mode=development",
+		"build": "webpack --mode=production",
 		"prepare": "npm run build",
 		"local": "npm run build && npm pack && mv animatedtxt-*.tgz ~/Desktop/test-anim-18/",
 		"lint": "npx eslint src/*"
