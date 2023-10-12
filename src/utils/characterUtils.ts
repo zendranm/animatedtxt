@@ -2,19 +2,18 @@ import { ExtendedSvgChar } from '@/types/character';
 import { SvgChar } from '@/types/font';
 
 export const reverseElements = (char: ExtendedSvgChar) => {
-	const sortedElements = char.elements.sort(
-		(current, next) => current.elementDelay - next.elementDelay,
-	);
+	const newElements = char.elements.map(element => {
+		const newDelay =
+			element.elementDuration + element.elementDelay === 1
+				? 0
+				: 1 - element.elementDelay - element.elementDuration;
+		return {
+			...element,
+			elementDelay: newDelay,
+		};
+	});
 
-	let rememberedValue;
-	for (let i = 0; i < Math.floor(sortedElements.length / 2); i += 1) {
-		rememberedValue = sortedElements[i].elementDelay;
-		sortedElements[i].elementDelay =
-			sortedElements[sortedElements.length - 1 - i].elementDelay;
-		sortedElements[sortedElements.length - 1 - i].elementDelay =
-			rememberedValue;
-	}
-	return char;
+	return { ...char, elements: newElements };
 };
 
 export const calculateAnimation = (
@@ -52,7 +51,7 @@ export const calculateAnimation = (
 
 	// Calculate adjustment if animation longer than animationTime
 	let alpha = 1;
-	if (lastEnd > animationTime) {
+	if (lastEnd !== animationTime) {
 		// Calculate time of element's animation which is too long
 		const lasts = lastEnd - longestAnimation.elementDelay * animationTime;
 
