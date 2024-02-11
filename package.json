@@ -34,7 +34,7 @@
 	},
 	"homepage": "https://github.com/zendranm/animatedtxt#readme",
 	"devDependencies": {
-		"@babel/core": "7.23.0",
+		"@babel/core": "7.23.9",
 		"@babel/eslint-parser": "7.22.15",
 		"@babel/eslint-plugin": "7.22.10",
 		"@babel/preset-env": "7.22.20",
