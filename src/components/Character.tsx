@@ -49,10 +49,10 @@ const Character: React.FC<CharacterProps> = ({
 
 	return (
 		<Svg
-			color={color}
-			size={size}
-			fontWidth={fontWidth}
-			linecap={linecap}
+			$color={color}
+			$size={size}
+			$fontWidth={fontWidth}
+			$linecap={linecap}
 			viewBox={`0 0 ${character.svgViewBox.width} ${character.svgViewBox.height}`}
 		>
 			{character.elements.map(
@@ -61,13 +61,13 @@ const Character: React.FC<CharacterProps> = ({
 					index: number,
 				) => (
 					<Path
-						delay={delay + elementDelay * duration}
-						duration={elementDuration}
+						$delay={delay + elementDelay * duration}
+						$duration={elementDuration}
 						d={shape}
-						length={length}
+						$length={length}
 						key={index}
-						cubicBezier={cubicBezier}
-						isReversed={isReversed}
+						$cubicBezier={cubicBezier}
+						$isReversed={isReversed}
 					/>
 				),
 			)}
@@ -78,10 +78,10 @@ const Character: React.FC<CharacterProps> = ({
 export default Character;
 
 const Svg = styled.svg<SvgProps>`
-	stroke: ${(props: SvgProps) => props.color};
-	height: ${(props: SvgProps) => props.size}px;
-	stroke-width: ${(props: SvgProps) => props.fontWidth};
-	stroke-linecap: ${(props: SvgProps) => props.linecap};
+	stroke: ${(props: SvgProps) => props.$color};
+	height: ${(props: SvgProps) => props.$size}px;
+	stroke-width: ${(props: SvgProps) => props.$fontWidth};
+	stroke-linecap: ${(props: SvgProps) => props.$linecap};
 `;
 
 const animate = (length: number, isReversed: boolean) => keyframes`
@@ -95,17 +95,17 @@ to {
 
 const Path = styled.path<PathProps>`
 	fill: transparent;
-	stroke-dasharray: ${(props: PathProps) => props.length};
+	stroke-dasharray: ${(props: PathProps) => props.$length};
 	stroke-dashoffset: ${(props: PathProps) =>
-		props.isReversed ? 0 : props.length};
-	animation: ${(props: PathProps) => animate(props.length, props.isReversed)} 2s
-		linear;
+		props.$isReversed ? 0 : props.$length};
+	animation: ${(props: PathProps) => animate(props.$length, props.$isReversed)}
+		2s linear;
 	animation-fill-mode: forwards; //Animated object stays instead of disappearing
 	animation-duration: ${(props: PathProps) =>
-		props.duration}s; //Animation length (without delay)
-	animation-delay: ${props => props.delay}s;
+		props.$duration}s; //Animation length (without delay)
+	animation-delay: ${props => props.$delay}s;
 	animation-timing-function: ${(props: PathProps) =>
-		props.cubicBezier
-			? `cubic-bezier(${props.cubicBezier.toString()})`
+		props.$cubicBezier
+			? `cubic-bezier(${props.$cubicBezier.toString()})`
 			: 'linear'};
 `;
