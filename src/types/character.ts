@@ -7,19 +7,19 @@ import {
 } from './font';
 
 export interface SvgProps {
-	color: string;
-	size: number;
-	fontWidth: number;
-	linecap: LinecapOptions;
+	$color: string;
+	$size: number;
+	$fontWidth: number;
+	$linecap: LinecapOptions;
 }
 
 export interface PathProps {
-	delay: number;
-	duration: number;
-	length: number;
+	$delay: number;
+	$duration: number;
+	$length: number;
 	key: number;
-	cubicBezier?: [number, number, number, number];
-	isReversed: boolean;
+	$cubicBezier?: [number, number, number, number];
+	$isReversed: boolean;
 }
 
 export interface ExtendedElement extends Element {
@@ -38,6 +38,6 @@ export interface CharacterProps {
 	color?: string;
 	size?: number;
 	font?: FontOptions;
-	cubicBezier?: PathProps['cubicBezier'];
+	cubicBezier?: PathProps['$cubicBezier'];
 	isReversed?: boolean;
 }

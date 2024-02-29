@@ -45,9 +45,9 @@ const addOffset = (children: WrappedChildType[]): OffsetWrappedChildType[] => {
 
 		const childWithOffset = (
 			<OffsetWrapper
-				offsetLeft={rememberedSmallestSpaceLeft * (fcActualWidth / 2)}
-				offsetRight={smallestSpaceRight * (fcActualWidth / 2)}
-				globalMargin={fcMargin}
+				$offsetLeft={rememberedSmallestSpaceLeft * (fcActualWidth / 2)}
+				$offsetRight={smallestSpaceRight * (fcActualWidth / 2)}
+				$globalMargin={fcMargin}
 				key={i}
 			>
 				{children[i]}
@@ -135,9 +135,11 @@ const Content = styled.div`
 const OffsetWrapper = styled.div<OffsetWrapperProps>`
 	display: inline-flex;
 	${props =>
-		`margin-left: calc(${props.globalMargin / 2}px - ${props.offsetLeft}px);`}
+		`margin-left: calc(${props.$globalMargin / 2}px - ${props.$offsetLeft}px);`}
 	${props =>
-		`margin-right: calc(${props.globalMargin / 2}px - ${props.offsetRight}px);`}
+		`margin-right: calc(${props.$globalMargin / 2}px - ${
+			props.$offsetRight
+		}px);`}
 	&:first-child {
 		margin-left: 0;
 	}

@@ -17,7 +17,7 @@ export type WrappedChildType = ReactElement<CharacterProps & WrapperProps>;
 export type OffsetWrappedChildType = ReactElement<OffsetWrapperProps>;
 
 export interface OffsetWrapperProps {
-	offsetRight: number;
-	offsetLeft: number;
-	globalMargin: number;
+	$offsetRight: number;
+	$offsetLeft: number;
+	$globalMargin: number;
 }
