@@ -29,18 +29,15 @@ const Character: React.FC<CharacterProps> = ({
 }) => {
 	const [character, setCharacter] = useState<ExtendedSvgChar>({
 		...defaultCharacter,
-		elements: [
-			{ elementDelay: 0, shape: '', length: 0, speed: 0, elementDuration: 0 },
-		],
+		elements: [{ elementDelay: 0, shape: '', length: 0, speed: 0, elementDuration: 0 }],
 	});
 	const [fontWidth, setFontWidth] = useState<number>(1);
 	const [linecap, setLinecap] = useState<LinecapOptions>('butt');
 
 	useEffect(() => {
-		const { chosenChar, fontWidth, linecap }: CharacterAndFontData =
-			isTypeofSvgChar(char)
-				? { chosenChar: char, ...getFontData(font) }
-				: getCharacterAndFontData(char, font);
+		const { chosenChar, fontWidth, linecap }: CharacterAndFontData = isTypeofSvgChar(char)
+			? { chosenChar: char, ...getFontData(font) }
+			: getCharacterAndFontData(char, font);
 		const newChar = calculateAnimation(chosenChar, duration);
 		setCharacter(isReversed ? reverseElements(newChar) : newChar);
 		setFontWidth(fontWidth);
@@ -56,10 +53,7 @@ const Character: React.FC<CharacterProps> = ({
 			viewBox={`0 0 ${character.svgViewBox.width} ${character.svgViewBox.height}`}
 		>
 			{character.elements.map(
-				(
-					{ elementDelay, shape, length, elementDuration }: ExtendedElement,
-					index: number,
-				) => (
+				({ elementDelay, shape, length, elementDuration }: ExtendedElement, index: number) => (
 					<Path
 						$delay={delay + elementDelay * duration}
 						$duration={elementDuration}
@@ -96,16 +90,11 @@ to {
 const Path = styled.path<PathProps>`
 	fill: transparent;
 	stroke-dasharray: ${(props: PathProps) => props.$length};
-	stroke-dashoffset: ${(props: PathProps) =>
-		props.$isReversed ? 0 : props.$length};
-	animation: ${(props: PathProps) => animate(props.$length, props.$isReversed)}
-		2s linear;
+	stroke-dashoffset: ${(props: PathProps) => (props.$isReversed ? 0 : props.$length)};
+	animation: ${(props: PathProps) => animate(props.$length, props.$isReversed)} 2s linear;
 	animation-fill-mode: forwards; //Animated object stays instead of disappearing
-	animation-duration: ${(props: PathProps) =>
-		props.$duration}s; //Animation length (without delay)
+	animation-duration: ${(props: PathProps) => props.$duration}s; //Animation length (without delay)
 	animation-delay: ${props => props.$delay}s;
 	animation-timing-function: ${(props: PathProps) =>
-		props.$cubicBezier
-			? `cubic-bezier(${props.$cubicBezier.toString()})`
-			: 'linear'};
+		props.$cubicBezier ? `cubic-bezier(${props.$cubicBezier.toString()})` : 'linear'};
 `;

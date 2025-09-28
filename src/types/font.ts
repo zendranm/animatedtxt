@@ -46,12 +46,7 @@ const charOptions = [
 	'Z',
 ] as const;
 
-const fontOptions = [
-	'basic-thin',
-	'basic-medium',
-	'basic-bold',
-	'font1',
-] as const;
+const fontOptions = ['basic-thin', 'basic-medium', 'basic-bold', 'font1'] as const;
 
 export type CharOptions = (typeof charOptions)[number];
 export type FontOptions = (typeof fontOptions)[number];

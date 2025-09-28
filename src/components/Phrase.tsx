@@ -24,10 +24,7 @@ const addOffset = (children: WrappedChildType[]): OffsetWrappedChildType[] => {
 		const fcRightOffset = firstChild.offsets.right;
 		const fcMargin = firstChild.margin;
 
-		const scLeftOffset =
-			i === children.length - 1
-				? [0, 0, 0]
-				: children[i + 1].props.offsets.left;
+		const scLeftOffset = i === children.length - 1 ? [0, 0, 0] : children[i + 1].props.offsets.left;
 
 		let smallestSpaceSum = 2;
 		let smallestSpaceRight = 0;
@@ -91,21 +88,18 @@ const Phrase: React.FC<PhraseProps> = ({
 				const { chosenChar } = isTypeofSvgChar(child.props.char)
 					? { chosenChar: child.props.char }
 					: getCharacterAndFontData(child.props.char, child.props.font ?? font);
-				const newChild: WrappedChildType = React.cloneElement(
-					child as WrappedChildType,
-					{
-						delay: (child.props.delay ?? 0) + delay,
-						duration: child.props.duration ?? duration,
-						color: child.props.color ?? color,
-						size,
-						font,
-						cubicBezier: child.props.cubicBezier ?? cubicBezier,
-						isReversed,
-						margin,
-						offsets: chosenChar.offsets,
-						svgViewBox: chosenChar.svgViewBox,
-					},
-				);
+				const newChild: WrappedChildType = React.cloneElement(child as WrappedChildType, {
+					delay: (child.props.delay ?? 0) + delay,
+					duration: child.props.duration ?? duration,
+					color: child.props.color ?? color,
+					size,
+					font,
+					cubicBezier: child.props.cubicBezier ?? cubicBezier,
+					isReversed,
+					margin,
+					offsets: chosenChar.offsets,
+					svgViewBox: chosenChar.svgViewBox,
+				});
 
 				return newChild;
 			}),
@@ -134,12 +128,8 @@ const Content = styled.div`
 
 const OffsetWrapper = styled.div<OffsetWrapperProps>`
 	display: inline-flex;
-	${props =>
-		`margin-left: calc(${props.$globalMargin / 2}px - ${props.$offsetLeft}px);`}
-	${props =>
-		`margin-right: calc(${props.$globalMargin / 2}px - ${
-			props.$offsetRight
-		}px);`}
+	${props => `margin-left: calc(${props.$globalMargin / 2}px - ${props.$offsetLeft}px);`}
+	${props => `margin-right: calc(${props.$globalMargin / 2}px - ${props.$offsetRight}px);`}
 	&:first-child {
 		margin-left: 0;
 	}
