@@ -1,4 +1,2 @@
 src
-demo
-.babelrc
-webpack.config.js
+vite.config.js
