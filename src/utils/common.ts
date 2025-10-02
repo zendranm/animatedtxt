@@ -4,7 +4,7 @@ import * as basicThin from '@/fonts/basicThin';
 import { SvgChar, CharacterAndFontData, CharOptions, FontOptions } from '@/types/font';
 
 export function isTypeofSvgChar(char: unknown): char is SvgChar {
-	return (char as SvgChar).svgViewBox !== undefined;
+	return (char as SvgChar)?.svgViewBox !== undefined;
 }
 
 export const defaultCharacter: SvgChar = {

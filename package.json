@@ -12,8 +12,8 @@
 	],
 	"scripts": {
 		"build": "vite build && vite build --config vite.config.ts --mode dts",
-		"local": "npm run build && npm pack && mv animatedtxt-*.tgz ~/Desktop/test-anim-18/",
-		"lint": "npx eslint src/*"
+		"lint": "npx eslint src/*",
+		"test": "vitest"
 	},
 	"repository": {
 		"type": "git",
@@ -51,7 +51,8 @@
 		"typescript": "5.9.2",
 		"typescript-eslint": "8.44.1",
 		"vite": "7.1.7",
-		"vite-plugin-dts": "4.5.4"
+		"vite-plugin-dts": "4.5.4",
+		"vitest": "3.2.4"
 	},
 	"dependencies": {
 		"react": ">=17",
