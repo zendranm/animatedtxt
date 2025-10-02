@@ -1,3 +1,4 @@
+/* eslint-disable no-loss-of-precision */
 import { SvgChar, LinecapOptions } from '@/types/font';
 
 export const fontWidth = 2;
