@@ -1,10 +1,4 @@
-import {
-	LinecapOptions,
-	CharOptions,
-	FontOptions,
-	SvgChar,
-	Element,
-} from './font';
+import { LinecapOptions, CharOptions, FontOptions, SvgChar, Element } from './font';
 
 export interface SvgProps {
 	$color: string;

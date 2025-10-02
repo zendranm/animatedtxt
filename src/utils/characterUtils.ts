@@ -16,10 +16,7 @@ export const reverseElements = (char: ExtendedSvgChar) => {
 	return { ...char, elements: newElements };
 };
 
-export const calculateAnimation = (
-	char: SvgChar,
-	animationTime: number,
-): ExtendedSvgChar => {
+export const calculateAnimation = (char: SvgChar, animationTime: number): ExtendedSvgChar => {
 	// Find the longest element in character
 	let longestElement = 0;
 	char.elements.forEach(element => {
@@ -46,8 +43,7 @@ export const calculateAnimation = (
 	});
 
 	// Calculate the time of the end of the animation that ends last
-	const lastEnd =
-		(longestAnimation.elementDelay + longestAnimation.speed) * animationTime;
+	const lastEnd = (longestAnimation.elementDelay + longestAnimation.speed) * animationTime;
 
 	// Calculate adjustment if animation longer than animationTime
 	let alpha = 1;
@@ -56,8 +52,7 @@ export const calculateAnimation = (
 		const lasts = lastEnd - longestAnimation.elementDelay * animationTime;
 
 		// Calculate allowed time that won't exceed animationTime
-		const shouldLast =
-			animationTime - longestAnimation.elementDelay * animationTime;
+		const shouldLast = animationTime - longestAnimation.elementDelay * animationTime;
 
 		alpha = shouldLast / lasts;
 	}

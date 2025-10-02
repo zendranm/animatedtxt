@@ -1,12 +1,7 @@
 import * as basicBold from '@/fonts/basicBold';
 import * as basicMedium from '@/fonts/basicMedium';
 import * as basicThin from '@/fonts/basicThin';
-import {
-	SvgChar,
-	CharacterAndFontData,
-	CharOptions,
-	FontOptions,
-} from '@/types/font';
+import { SvgChar, CharacterAndFontData, CharOptions, FontOptions } from '@/types/font';
 
 export function isTypeofSvgChar(char: unknown): char is SvgChar {
 	return (char as SvgChar).svgViewBox !== undefined;
@@ -21,7 +16,6 @@ export const defaultCharacter: SvgChar = {
 	},
 };
 
-// eslint-disable-next-line complexity -- TODO: instead of importing many objects and using switch to find correct char use dictionary like map
 export const getCharacterAndFontData = (
 	char: CharOptions,
 	font: FontOptions,
@@ -133,9 +127,7 @@ export const getCharacterAndFontData = (
 	return { chosenChar, fontWidth, linecap };
 };
 
-export const getFontData = (
-	font: FontOptions,
-): Omit<CharacterAndFontData, 'chosenChar'> => {
+export const getFontData = (font: FontOptions): Omit<CharacterAndFontData, 'chosenChar'> => {
 	let chosenFont;
 	switch (font) {
 		case 'basic-thin':

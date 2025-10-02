@@ -1,5 +1,4 @@
-// eslint-disable-next-line eslint-comments/disable-enable-pair -- comment is provided below
-/* eslint-disable @typescript-eslint/no-loss-of-precision -- those lengths of svg elements match the actual svg elements */
+/* eslint-disable no-loss-of-precision */
 import { SvgChar, LinecapOptions } from '@/types/font';
 
 export const fontWidth = 8;
@@ -27,8 +26,7 @@ export const charB: SvgChar = {
 		{ elementDelay: 0.0, shape: 'M 4 0 L 4 64', length: 64 },
 		{
 			elementDelay: 0.1,
-			shape:
-				'M 4 4 L 28 4 C 43 4 43 30 28 30 L 4 30 L 28 30 C 46 30 46 60 28 60 L 4 60',
+			shape: 'M 4 4 L 28 4 C 43 4 43 30 28 30 L 4 30 L 28 30 C 46 30 46 60 28 60 L 4 60',
 			length: 179.7399444580078,
 		},
 	],
@@ -279,8 +277,7 @@ export const charS: SvgChar = {
 	elements: [
 		{
 			elementDelay: 0.0,
-			shape:
-				'M 40 19 C 40 -1 4 -1 4 19 C 4 33 16 32 22 32 C 28 32 40 31 40 45 C 40 65 4 65 4 45',
+			shape: 'M 40 19 C 40 -1 4 -1 4 19 C 4 33 16 32 22 32 C 28 32 40 31 40 45 C 40 65 4 65 4 45',
 			length: 156.69471740722656,
 		},
 	],
