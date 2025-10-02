@@ -9,7 +9,8 @@ import {
 	OffsetWrapperProps,
 	WrappedChildType,
 } from '@/types/phrase';
-import { getCharacterAndFontData, isTypeofSvgChar } from '@/utils/common';
+import { isTypeofSvgChar } from '@/utils/isTypeofSvgChar';
+import { getCharacterAndFontData } from '@/utils/getCharacterAndFontData';
 
 const addOffset = (children: WrappedChildType[]): OffsetWrappedChildType[] => {
 	const newChildren: OffsetWrappedChildType[] = [];

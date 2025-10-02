@@ -9,13 +9,11 @@ import {
 	CharacterProps,
 } from '@/types/character';
 import { LinecapOptions, CharacterAndFontData } from '@/types/font';
-import { calculateAnimation, reverseElements } from '@/utils/characterUtils';
-import {
-	defaultCharacter,
-	getCharacterAndFontData,
-	getFontData,
-	isTypeofSvgChar,
-} from '@/utils/common';
+import { calculateAnimation } from '@/utils/calculateAnimation';
+import { reverseElements } from '@/utils/reverseElements';
+import { isTypeofSvgChar } from '@/utils/isTypeofSvgChar';
+import { getFontData } from '@/utils/getFontData';
+import { defaultCharacter, getCharacterAndFontData } from '@/utils/getCharacterAndFontData';
 
 const Character: React.FC<CharacterProps> = ({
 	char,

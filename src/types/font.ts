@@ -1,4 +1,3 @@
-// TODO: rename Element as it's reserved name
 export interface Element {
 	elementDelay: number;
 	shape: string;
