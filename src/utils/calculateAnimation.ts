@@ -1,21 +1,7 @@
 import { ExtendedSvgChar } from '@/types/character';
 import { SvgChar } from '@/types/font';
 
-export const reverseElements = (char: ExtendedSvgChar) => {
-	const newElements = char.elements.map(element => {
-		const newDelay =
-			element.elementDuration + element.elementDelay === 1
-				? 0
-				: 1 - element.elementDelay - element.elementDuration;
-		return {
-			...element,
-			elementDelay: newDelay,
-		};
-	});
-
-	return { ...char, elements: newElements };
-};
-
+// TODO: rename calculateAnimation (file and function) to something more meaningful
 export const calculateAnimation = (char: SvgChar, animationTime: number): ExtendedSvgChar => {
 	// Find the longest element in character
 	let longestElement = 0;

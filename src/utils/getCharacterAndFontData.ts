@@ -3,10 +3,6 @@ import * as basicMedium from '@/fonts/basicMedium';
 import * as basicThin from '@/fonts/basicThin';
 import { SvgChar, CharacterAndFontData, CharOptions, FontOptions } from '@/types/font';
 
-export function isTypeofSvgChar(char: unknown): char is SvgChar {
-	return (char as SvgChar).svgViewBox !== undefined;
-}
-
 export const defaultCharacter: SvgChar = {
 	svgViewBox: { width: 0, height: 0 },
 	elements: [{ elementDelay: 0, shape: '', length: 0 }],
@@ -125,27 +121,4 @@ export const getCharacterAndFontData = (
 	const { fontWidth, linecap } = chosenFont;
 
 	return { chosenChar, fontWidth, linecap };
-};
-
-export const getFontData = (font: FontOptions): Omit<CharacterAndFontData, 'chosenChar'> => {
-	let chosenFont;
-	switch (font) {
-		case 'basic-thin':
-			chosenFont = basicThin;
-			break;
-		case 'basic-medium':
-			chosenFont = basicMedium;
-			break;
-		case 'basic-bold':
-		case 'font1':
-			chosenFont = basicBold;
-			break;
-		default:
-			chosenFont = basicBold;
-			break;
-	}
-
-	const { fontWidth, linecap } = chosenFont;
-
-	return { fontWidth, linecap };
 };

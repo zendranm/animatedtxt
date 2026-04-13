@@ -17,6 +17,7 @@ export interface PathProps {
 }
 
 export interface ExtendedElement extends Element {
+	// TODO: speed shouldn't be a property of ExtendedElement as it's only used in calculateAnimation
 	speed: number;
 	elementDuration: number;
 }
