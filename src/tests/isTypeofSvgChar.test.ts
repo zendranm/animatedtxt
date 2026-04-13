@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { isTypeofSvgChar } from '@/utils/isTypeofSvgChar';
-import { makeChar } from '@/tests/testUtils';
+import { makeChar } from '@/tests/utils';
 
 describe('isTypeofSvgChar', () => {
 	it('returns true for valid SvgChar-like object', () => {
